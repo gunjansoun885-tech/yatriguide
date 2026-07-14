@@ -10,7 +10,7 @@ const DESTINATIONS_DATA = [
     title: "Mussoorie",
     tagline: "The Queen of Hills",
     description: "Nestled in the Garhwal Himalayan foothills, Mussoorie offers stunning vistas of mist-shrouded valleys, colonial-era architecture, and the cascading Kempty Falls.",
-    image: "https://images.unsplash.com/photo-1596422846543-75c6fc18a51b?auto=format&fit=crop&w=800&q=80",
+    image: "/mussorie.png",
     rating: 4.8,
     category: "Hill Station"
   },
@@ -19,7 +19,7 @@ const DESTINATIONS_DATA = [
     title: "Nainital",
     tagline: "The Lake District",
     description: "Centered around the emerald-tinted, pear-shaped Naini Lake, this scenic town is surrounded by seven dramatic hills and features classic wooden boating rows.",
-    image: "https://images.unsplash.com/photo-1562240020-ce31ccb0fa7d?auto=format&fit=crop&w=800&q=80",
+    image: "/nanital.jpg",
     rating: 4.7,
     category: "Lakes & Leisure"
   },
@@ -28,7 +28,7 @@ const DESTINATIONS_DATA = [
     title: "Rishikesh",
     tagline: "Yoga & Adventure Capital",
     description: "Where the Ganges flows swiftly out of the Himalayas, Rishikesh hosts thousands for sacred aartis, yoga study, world-class white water rafting, and bungee jumping.",
-    image: "https://images.unsplash.com/photo-1598977123418-45f04b01f4ac?auto=format&fit=crop&w=800&q=80",
+    image: "/rishikesh.png",
     rating: 4.9,
     category: "Adventure & Spiritual"
   },
@@ -37,7 +37,7 @@ const DESTINATIONS_DATA = [
     title: "Kedarnath",
     tagline: "The Sacred Abode",
     description: "Located near the Mandakini river amidst majestic snow-covered peaks, Kedarnath is one of the holiest Char Dham destinations, housing the ancient stone temple of Lord Shiva.",
-    image: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80",
+    image: "/kedar.png",
     rating: 4.95,
     category: "Spiritual Pilgrimage"
   },
@@ -46,7 +46,7 @@ const DESTINATIONS_DATA = [
     title: "Auli",
     tagline: "The Skiing Paradise",
     description: "Surrounded by dense oak forests and massive peaks like Nanda Devi, Auli is a premier ski resort destination containing lush alpine meadows and crystal-clear lakes.",
-    image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80",
+    image: "/auli.jpeg",
     rating: 4.8,
     category: "Snow Sports"
   },
@@ -55,7 +55,7 @@ const DESTINATIONS_DATA = [
     title: "Jim Corbett",
     tagline: "Wildlife Haven",
     description: "India's oldest national park, home to the endangered Bengal Tiger, rare elephants, and leopards roaming across deep riverine belts and sal forest reserves.",
-    image: "https://images.unsplash.com/photo-1581850518616-bcb8077ab233?auto=format&fit=crop&w=800&q=80",
+    image: "/jim.webp",
     rating: 4.75,
     category: "Wildlife Safari"
   }

@@ -23,6 +23,7 @@ export default function ContactForm() {
     message: "",
   });
   const [qrCode, setQrCode] = useState("");
+  const [statusMessage, setStatusMessage] = useState({ type: "", message: "" });
 
   const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
@@ -52,32 +53,54 @@ Email: ${form.email}
 Message: ${form.message}`;
 
     try {
+      setStatusMessage({ type: "loading", message: "Sending your details..." });
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.error || "Unable to send your details right now.");
+      }
+
       const qr = await toDataURL(payload.trim());
       setQrCode(qr);
-      alert(`Thank you, ${form.ownerName || form.driverName}! Your details have been received.`);
-    } catch (error) {
-      console.error("QR code generation failed", error);
-      alert("Your details were submitted, but the QR code could not be generated.");
-    }
+      setStatusMessage({
+        type: "success",
+        message: data.message || `Thank you, ${form.ownerName || form.driverName}! Your details were sent successfully.`,
+      });
 
-    setForm({
-      vehicleNumber: "",
-      vehicleType: "private",
-      ownerName: "",
-      driverName: "",
-      ownerPhone: "",
-      ownerWhatsapp: "",
-      driverPhone: "",
-      driverWhatsapp: "",
-      ownerAadhar: "",
-      driverAadhar: "",
-      stayDays: "",
-      validityDate: "",
-      goalToHome: "",
-      bloodGroup: "",
-      email: "",
-      message: "",
-    });
+      setForm({
+        vehicleNumber: "",
+        vehicleType: "private",
+        ownerName: "",
+        driverName: "",
+        ownerPhone: "",
+        ownerWhatsapp: "",
+        driverPhone: "",
+        driverWhatsapp: "",
+        ownerAadhar: "",
+        driverAadhar: "",
+        stayDays: "",
+        validityDate: "",
+        goalToHome: "",
+        bloodGroup: "",
+        email: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Form submission failed", error);
+      setStatusMessage({
+        type: "error",
+        message: error.message || "Your details could not be sent. Please try again.",
+      });
+    }
   };
 
   return (
@@ -262,6 +285,7 @@ Message: ${form.message}`;
           placeholder="Email Address"
           value={form.email}
           onChange={handleChange}
+          required
           className="w-full px-4 py-2 bg-stone-800 text-white placeholder-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-gold-500"
         />
       </div>
@@ -274,6 +298,12 @@ Message: ${form.message}`;
         onChange={handleChange}
         className="w-full px-4 py-2 bg-stone-800 text-white placeholder-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-gold-500"
       />
+
+      {statusMessage.message ? (
+        <p className={`rounded border px-4 py-3 text-sm ${statusMessage.type === "success" ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-200" : statusMessage.type === "error" ? "border-rose-500/40 bg-rose-500/10 text-rose-200" : "border-gold-500/40 bg-gold-500/10 text-gold-200"}`}>
+          {statusMessage.message}
+        </p>
+      ) : null}
 
       <button
         type="submit"

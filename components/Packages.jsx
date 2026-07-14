@@ -13,7 +13,7 @@ const PACKAGES_DATA = [
     reviews: 142,
     price: "28,999",
     originalPrice: "34,999",
-    image: "https://images.unsplash.com/photo-1626621340035-b86362d5ab85?auto=format&fit=crop&w=800&q=80",
+    image: "/chardham.jpg",
     inclusions: ["Chauffeur Driven SUV", "Premium Hotels", "VIP Temple Entry", "Pure Veg Meals"],
     badge: "Most Sacred"
   },
@@ -25,7 +25,7 @@ const PACKAGES_DATA = [
     reviews: 98,
     price: "16,499",
     originalPrice: "19,999",
-    image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80",
+    image: "/rafting.jpeg",
     inclusions: ["Skiing Equipment", "Ganga White-Water Rafting", "Riverside Camping", "Scenic Cable Car Ticket"],
     badge: "Thrill Seeker"
   },
@@ -37,7 +37,7 @@ const PACKAGES_DATA = [
     reviews: 84,
     price: "11,999",
     originalPrice: "14,500",
-    image: "https://images.unsplash.com/photo-1562240020-ce31ccb0fa7d?auto=format&fit=crop&w=800&q=80",
+    image: "/queen.jpg",
     inclusions: ["Private Luxury Sedan", "Lake-view Stays", "Boat Ride Tickets", "Local Tour Guide"],
     badge: "Leisure Escape"
   }

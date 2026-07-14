@@ -7,56 +7,56 @@ import { Image as ImageIcon, X, ChevronLeft, ChevronRight, ZoomIn } from "lucide
 const GALLERY_IMAGES = [
   {
     id: 1,
-    url: "https://images.unsplash.com/photo-1626621340035-b86362d5ab85?auto=format&fit=crop&w=800&q=80",
+    url: "/kedar.png",
     title: "Kedarnath Temple Peak",
     caption: "A magnificent snowy peak hovering over the ancient Kedarnath Shrine.",
     size: "tall"
   },
   {
     id: 2,
-    url: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=800&q=80",
+    url: "/rafting.jpeg",
     title: "White Water Currents",
     caption: "Conquering wild rapids under deep green gorges of Rishikesh.",
     size: "wide"
   },
   {
     id: 3,
-    url: "https://images.unsplash.com/photo-1596422846543-75c6fc18a51b?auto=format&fit=crop&w=800&q=80",
+    url: "/mussorie.png",
     title: "Misty Mussoorie Hills",
     caption: "Golden clouds sweeping through dense pine ridges of Garhwal.",
     size: "square"
   },
   {
     id: 4,
-    url: "https://images.unsplash.com/photo-1562240020-ce31ccb0fa7d?auto=format&fit=crop&w=800&q=80",
+    url: "/nanital.jpg",
     title: "Rowboats in Nainital",
     caption: "Colorful traditional rowboats lined up along the serene Naini lake.",
     size: "tall"
   },
   {
     id: 5,
-    url: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80",
+    url: "/auli.jpeg",
     title: "Auli Snow Slopes",
     caption: "Thick ski slopes facing the monumental Nanda Devi Himalayan Peak.",
     size: "wide"
   },
   {
     id: 6,
-    url: "https://images.unsplash.com/photo-1581850518616-bcb8077ab233?auto=format&fit=crop&w=800&q=80",
+    url: "/jim.webp",
     title: "Royal Bengal Tiger",
     caption: "A majestic tiger cooling off in the dense riverine forests of Corbett.",
     size: "tall"
   },
   {
     id: 7,
-    url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
+    url: "/auli.jpeg",
     title: "Alpine Meadows of Auli",
     caption: "Lush bugyals blooming with wildflower colonies under sun-kissed peaks.",
     size: "wide"
   },
   {
     id: 8,
-    url: "https://images.unsplash.com/photo-1598977123418-45f04b01f4ac?auto=format&fit=crop&w=800&q=80",
+    url: "/lakshman.jpeg",
     title: "Sacred Lakshman Jhula",
     caption: "A historic suspension bridge overlooking spiritual chants along the Ganges.",
     size: "square"
