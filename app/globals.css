@@ -3,48 +3,74 @@
 @theme {
   --font-serif: var(--font-playfair), Georgia, serif;
   --font-sans: var(--font-outfit), Inter, sans-serif;
-  
-  --color-forest-50: #f0fdf4;
-  --color-forest-100: #dcfce7;
-  --color-forest-200: #bbf7d0;
-  --color-forest-300: #86efac;
-  --color-forest-400: #4ade80;
-  --color-forest-500: #22c55e;
-  --color-forest-600: #16a34a;
-  --color-forest-700: #15803d;
-  --color-forest-800: #166534;
-  --color-forest-900: #14532d;
-  --color-forest-950: #022c16;
-  
-  --color-mountain-50: #f0f9ff;
-  --color-mountain-100: #e0f2fe;
-  --color-mountain-200: #bae6fd;
-  --color-mountain-300: #7dd3fc;
-  --color-mountain-400: #38bdf8;
-  --color-mountain-500: #0ea5e9;
-  --color-mountain-600: #0284c7;
-  --color-mountain-700: #0369a1;
-  --color-mountain-800: #075985;
-  --color-mountain-900: #0c4a6e;
-  --color-mountain-950: #032b45;
 
-  --color-gold-50: #fffbeb;
-  --color-gold-100: #fef3c7;
-  --color-gold-200: #fde68a;
-  --color-gold-300: #fcd34d;
-  --color-gold-400: #fbbf24;
-  --color-gold-500: #f59e0b;
-  --color-gold-600: #d97706;
-  --color-gold-700: #b45309;
-  --color-gold-800: #92400e;
-  --color-gold-900: #78350f;
-  --color-gold-950: #451a03;
+  --color-forest-50: #fffaf4;
+  --color-forest-100: #fff0dc;
+  --color-forest-200: #ffe0b7;
+  --color-forest-300: #f7c07d;
+  --color-forest-400: #f2a44d;
+  --color-forest-500: #ef8a20;
+  --color-forest-600: #cc6e14;
+  --color-forest-700: #a65411;
+  --color-forest-800: #7d3f0f;
+  --color-forest-900: #5a2c0d;
+  --color-forest-950: #2f1808;
+
+  --color-mountain-50: #fffdfa;
+  --color-mountain-100: #fff4e7;
+  --color-mountain-200: #fde4c7;
+  --color-mountain-300: #f8c68d;
+  --color-mountain-400: #f0a55a;
+  --color-mountain-500: #e78427;
+  --color-mountain-600: #c96a16;
+  --color-mountain-700: #a55111;
+  --color-mountain-800: #7d3f0e;
+  --color-mountain-900: #5a2d0d;
+  --color-mountain-950: #321705;
+
+  --color-black-50: #fffaf2;
+  --color-black-100: #fff0db;
+  --color-black-200: #ffe2b8;
+  --color-black-300: #f9c47f;
+  --color-black-400: #f2aa49;
+  --color-black-500: #ef8d1f;
+  --color-black-600: #d06e14;
+  --color-black-700: #a8520f;
+  --color-black-800: #7d3d0d;
+  --color-black-900: #5d2c0d;
+  --color-black-950: #331607;
+
+  --color-stone-50: #fffdfa;
+  --color-stone-100: #fff5e8;
+  --color-stone-200: #fde6cd;
+  --color-stone-300: #f8d0a3;
+  --color-stone-400: #eab26f;
+  --color-stone-500: #d28c3f;
+  --color-stone-600: #a96c2c;
+  --color-stone-700: #7f4f20;
+  --color-stone-800: #5d3a17;
+  --color-stone-900: #f7d6a5;
+  --color-stone-950: #fef7ec;
+
+  --color-emerald-50: #fffaf3;
+  --color-emerald-100: #fff0dc;
+  --color-emerald-200: #ffd9a8;
+  --color-emerald-300: #f7b66a;
+  --color-emerald-400: #f59d40;
+  --color-emerald-500: #e97a15;
+  --color-emerald-600: #c85e0e;
+  --color-emerald-700: #a5470d;
+  --color-emerald-800: #7e3509;
+  --color-emerald-900: #60270b;
+  --color-emerald-950: #381504;
 }
 
 /* Base style layers and custom animations */
 body {
   font-family: var(--font-outfit), sans-serif;
   overflow-x: hidden;
+  background: #fffdfa;
+  color: #5d3a17;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -57,29 +83,29 @@ h1, h2, h3, h4, h5, h6 {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #022c16; /* deep forest green */
+  background: #fff0dc;
 }
 ::-webkit-scrollbar-thumb {
-  background: #f59e0b; /* warm gold */
+  background: #f2aa49;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #d97706;
+  background: #d06e14;
 }
 
 /* Modern glassmorphic styles */
 .glassmorphism {
-  background: rgba(2, 44, 22, 0.45);
+  background: rgba(255, 250, 244, 0.78);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(242, 164, 77, 0.25);
 }
 
 .glassmorphism-light {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(242, 164, 77, 0.18);
 }
 
 .text-shadow-md {

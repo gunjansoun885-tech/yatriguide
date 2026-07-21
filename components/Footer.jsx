@@ -20,7 +20,7 @@ export default function Footer() {
     setTimeout(() => {
       setEmail("");
       setSubscribed(false);
-      alert("Subscription successful! Welcome to the YatraSarthi Inner Circle.");
+      alert("Subscription successful! Welcome to the Yatriguide Inner Circle.");
     }, 1500);
   };
 
@@ -33,7 +33,7 @@ export default function Footer() {
   };
 
   return (
-    <footer id="footer" className="bg-stone-950 text-stone-400 font-sans border-t border-white/5 relative z-10 pt-20 pb-8">
+    <footer id="footer" className="bg-stone-50 text-stone-600 font-sans border-t border-orange-100 relative z-10 pt-20 pb-8">
       {/* Footer Top Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16 border-b border-white/5 text-left">
         
@@ -48,16 +48,16 @@ export default function Footer() {
               <Compass className="w-5 h-5 text-forest-950" />
             </div>
             <div className="flex flex-col">
-              <span className="font-serif text-2xl font-black tracking-wider text-white">
-                YatraSarthi
+              <span className="font-serif text-2xl font-black tracking-wider text-stone-800">
+                Yatri guide
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-emerald-300 font-bold -mt-1">
+              <span className="text-[10px] uppercase tracking-widest text-orange-600 font-bold -mt-1">
                 Devbhoomi Guide
               </span>
             </div>
           </a>
-          <p className="text-sm font-light text-stone-400 leading-relaxed">
-            YatraSarthi is Uttarakhand's premier boutique destination guide. We craft custom itineraries, arrange high-altitude logistics, and manage certified stays in the land of sacred waters and mountain gods.
+          <p className="text-sm font-light text-stone-600 leading-relaxed">
+            Yatri guide is Uttarakhand's premier boutique destination guide. We craft custom itineraries, arrange high-altitude logistics, and manage certified stays in the land of sacred waters and mountain gods.
           </p>
           {/* Social Icons */}
           <div className="flex space-x-4 pt-2">
@@ -86,7 +86,7 @@ export default function Footer() {
 
         {/* Column 2: Quick Links */}
         <div>
-          <h3 className="font-serif text-lg font-bold text-white mb-6">Quick Links</h3>
+          <h3 className="font-serif text-lg font-bold text-stone-800 mb-6">Quick Links</h3>
           <ul className="space-y-3 text-sm font-light">
             {[
               { label: "Home Base", id: "#home" },
@@ -111,7 +111,7 @@ export default function Footer() {
 
         {/* Column 3: Travel Categories */}
         <div>
-          <h3 className="font-serif text-lg font-bold text-white mb-6">Travel Categories</h3>
+          <h3 className="font-serif text-lg font-bold text-stone-800 mb-6">Travel Categories</h3>
           <ul className="space-y-3 text-sm font-light">
             <li>
               <a href="#packages" onClick={(e) => handleScrollTo(e, "#packages")} className="hover:text-gold-400 hover:translate-x-1 inline-block transition-all duration-300">
@@ -143,7 +143,7 @@ export default function Footer() {
 
         {/* Column 4: Contact & Support */}
         <div className="space-y-4 text-sm font-light">
-          <h3 className="font-serif text-lg font-bold text-white mb-2">Devbhoomi HQ</h3>
+          <h3 className="font-serif text-lg font-bold text-stone-800 mb-2">Devbhoomi HQ</h3>
           
           <div className="flex items-start space-x-3">
             <MapPin className="w-4 h-4 text-emerald-400 mt-1 shrink-0" />
@@ -162,14 +162,14 @@ export default function Footer() {
 
           <div className="flex items-center space-x-3">
             <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
-            <a href="mailto:guide@yatrasarthi.com" className="hover:text-gold-400 transition-colors">
-              guide@yatrasarthi.com
+            <a href="mailto:guide@yatriguide.com" className="hover:text-gold-400 transition-colors">
+              guide@yatriguide.com
             </a>
           </div>
 
           {/* Newsletter Input Area */}
           <div className="pt-4 border-t border-white/5">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-3">Newsletter</h4>
+            <h4 className="text-xs font-bold text-black uppercase tracking-wider mb-3">Newsletter</h4>
             <form onSubmit={handleSubscribe} className="flex max-w-full">
               <input
                 type="email"
@@ -177,7 +177,7 @@ export default function Footer() {
                 placeholder="Your email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 min-w-0 px-3 py-2 bg-stone-900 border border-white/10 rounded-l-lg text-xs text-white placeholder-white/40 focus:outline-none focus:border-gold-500 font-sans"
+                className="flex-1 min-w-0 px-3 py-2 bg-stone-900 border border-white/10 rounded-l-lg text-xs text-black placeholder-black/40 focus:outline-none focus:border-gold-500 font-sans"
               />
               <button
                 type="submit"
@@ -200,7 +200,7 @@ export default function Footer() {
       {/* Footer Bottom copyright Row */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 space-y-4 sm:space-y-0">
         <span>
-          © {new Date().getFullYear()} YatraSarthi Guide. All rights reserved. Made in Uttarakhand.
+          © {new Date().getFullYear()} Yatriguide Guide. All rights reserved. Made in Uttarakhand.
         </span>
         <div className="flex space-x-6">
           <a href="#" className="hover:text-gold-400 transition-colors">Privacy Policy</a>

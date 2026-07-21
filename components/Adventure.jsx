@@ -71,9 +71,9 @@ const ADVENTURES = [
 
 export default function Adventure() {
   return (
-    <section id="adventure" className="py-24 bg-stone-900 relative overflow-hidden">
+    <section id="adventure" className="py-24 bg-stone-50 relative overflow-hidden">
       {/* Visual background details */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-300/20 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -111,7 +111,7 @@ export default function Adventure() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-stone-400 font-sans max-w-md text-sm sm:text-base font-light mt-4 md:mt-0 leading-relaxed"
+            className="text-stone-600 font-sans max-w-md text-sm sm:text-base font-light mt-4 md:mt-0 leading-relaxed"
           >
             Devbhoomi is not just about peace; it's a giant playground for the brave. Experience high-octane thrills in the lap of snow-bound giants.
           </motion.p>
@@ -133,7 +133,7 @@ export default function Adventure() {
                   y: -5,
                   transition: { duration: 0.2 }
                 }}
-                className={`group p-6 rounded-2xl bg-forest-950/20 hover:bg-forest-950/40 border border-white/5 hover:border-emerald-500/30 flex flex-col justify-between h-72 shadow-lg shadow-black/20 ${item.glow} hover:shadow-2xl transition-all duration-300`}
+                className={`group p-6 rounded-2xl bg-white/80 hover:bg-orange-50/80 border border-orange-100 hover:border-orange-300/70 flex flex-col justify-between h-72 shadow-lg shadow-orange-100/70 ${item.glow} hover:shadow-2xl transition-all duration-300`}
               >
                 <div>
                   {/* Icon with glow background */}
@@ -147,16 +147,16 @@ export default function Adventure() {
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="text-xl font-serif font-bold text-white mb-2 group-hover:text-gold-400 transition-colors">
+                  <h3 className="text-xl font-serif font-bold text-stone-800 mb-2 group-hover:text-orange-500 transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-xs sm:text-sm font-sans font-light text-stone-300 leading-relaxed line-clamp-3">
+                  <p className="text-xs sm:text-sm font-sans font-light text-stone-600 leading-relaxed line-clamp-3">
                     {item.description}
                   </p>
                 </div>
 
                 {/* Explore link */}
-                <div className="flex items-center space-x-1.5 text-xs font-sans font-semibold text-emerald-400 mt-4 cursor-pointer group-hover:text-gold-400 transition-colors">
+                <div className="flex items-center space-x-1.5 text-xs font-sans font-semibold text-orange-500 mt-4 cursor-pointer group-hover:text-orange-600 transition-colors">
                   <span>Explore packages</span>
                   <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>

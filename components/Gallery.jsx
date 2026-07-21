@@ -88,7 +88,7 @@ export default function Gallery() {
   };
 
   return (
-    <section id="gallery" className="py-24 bg-gradient-to-b from-stone-900 to-forest-950 relative border-t border-white/5">
+    <section id="gallery" className="py-24 bg-gradient-to-b from-stone-100 to-stone-50 relative border-t border-orange-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -97,7 +97,7 @@ export default function Gallery() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="flex items-center justify-center space-x-2 text-gold-400 text-xs sm:text-sm font-sans font-extrabold uppercase tracking-widest mb-3"
+            className="flex items-center justify-center space-x-2 text-black-400 text-xs sm:text-sm font-sans font-extrabold uppercase tracking-widest mb-3"
           >
             <ImageIcon className="w-4 h-4" />
             <span>Captured Landscapes</span>
@@ -106,12 +106,12 @@ export default function Gallery() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-5xl font-serif font-black text-white mb-4"
+            className="text-3xl sm:text-5xl font-serif font-black text-stone-800 mb-4"
           >
             Devbhoomi Photo Gallery
           </motion.h2>
           <motion.div className="w-24 h-1 bg-gradient-to-r from-gold-500 to-amber-500 mx-auto rounded-full mb-6" />
-          <p className="text-stone-300 font-sans max-w-xl mx-auto text-sm sm:text-base font-light">
+          <p className="text-stone-600 font-sans max-w-xl mx-auto text-sm sm:text-base font-light">
             Take a visual tour through our postcard-perfect lens. Click any photograph to launch the cinematic lightbox.
           </p>
         </div>
@@ -126,7 +126,7 @@ export default function Gallery() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.05 }}
               onClick={() => setActiveIdx(idx)}
-              className="relative break-inside-avoid mb-6 rounded-2xl overflow-hidden cursor-pointer group bg-stone-950 border border-white/5 shadow-lg hover:shadow-2xl transition-all duration-300"
+              className="relative break-inside-avoid mb-6 rounded-2xl overflow-hidden cursor-pointer group bg-white border border-orange-100 shadow-lg hover:shadow-2xl transition-all duration-300"
             >
               <img
                 src={img.url}

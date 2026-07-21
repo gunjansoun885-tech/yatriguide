@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, Star, CheckCircle, Shield, ArrowRight, X } from "lucide-react";
 
@@ -49,6 +49,18 @@ export default function Packages() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
 
+  useEffect(() => {
+    const handleOpenBookingModal = (event) => {
+      const targetPackage = PACKAGES_DATA.find((pkg) => pkg.id === event.detail?.packageId) || PACKAGES_DATA[0];
+      setSelectedPackage(targetPackage);
+      setSuccess(false);
+      setFormData({ name: "", email: "", phone: "", date: "" });
+    };
+
+    window.addEventListener("open-booking-modal", handleOpenBookingModal);
+    return () => window.removeEventListener("open-booking-modal", handleOpenBookingModal);
+  }, []);
+
   const handleBookingSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -64,7 +76,7 @@ export default function Packages() {
   };
 
   return (
-    <section id="packages" className="py-24 bg-stone-900/95 relative border-t border-white/5">
+    <section id="packages" className="py-24 bg-stone-50 relative border-t border-orange-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -82,12 +94,12 @@ export default function Packages() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-5xl font-serif font-black text-white mb-4"
+            className="text-3xl sm:text-5xl font-serif font-black text-stone-800 mb-4"
           >
             Featured Travel Packages
           </motion.h2>
           <motion.div className="w-24 h-1 bg-gradient-to-r from-gold-500 to-amber-500 mx-auto rounded-full mb-6" />
-          <p className="text-stone-300 font-sans max-w-xl mx-auto text-sm sm:text-base font-light">
+          <p className="text-stone-600 font-sans max-w-xl mx-auto text-sm sm:text-base font-light">
             All-inclusive boutique experiences designed to give you a stress-free immersion into Uttarakhand's majestic landscape.
           </p>
         </div>
@@ -101,7 +113,7 @@ export default function Packages() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.15 }}
-              className="group flex flex-col justify-between rounded-2xl overflow-hidden bg-forest-950/20 border border-white/5 hover:border-emerald-500/30 shadow-xl shadow-black/30 hover:shadow-black/50 transition-all duration-300"
+              className="group flex flex-col justify-between rounded-2xl overflow-hidden bg-white/90 border border-orange-100 hover:border-orange-300 shadow-xl shadow-orange-100/80 hover:shadow-orange-200/80 transition-all duration-300"
             >
               {/* Image & Badge Header */}
               <div className="relative h-60 w-full overflow-hidden">
@@ -136,14 +148,14 @@ export default function Packages() {
                     </div>
                   </div>
 
-                  <h3 className="text-lg sm:text-xl font-serif font-black text-white mb-4 group-hover:text-gold-400 transition-colors">
+                  <h3 className="text-lg sm:text-xl font-serif font-black text-stone-800 mb-4 group-hover:text-orange-500 transition-colors">
                     {pkg.title}
                   </h3>
 
                   {/* Inclusion Tags */}
                   <div className="space-y-2 mb-6">
                     {pkg.inclusions.map((inc, i) => (
-                      <div key={i} className="flex items-center space-x-2 text-xs text-stone-300 font-sans font-light">
+                      <div key={i} className="flex items-center space-x-2 text-xs text-stone-600 font-sans font-light">
                         <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                         <span>{inc}</span>
                       </div>
@@ -164,7 +176,7 @@ export default function Packages() {
                   <motion.button
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedPackage(pkg)}
-                    className="px-4 py-2.5 bg-gradient-to-r from-emerald-700 to-emerald-800 hover:from-emerald-600 hover:to-emerald-700 border border-emerald-500/30 text-white font-sans font-bold text-xs rounded-xl shadow flex items-center space-x-1 cursor-pointer transition-colors"
+                    className="px-4 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 border border-orange-300/60 text-white font-sans font-bold text-xs rounded-xl shadow flex items-center space-x-1 cursor-pointer transition-colors"
                   >
                     <span>Book Now</span>
                     <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />

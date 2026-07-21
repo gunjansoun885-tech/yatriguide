@@ -32,7 +32,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${playfair.variable} ${outfit.variable} scroll-smooth`}>
-      <body className="font-sans bg-stone-50 text-stone-900 min-h-screen overflow-x-hidden selection:bg-emerald-800 selection:text-white">
+      <body className="font-sans bg-stone-50 text-stone-800 min-h-screen overflow-x-hidden selection:bg-orange-500 selection:text-white">
         {children}
       </body>
     </html>

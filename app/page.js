@@ -4,20 +4,20 @@ import Destinations from "@/components/Destinations";
 import Adventure from "@/components/Adventure";
 import Packages from "@/components/Packages";
 import Gallery from "@/components/Gallery";
-import Testimonials from "@/components/Testimonials";
+
 import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 w-full bg-stone-900 overflow-hidden">
+      <main className="flex-1 w-full bg-stone-50 overflow-hidden">
         <Hero />
         <Destinations />
         <Adventure />
         <Packages />
         <Gallery />
-        <Testimonials />
+        
       </main>
       <Footer />
     </>

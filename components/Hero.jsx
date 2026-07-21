@@ -5,9 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, MapPin, Calendar, Users, ChevronRight, Compass } from "lucide-react";
 
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1626621340035-b86362d5ab85?auto=format&fit=crop&w=1920&q=85", // Snowy Peaks near Kedarnath
-  "https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1920&q=85", // River rafting & yoga in Rishikesh
-  "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=85"  // Majestic Pine Valleys of Auli
+  "/kedarnath modi.png",
+  "/modiji.png",
+  "/psd.png",
+  "/nanital.png",
+  "/hill.png",
+  "/kedar.png",
 ];
 
 const DESTINATIONS = [
@@ -63,7 +66,7 @@ export default function Hero() {
           />
         </AnimatePresence>
         {/* Gradients Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-black/40 to-black/60 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-orange-950/70 via-orange-950/30 to-black/55 z-10" />
       </div>
 
       {/* Main Content */}
@@ -73,9 +76,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-6 flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-400/30 text-emerald-300 font-sans text-xs sm:text-sm font-semibold uppercase tracking-widest backdrop-blur-md"
+          className="mb-6 flex items-center space-x-2 px-4 py-1.5 rounded-full bg-orange-100/80 border border-orange-200/80 text-orange-700 font-sans text-xs sm:text-sm font-semibold uppercase tracking-widest backdrop-blur-md"
         >
-          <Compass className="w-4 h-4 text-gold-400 animate-spin-slow" />
+          <Compass className="w-4 h-4 text-orange-500 animate-spin-slow" />
           <span>Explore Devbhoomi Uttarakhand</span>
         </motion.div>
 
@@ -84,10 +87,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="text-4xl sm:text-6xl md:text-7xl font-serif font-black tracking-tight text-white mb-6 leading-tight text-shadow-lg"
+          className="text-4xl sm:text-6xl md:text-7xl font-serif font-black tracking-tight text-white mb-6 leading-tight text-white"
         >
           Discover the Beauty <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-amber-300 to-emerald-300">
+          <span className="text-clip-text-white-300">
             of Uttarakhand
           </span>
         </motion.h1>
@@ -97,18 +100,13 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: 0.7 }}
-          className="text-base sm:text-xl text-stone-200/90 font-sans font-light max-w-2xl mb-12 leading-relaxed text-shadow-md"
+          className="text-base sm:text-xl text-stone-100/95 font-sans font-light max-w-2xl mb-12 leading-relaxed text-shadow-md"
         >
           Explore ancient temples, mystic mist-clad peaks, pristine river currents, and dense alpine forests. Plan your spiritual and thrill-seeking retreat.
         </motion.p>
 
         {/* Search Widget Container */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, type: "spring", stiffness: 100, delay: 0.9 }}
-          className="w-full max-w-4xl"
-        >
+        
           <form
             onSubmit={handleSearchSubmit}
             className="glassmorphism p-5 sm:p-6 rounded-2xl sm:rounded-3xl shadow-2xl border border-white/10 flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between"
@@ -117,7 +115,7 @@ export default function Hero() {
             <div className="flex-1 text-left min-w-[200px] border-b md:border-b-0 md:border-r border-white/10 pb-3 md:pb-0 md:pr-4">
               <div className="flex items-center space-x-2 text-gold-400 mb-1.5">
                 <MapPin className="w-4 h-4" />
-                <label className="text-[11px] font-sans font-bold uppercase tracking-wider text-emerald-300">
+                <label className="text-[11px] font-sans font-bold uppercase tracking-wider text-black">
                   Where to?
                 </label>
               </div>
@@ -126,9 +124,9 @@ export default function Hero() {
                 onChange={(e) => setDestination(e.target.value)}
                 className="w-full bg-transparent text-white font-sans text-sm font-semibold focus:outline-none cursor-pointer appearance-none"
               >
-                <option value="" className="bg-forest-950 text-white/50">Select Destination</option>
+                <option value="" className="bg-orange-950 text-black">Select Destination</option>
                 {DESTINATIONS.map((dest) => (
-                  <option key={dest} value={dest} className="bg-forest-950 text-white">
+                    <option key={dest} value={dest} className="bg-orange-950 text-white">
                     {dest}
                   </option>
                 ))}
@@ -139,7 +137,7 @@ export default function Hero() {
             <div className="flex-1 text-left min-w-[150px] border-b md:border-b-0 md:border-r border-white/10 pb-3 md:pb-0 md:pr-4">
               <div className="flex items-center space-x-2 text-gold-400 mb-1.5">
                 <Calendar className="w-4 h-4" />
-                <label className="text-[11px] font-sans font-bold uppercase tracking-wider text-emerald-300">
+                <label className="text-[11px] font-sans font-bold uppercase tracking-wider text-black">
                   Travel Date
                 </label>
               </div>
@@ -156,7 +154,7 @@ export default function Hero() {
             <div className="flex-1 text-left min-w-[120px] pb-3 md:pb-0">
               <div className="flex items-center space-x-2 text-gold-400 mb-1.5">
                 <Users className="w-4 h-4" />
-                <label className="text-[11px] font-sans font-bold uppercase tracking-wider text-emerald-300">
+                <label className="text-[11px] font-sans font-bold uppercase tracking-wider text-black">
                   Travelers
                 </label>
               </div>
@@ -165,10 +163,10 @@ export default function Hero() {
                 onChange={(e) => setTravelers(e.target.value)}
                 className="w-full bg-transparent text-white font-sans text-sm font-semibold focus:outline-none cursor-pointer appearance-none"
               >
-                <option value="1" className="bg-forest-950 text-white">1 Guest</option>
-                <option value="2" className="bg-forest-950 text-white">2 Guests</option>
-                <option value="4" className="bg-forest-950 text-white">4 Guests</option>
-                <option value="5+" className="bg-forest-950 text-white">Family / Group (5+)</option>
+                <option value="1" className="bg-orange-950 text-white">1 Guest</option>
+                <option value="2" className="bg-orange-950 text-white">2 Guests</option>
+                <option value="4" className="bg-orange-950 text-white">4 Guests</option>
+                <option value="5+" className="bg-orange-950 text-white">Family / Group (5+)</option>
               </select>
             </div>
 
@@ -178,10 +176,10 @@ export default function Hero() {
               whileTap={{ scale: 0.98 }}
               type="submit"
               disabled={isSearching}
-              className="px-6 py-4 bg-gradient-to-r from-gold-500 to-amber-500 hover:from-gold-600 hover:to-amber-600 text-forest-950 font-sans font-extrabold text-sm uppercase tracking-wider rounded-xl sm:rounded-2xl shadow-xl shadow-gold-500/10 hover:shadow-gold-500/30 flex items-center justify-center space-x-2 cursor-pointer transition-all duration-300"
+              className="px-6 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-sans font-extrabold text-sm uppercase tracking-wider rounded-xl sm:rounded-2xl shadow-xl shadow-orange-500/20 hover:shadow-orange-500/40 flex items-center justify-center space-x-2 cursor-pointer transition-all duration-300"
             >
               {isSearching ? (
-                <div className="w-5 h-5 border-2 border-forest-950 border-t-transparent rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
                   <Search className="w-4 h-4" />
@@ -191,11 +189,15 @@ export default function Hero() {
               )}
             </motion.button>
           </form>
-        </motion.div>
-      </div>
+          </div>
+
 
       {/* Hero bottom glow overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-forest-950 to-transparent z-15" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-orange-950/80 to-transparent z-15" />
     </section>
-  );
-}
+    );
+    }
+  
+  
+  
+

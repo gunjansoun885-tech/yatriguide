@@ -63,10 +63,10 @@ const DESTINATIONS_DATA = [
 
 export default function Destinations() {
   return (
-    <section id="destinations" className="py-24 bg-gradient-to-b from-forest-950 to-stone-900 relative">
+    <section id="destinations" className="py-24 bg-gradient-to-b from-stone-100 to-stone-50 relative">
       {/* Decorative leaf/forest background elements */}
-      <div className="absolute top-1/3 left-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 left-0 w-96 h-96 bg-orange-300/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-orange-200/25 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -79,7 +79,7 @@ export default function Destinations() {
             transition={{ duration: 0.6 }}
             className="flex items-center justify-center space-x-2 text-gold-400 text-xs sm:text-sm font-sans font-extrabold uppercase tracking-widest mb-3"
           >
-            <Compass className="w-4 h-4 text-gold-400" />
+            <Compass className="w-4 h-4 text-black-400" />
             <span>Curated Handpicked Vistas</span>
           </motion.div>
           <motion.h2
@@ -87,7 +87,7 @@ export default function Destinations() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-3xl sm:text-5xl font-serif font-black text-white mb-4"
+            className="text-3xl sm:text-5xl font-serif font-black text-stone-800 mb-4"
           >
             Popular Destinations
           </motion.h2>
@@ -95,14 +95,14 @@ export default function Destinations() {
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="w-24 h-1 bg-gradient-to-r from-gold-500 to-amber-500 mx-auto rounded-full mb-6"
+            className="w-24 h-1 bg-gradient-to-r from-black-500 to-amber-500 mx-auto rounded-full mb-6"
           />
           <motion.p
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 3 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-stone-300 font-sans max-w-xl mx-auto text-sm sm:text-base font-light"
+            className="text-stone-600 font-sans max-w-xl mx-auto text-sm sm:text-base font-light"
           >
             Discover the magical spirit of Northern India. From rapid cold rivers to peaceful mountain shrines, adventure awaits in every corner.
           </motion.p>
@@ -131,36 +131,36 @@ export default function Destinations() {
 
               {/* Card Badge */}
               <div className="absolute top-4 left-4 z-20">
-                <span className="px-3 py-1 text-[10px] font-sans font-bold uppercase tracking-widest text-white bg-forest-950/70 border border-emerald-500/35 rounded-full backdrop-blur-md">
+                <span className="px-3 py-1 text-[10px] font-sans font-bold uppercase tracking-widest text-black-700 bg-red/85 border border-orange-200 rounded-full">
                   {dest.category}
                 </span>
               </div>
 
               {/* Card Content (Always visible/Floating up on hover) */}
               <div className="absolute bottom-0 left-0 right-0 p-6 z-20 text-left flex flex-col justify-end h-1/2">
-                <div className="flex items-center space-x-1.5 text-gold-400 mb-1">
+                <div className="flex items-center space-x-1.5 text-black-400 mb-1">
                   <MapPin className="w-3.5 h-3.5" />
                   <span className="text-xs font-sans font-semibold tracking-wider">{dest.tagline}</span>
                 </div>
                 
-                <h3 className="text-xl sm:text-2xl font-serif font-black text-white group-hover:text-gold-400 transition-colors flex items-center justify-between">
+                <h3 className="text-xl sm:text-2xl font-serif font-black text-stone-800 group-hover:text-orange- transition-colors flex items-center justify-between">
                   <span>{dest.title}</span>
-                  <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 text-gold-400" />
+                  <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 text-black-400" />
                 </h3>
 
                 {/* Smooth expanding description */}
-                <div className="h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden mt-3">
-                  <p className="text-xs sm:text-sm font-sans font-light text-stone-200/90 leading-relaxed border-t border-white/10 pt-3">
+                <div className="h-0 opacity-0.2 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden mt-3">
+                  <p className="text-xs sm:text-sm font-sans font-light text-black leading-relaxed border-t border-orange-100 pt-3">
                     {dest.description}
                   </p>
                 </div>
                 
                 {/* Rating Bar */}
-                <div className="flex items-center justify-between mt-3 text-[11px] font-sans text-stone-400">
+                <div className="flex items-center justify-between mt-3 text-[15px] font-sans text-black-400">
                   <span>Explore Itinerary</span>
                   <div className="flex items-center space-x-1">
-                    <span className="text-gold-400 font-bold">★</span>
-                    <span className="text-stone-200 font-bold">{dest.rating}</span>
+                    <span className="text-black-800 font-bold">★</span>
+                    <span className="text-black-200 font-bold">{dest.rating}</span>
                   </div>
                 </div>
               </div>

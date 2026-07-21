@@ -9,7 +9,7 @@ const TESTIMONIALS_DATA = [
     id: 1,
     name: "Aarav Sharma",
     location: "New Delhi, India",
-    review: "Our sacred Char Dham yatra was incredibly organized! Our elderly parents had VIP passes, pure satvik food, and comfortable SUVs. YatraSarthi truly made our pilgrimage feel holy, peaceful, and entirely stress-free.",
+    review: "Our sacred Char Dham yatra was incredibly organized! Our elderly parents had VIP passes, pure satvik food, and comfortable SUVs. Yatriguide truly made our pilgrimage feel holy, peaceful, and entirely stress-free.",
     rating: 5,
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80"
   },
@@ -99,7 +99,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section id="testimonials" className="py-24 bg-forest-950 relative overflow-hidden border-t border-white/5">
+    <section id="testimonials" className="py-24 bg-stone-50 relative overflow-hidden border-t border-orange-100">
       {/* Dynamic green particle background */}
       <div className="absolute top-10 left-10 w-48 h-48 bg-emerald-500/5 rounded-full blur-2xl" />
       <div className="absolute bottom-10 right-10 w-48 h-48 bg-gold-500/5 rounded-full blur-2xl" />
@@ -121,7 +121,7 @@ export default function Testimonials() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-5xl font-serif font-black text-white"
+            className="text-3xl sm:text-5xl font-serif font-black text-stone-800"
           >
             Travelers Testimonials
           </motion.h2>

@@ -45,13 +45,20 @@ export default function Navbar() {
     }
   };
 
+  const handleOpenRegistrationModal = (e) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    setIsSearchOpen(false);
+    window.location.href = "/contact";
+  };
+
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-forest-950/90 backdrop-blur-md py-4 shadow-lg border-b border-white/10"
-            : "bg-gradient-to-b from-black/60 to-transparent py-6"
+            ? "bg-white/90 backdrop-blur-md py-4 shadow-lg border-b border-orange-200/80"
+            : "bg-gradient-to-b from-stone-100/80 to-transparent py-6"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -73,10 +80,10 @@ export default function Navbar() {
                 <Compass className="w-6 h-6 text-forest-950" />
               </motion.div>
               <div className="flex flex-col">
-                <span className="font-serif text-xl sm:text-2xl font-black tracking-wider text-white group-hover:text-gold-400 transition-colors">
-                  YatraSarthi
+                <span className="font-serif text-xl sm:text-2xl font-black tracking-wider text-stone-800 group-hover:text-orange-500 transition-colors">
+                  Yatri guide
                 </span>
-                <span className="text-[10px] uppercase tracking-widest text-emerald-300 font-bold -mt-1 font-sans">
+                <span className="text-[10px] uppercase tracking-widest text-orange-600 font-bold -mt-1 font-sans">
                   Devbhoomi Guide
                 </span>
               </div>
@@ -96,7 +103,7 @@ export default function Navbar() {
                       handleScrollTo(e, item.href);
                     }
                   }}
-                  className="font-sans text-sm font-semibold text-white/90 hover:text-gold-400 transition-colors duration-300 relative py-2 group"
+                  className="font-sans text-sm font-semibold text-stone-700 hover:text-orange-500 transition-colors duration-300 relative py-2 group"
                 >
                   {item.label}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-400 transition-all duration-300 group-hover:w-full" />
@@ -105,12 +112,12 @@ export default function Navbar() {
             </nav>
 
             {/* CTA & Actions */}
-            <div className="hidden sm:flex items-center space-x-4">
+            <div className="hidden sm:flex items-center space-x-3">
               {/* Search Toggle */}
               <div className="relative">
                 <button
                   onClick={() => setIsSearchOpen(!isSearchOpen)}
-                  className="p-2 text-white hover:text-gold-400 transition-colors focus:outline-none"
+                  className="p-2 text-stone-700 hover:text-orange-500 transition-colors focus:outline-none"
                   aria-label="Toggle Search"
                 >
                   <Search className="w-5 h-5" />
@@ -121,14 +128,14 @@ export default function Navbar() {
                       initial={{ opacity: 0, scale: 0.95, y: -10 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                      className="absolute right-0 mt-2 w-64 bg-forest-950/95 border border-white/10 rounded-lg p-2 shadow-xl backdrop-blur-md"
+                      className="absolute right-0 mt-2 w-64 bg-white/95 border border-orange-200 rounded-lg p-2 shadow-xl backdrop-blur-md"
                     >
                       <input
                         type="text"
                         placeholder="Search sacred destinations..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full px-3 py-1.5 bg-forest-900 text-white placeholder-white/50 text-sm border border-emerald-800 rounded focus:outline-none focus:border-gold-500 font-sans"
+                        className="w-full px-3 py-1.5 bg-stone-50 text-stone-800 placeholder-stone-400 text-sm border border-orange-200 rounded focus:outline-none focus:border-orange-500 font-sans"
                         autoFocus
                       />
                     </motion.div>
@@ -141,10 +148,20 @@ export default function Navbar() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={(e) => handleScrollTo(e, "#packages")}
-                className="flex items-center space-x-2 px-5 py-2.5 bg-gradient-to-r from-gold-500 to-amber-500 hover:from-gold-600 hover:to-amber-600 text-forest-950 font-sans font-bold text-sm rounded-full shadow-lg shadow-gold-500/20 hover:shadow-gold-500/40 transition-all duration-300"
+                className="flex items-center space-x-2 px-5 py-2.5 bg-white/90 border border-orange-200 text-orange-700 font-sans font-bold text-sm rounded-full shadow-sm hover:bg-orange-50 transition-all duration-300"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Plan Your Trip</span>
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleOpenRegistrationModal}
+                className="flex items-center space-x-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-sans font-bold text-sm rounded-full shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all duration-300"
+              >
+                <Calendar className="w-4 h-4" />
+                <span>Registration</span>
               </motion.button>
             </div>
 
@@ -152,14 +169,14 @@ export default function Navbar() {
             <div className="flex lg:hidden items-center space-x-3">
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="p-2 text-white hover:text-gold-400 transition-colors focus:outline-none sm:hidden"
+                className="p-2 text-stone-700 hover:text-orange-500 transition-colors focus:outline-none sm:hidden"
                 aria-label="Toggle Search"
               >
                 <Search className="w-5 h-5" />
               </button>
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 text-white hover:text-gold-400 focus:outline-none"
+                className="p-2 text-stone-700 hover:text-orange-500 focus:outline-none"
                 aria-label="Toggle Mobile Menu"
               >
                 {isMobileMenuOpen ? (
@@ -212,7 +229,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
-              className="fixed right-0 top-0 bottom-0 w-80 max-w-full bg-forest-950 text-white z-50 p-6 flex flex-col justify-between border-l border-white/10 shadow-2xl lg:hidden"
+              className="fixed right-0 top-0 bottom-0 w-80 max-w-full bg-white/95 text-stone-800 z-50 p-6 flex flex-col justify-between border-l border-orange-200 shadow-2xl lg:hidden"
             >
               <div>
                 <div className="flex items-center justify-between pb-6 border-b border-white/10">
