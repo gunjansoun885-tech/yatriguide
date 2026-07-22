@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Image as ImageIcon, X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
+import { text } from "framer-motion/client";
 
 const GALLERY_IMAGES = [
   {
