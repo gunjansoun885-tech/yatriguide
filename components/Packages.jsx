@@ -11,8 +11,7 @@ const PACKAGES_DATA = [
     duration: "10 Nights / 11 Days",
     rating: 5,
     reviews: 142,
-    price: "28,999",
-    originalPrice: "34,999",
+    
     image: "/chardham.jpg",
     inclusions: ["Chauffeur Driven SUV", "Premium Hotels", "VIP Temple Entry", "Pure Veg Meals"],
     badge: "Most Sacred"
@@ -23,8 +22,7 @@ const PACKAGES_DATA = [
     duration: "5 Nights / 6 Days",
     rating: 4,
     reviews: 98,
-    price: "16,499",
-    originalPrice: "19,999",
+    
     image: "/rafting.jpeg",
     inclusions: ["Skiing Equipment", "Ganga White-Water Rafting", "Riverside Camping", "Scenic Cable Car Ticket"],
     badge: "Thrill Seeker"
@@ -35,8 +33,8 @@ const PACKAGES_DATA = [
     duration: "4 Nights / 5 Days",
     rating: 5,
     reviews: 84,
-    price: "11,999",
-    originalPrice: "14,500",
+    
+    
     image: "/queen.jpg",
     inclusions: ["Private Luxury Sedan", "Lake-view Stays", "Boat Ride Tickets", "Local Tour Guide"],
     badge: "Leisure Escape"
@@ -165,14 +163,7 @@ export default function Packages() {
 
                 {/* Price & Book Button */}
                 <div className="pt-4 border-t border-white/5 flex items-center justify-between mt-auto">
-                  <div>
-                    <span className="text-[10px] uppercase tracking-widest text-stone-400 block font-sans">Price starting at</span>
-                    <div className="flex items-baseline space-x-1.5">
-                      <span className="text-xl sm:text-2xl font-sans font-black text-gold-400">₹{pkg.price}</span>
-                      <span className="text-xs text-stone-400 line-through">₹{pkg.originalPrice}</span>
-                    </div>
-                  </div>
-
+                  
                   <motion.button
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedPackage(pkg)}

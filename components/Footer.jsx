@@ -148,15 +148,15 @@ export default function Footer() {
           <div className="flex items-start space-x-3">
             <MapPin className="w-4 h-4 text-emerald-400 mt-1 shrink-0" />
             <span>
-              12, Canal Road, Jakhan, Dehradun, <br />
-              Uttarakhand - 248001, India
+              siddheshwar vihar,niliyam calony <br />
+             Haldwani Uttarakhand - 263139, India
             </span>
           </div>
 
           <div className="flex items-center space-x-3 pt-2">
             <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
-            <a href="tel:+91800XXXXXXXX" className="hover:text-gold-400 transition-colors">
-              +91-800-UTTARA (888-272)
+            <a href="tel:+9719XXXXXXXX" className="hover:text-gold-400 transition-colors">
+              +91-9719813241
             </a>
           </div>
 
