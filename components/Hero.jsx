@@ -59,32 +59,26 @@ export default function Hero() {
  className="relative w-full h-[100svh] min-h-[600px] flex items-center justify-center overflow-hidden"
 >
       {/* Background Images with AnimatePresence */}
-      <div className="absolute inset-0 z-0 bg-stone-950">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentBg}
-            initial={{ opacity: 0, scale: 1.15 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 2, ease: "easeInOut" }}
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url('${HERO_IMAGES[currentBg]}')` }}
-          />
-        </AnimatePresence>
-        {/* Gradients Overlay */}
-        <div> className="absolute inset-0 bg-cover bg-center md:bg-center bg-top"
-      </div>
 
-      
+       <div className="absolute inset-0 z-0 bg-stone-950">
+  <AnimatePresence mode="wait">
+    <motion.div
+      key={currentBg}
+      initial={{ opacity: 0, scale: 1.15 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 2, ease: "easeInOut" }}
+      className="absolute inset-0 bg-cover bg-center"
+      style={{ backgroundImage: `url('${HERO_IMAGES[currentBg]}')` }}
+    />
+  </AnimatePresence>
 
-        {/* Cinematic Main Heading */}
-       
-        
+  <div className="absolute inset-0 bg-black/40"></div>
 
+  <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-orange-950/80 to-transparent"></div>
+</div>
 
-      {/* Hero bottom glow overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-orange-950/80 to-transparent z-15" />
-    </section>
+</section>
     );
     }
   
