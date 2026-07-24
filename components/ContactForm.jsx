@@ -4,6 +4,12 @@ import { useState } from "react";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import { toDataURL } from "qrcode";
+import CryptoJS from "crypto-js";
+const SECRET_KEY = "YatraSarthi@2026";
+
+const encryptData = (text) => {
+  return CryptoJS.AES.encrypt(text, SECRET_KEY).toString();
+};
 
 const initialForm = {
   vehicleNumber: "",
@@ -139,8 +145,9 @@ export default function ContactForm() {
          `driverPhone: ${form.driverType === "owner" ? form.ownerPhone : form.driverType === "driver" ? form.driverPhone : form.otherPhone}`,
          
       ].join("\n");
+      const encryptedData = encryptData(qrDetails);
 
-      setQrCode(await toDataURL(qrDetails));
+     setQrCode(await toDataURL(encryptedData));
       setRegistrationId(data.registrationId);
       setStatusMessage({
         type: "success",

@@ -11,7 +11,7 @@ export const metadata = {
 const infoItems = [
   {
     title: "Call Us",
-    description: "+91 98765 43210",
+    description: "+91 9719813241",
     icon: Phone,
   },
   {
@@ -21,7 +21,7 @@ const infoItems = [
   },
   {
     title: "Visit Us",
-    description: "123 Devbhoomi Road, Rishikesh, Uttarakhand",
+    description: "siddeshwar vihar, niliyam calony,haldwani Uttarakhand",
     icon: MapPin,
   },
   {
@@ -56,8 +56,8 @@ export default function ContactPage() {
 
             <aside className="space-y-6">
               <div className="rounded-3xl border border-white/10 bg-stone-900/80 p-8 shadow-2xl backdrop-blur-xl">
-                <h2 className="text-2xl font-bold text-orange-600">Contact Details</h2>
-                <p className="mt-3 text-sm leading-7 text-stone-300">
+                <h2 className="text-2xl font-bold text-white-600">Contact Details</h2>
+                <p className="mt-3 text-sm leading-7 text-white-300">
                   Reach out anytime for help with registration, travel planning, or emergency support during your Uttarakhand journey.
                 </p>
                 <div className="mt-8 space-y-4">

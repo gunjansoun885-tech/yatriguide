@@ -10,7 +10,6 @@ const HERO_IMAGES = [
   "/modiji.png",
   "/psd.png",
   "/nanital.png",
-  "/hill.png",
   "/kedar.png",
   "/image.png",
   "/kainchi.png",
@@ -55,7 +54,10 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="relative w-full h-[100vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+   <section
+  id="home"
+ className="relative w-full h-[100svh] min-h-[600px] flex items-center justify-center overflow-hidden"
+>
       {/* Background Images with AnimatePresence */}
       <div className="absolute inset-0 z-0 bg-stone-950">
         <AnimatePresence mode="wait">
@@ -70,7 +72,7 @@ export default function Hero() {
           />
         </AnimatePresence>
         {/* Gradients Overlay */}
-        <div className="absolute inset-0 bg-from-white-950/70 via-orange-950/30 to-black/55 z-10" />
+        <div> className="absolute inset-0 bg-cover bg-center md:bg-center bg-top"
       </div>
 
       
