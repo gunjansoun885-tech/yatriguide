@@ -57,12 +57,12 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-white/90 backdrop-blur-md py-4 shadow-lg border-b border-orange-200/80"
-            : "bg-gradient-to-b from-stone-100/80 to-transparent py-6"
+            ? "bg-white/90 backdrop-blur-md py-3 shadow-lg border-b border-orange-200/80"
+            : "bg-gradient-to-b from-stone-100/80 to-transparent py-4 sm:py-6"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-5 lg:px-8">
+          <div className="flex items-center justify-between gap-2">
             {/* Logo */}
             <a
               href="/"
@@ -70,27 +70,27 @@ export default function Navbar() {
                 e.preventDefault();
                 window.location.href = "/";
               }}
-              className="flex items-center space-x-2 group focus:outline-none"
+              className="flex items-center space-x-2 group focus:outline-none min-w-0"
             >
               <motion.div
                 whileHover={{ rotate: 15 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="p-2 bg-gradient-to-tr from-gold-500 to-emerald-400 rounded-xl"
+                className="p-2 bg-gradient-to-tr from-gold-500 to-emerald-400 rounded-xl shrink-0"
               >
-                <Compass className="w-6 h-6 text-forest-950" />
+                <Compass className="w-5 h-5 sm:w-6 sm:h-6 text-forest-950" />
               </motion.div>
-              <div className="flex flex-col">
-                <span className="font-serif text-xl sm:text-2xl font-black tracking-wider text-stone-800 group-hover:text-orange-500 transition-colors">
+              <div className="flex flex-col min-w-0">
+                <span className="font-serif text-lg sm:text-xl lg:text-2xl font-black tracking-wider text-stone-800 group-hover:text-orange-500 transition-colors whitespace-nowrap">
                   Yatri guide
                 </span>
-                <span className="text-[10px] uppercase tracking-widest text-orange-600 font-bold -mt-1 font-sans">
+                <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-orange-600 font-bold -mt-1 font-sans whitespace-nowrap">
                   Devbhoomi Guide
                 </span>
               </div>
             </a>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-6">
+            <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
               {MENU_ITEMS.map((item) => (
                 <a
                   key={item.label}
@@ -112,7 +112,7 @@ export default function Navbar() {
             </nav>
 
             {/* CTA & Actions */}
-            <div className="hidden sm:flex items-center space-x-3">
+            <div className="hidden lg:flex items-center space-x-3">
               {/* Search Toggle */}
               <div className="relative">
                 <button
@@ -166,7 +166,7 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Hamburger Button */}
-            <div className="flex lg:hidden items-center space-x-3">
+            <div className="flex md:hidden items-center space-x-2">
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
                 className="p-2 text-stone-700 hover:text-orange-500 transition-colors focus:outline-none sm:hidden"
@@ -229,19 +229,26 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
-              className="fixed right-0 top-0 bottom-0 w-80 max-w-full bg-white/95 text-stone-800 z-50 p-6 flex flex-col justify-between border-l border-orange-200 shadow-2xl lg:hidden"
+              className="fixed right-0 top-0 bottom-0 w-80 max-w-full bg-stone-950/95 text-stone-100 z-50 p-6 flex flex-col justify-between border-l border-orange-200/30 shadow-2xl backdrop-blur-xl md:hidden"
             >
               <div>
                 <div className="flex items-center justify-between pb-6 border-b border-white/10">
                   <div className="flex items-center space-x-2">
-                    <Compass className="w-6 h-6 text-gold-400 animate-spin-slow" />
-                    <span className="font-serif text-xl font-bold tracking-wider text-white">
-                      YatraSarthi
-                    </span>
+                    <div className="p-2 bg-gradient-to-tr from-gold-500 to-emerald-400 rounded-xl shrink-0">
+                      <Compass className="w-5 h-5 text-forest-950" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-serif text-xl font-black tracking-wider text-white">
+                        Yatri guide
+                      </span>
+                      <span className="text-[10px] uppercase tracking-[0.25em] text-orange-300 font-bold -mt-1 font-sans">
+                        Devbhoomi Guide
+                      </span>
+                    </div>
                   </div>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-1 rounded-full border border-white/10 text-white hover:text-gold-400 focus:outline-none"
+                    className="p-1 rounded-full border border-white/10 text-white hover:text-orange-400 focus:outline-none"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -256,7 +263,7 @@ export default function Navbar() {
                       key={item.label}
                       href={item.href}
                       onClick={(e) => handleScrollTo(e, item.href)}
-                      className="font-sans text-lg font-medium py-2 text-white/80 hover:text-gold-400 transition-colors border-b border-white/5"
+                      className="font-sans text-lg font-medium py-2 text-orange-400 hover:text-amber-300 transition-colors border-b border-white/5"
                     >
                       {item.label}
                     </motion.a>
