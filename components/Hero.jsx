@@ -9,7 +9,7 @@ const HERO_IMAGES = [
   "/kedarnath modi.png",
   "/modiji.png",
   "/psd.png",
-  "/nanital.png",
+  "/nainital.png",
   "/kedar.png",
   "/image.png",
   "/kainchi.png",
@@ -28,7 +28,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="home" className="relative w-full h-[100svh] overflow-hidden">
+    <section id="home" className="relative h-[100svh] w-full overflow-hidden">
       <div className="absolute inset-0 z-0 bg-stone-950">
         <AnimatePresence mode="wait">
           <motion.div
@@ -37,15 +37,16 @@ export default function Hero() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 2, ease: "easeInOut" }}
-            className="absolute inset-0"
+            className="absolute inset-0 overflow-hidden"
           >
             <Image
               src={HERO_IMAGES[currentBg]}
               alt="Uttarakhand travel destination"
               fill
-              priority
+              priority={currentBg === 0}
               sizes="100vw"
-              className="h-full w-full object-cover object-center"
+              className="h-full w-full bg-stone-950 object-cover object-center sm:object-cover"
+              style={{ transform: "scale(1.04)" }}
             />
           </motion.div>
         </AnimatePresence>
@@ -56,7 +57,7 @@ export default function Hero() {
       </div>
 
       {currentBg === 0 && (
-        <div className="relative z-10 flex h-[100svh] w-full items-center justify-center px-4 pb-8 sm:px-6 sm:pb-10 lg:px-8 lg:pb-12">
+        <div className="relative z-10 flex h-[100svh] w-full items-center justify-center px-4 pb-8 pt-16 sm:px-6 sm:pb-10 sm:pt-0 lg:px-8 lg:pb-12">
           <div className="max-w-4xl text-center">
             <h1 className="font-serif text-[2rem] font-black leading-[0.95] tracking-tight text-white text-shadow-lg sm:text-[2.8rem] md:text-[3.8rem] lg:text-[4.5rem] xl:text-[5.2rem]">
               Discover the Beauty
