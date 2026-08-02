@@ -54,6 +54,17 @@ export default function Navbar() {
 
   return (
     <>
+      <motion.button
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.97 }}
+        animate={{ scale: [1, 1.08, 1] }}
+        transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+        onClick={handleOpenRegistrationModal}
+        className="fixed left-1/2 top-20 z-[60] -translate-x-1/2 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-orange-500/30 md:hidden"
+      >
+        Registration
+      </motion.button>
+
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
@@ -154,9 +165,12 @@ export default function Navbar() {
                 <span>Plan Your Trip</span>
               </motion.button>
 
+
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                animate={{ scale: [1, 1.08, 1] }}
+                transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
                 onClick={handleOpenRegistrationModal}
                 className="flex items-center space-x-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-sans font-bold text-sm rounded-full shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all duration-300"
               >
@@ -279,6 +293,13 @@ export default function Navbar() {
                   <Phone className="w-4 h-4" />
                   <span>Helpline: +91-800-UTTARA</span>
                 </a>
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleOpenRegistrationModal}
+                  className="w-full text-center py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-sans font-bold rounded-lg shadow-lg hover:brightness-110"
+                >
+                  Registration
+                </motion.button>
                 <motion.button
                   whileTap={{ scale: 0.95 }}
                   onClick={(e) => handleScrollTo(e, "#packages")}

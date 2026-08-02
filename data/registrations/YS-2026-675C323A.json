@@ -1,0 +1,57 @@
+{
+  "vehicleNumber": "uk0765",
+  "vehicleType": "commercial",
+  "travelFrom": "Dehradun",
+  "travelTo": "Gangotri",
+  "tourFrom": "2026-08-02",
+  "tourTo": "2026-08-06",
+  "driverType": "owner",
+  "ownerName": "jjj",
+  "ownerAge": "30",
+  "ownerPhone": "8979065247",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "897657897654",
+  "ownerGender": "Female",
+  "ownerBloodGroup": "AB+",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "passengerCount": "2",
+  "passengerDetails": [
+    {
+      "name": "lajsu",
+      "age": "15",
+      "gender": "Male"
+    },
+    {
+      "name": "gytt",
+      "age": "16",
+      "gender": "Male"
+    }
+  ],
+  "stayDays": "",
+  "validityDate": "",
+  "goalToHome": "",
+  "bloodGroup": "",
+  "email": "simmibisht56@gmail.com",
+  "emergencyContactNo": "8979065247",
+  "message": "",
+  "registrationPassword": "123456",
+  "id": "YS-2026-675C323A",
+  "password": {
+    "salt": "3f562361be8aa792d1b17093547649c5",
+    "hash": "157043954c21a66f046fe43f0e6df795756eb7200a84c577b573a443841f7da9e81abea7d4f7eff5446dd687a055454873e01cac47915dcd07e1e18d1857ca8c"
+  },
+  "createdAt": "2026-08-02T11:17:43.353Z"
+}

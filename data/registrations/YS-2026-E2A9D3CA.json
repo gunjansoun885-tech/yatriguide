@@ -1,0 +1,57 @@
+{
+  "vehicleNumber": "uk0765",
+  "vehicleType": "commercial",
+  "travelFrom": "Delhi",
+  "travelTo": "Mussoorie",
+  "tourFrom": "2026-08-02",
+  "tourTo": "2026-08-07",
+  "driverType": "driver",
+  "ownerName": "",
+  "ownerAge": "",
+  "ownerPhone": "",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "",
+  "ownerGender": "",
+  "ownerBloodGroup": "",
+  "driverName": "huij",
+  "vehicleOwnerName": "hsh",
+  "vehicleOwnerContact": "9876567895",
+  "driverAge": "30",
+  "driverPhone": "7617665247",
+  "driverWhatsapp": "",
+  "driverAadhar": "773748598372",
+  "driverGender": "Female",
+  "driverBloodGroup": "AB-",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "passengerCount": "2",
+  "passengerDetails": [
+    {
+      "name": "lajsu",
+      "age": "13",
+      "gender": "Male"
+    },
+    {
+      "name": "gytt",
+      "age": "14",
+      "gender": "Female"
+    }
+  ],
+  "stayDays": "",
+  "validityDate": "",
+  "goalToHome": "",
+  "bloodGroup": "",
+  "email": "simmibisht56@gmail.com",
+  "emergencyContactNo": "78675645518",
+  "message": "",
+  "registrationPassword": "gunjann",
+  "id": "YS-2026-E2A9D3CA",
+  "password": {
+    "salt": "7cacfbe1c20a9966e504fbd3a40dca23",
+    "hash": "828289b412bf5725ba8563a5fb6b5f197a5effe46f5a39ba1ce0745f8cdab945aee23efb064cc06cdb6e3e65c088d60ad8bd3fd96909e7175e7bc8f8bc7d5039"
+  },
+  "createdAt": "2026-08-02T11:15:39.549Z"
+}

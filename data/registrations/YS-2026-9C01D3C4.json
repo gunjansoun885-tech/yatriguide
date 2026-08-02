@@ -1,0 +1,52 @@
+{
+  "vehicleNumber": "uk0765",
+  "vehicleType": "private",
+  "travelFrom": "Mussoorie",
+  "travelTo": "Haldwani",
+  "tourFrom": "2026-08-02",
+  "tourTo": "2026-08-04",
+  "driverType": "owner",
+  "ownerName": "gunjan",
+  "ownerAge": "24",
+  "ownerPhone": "8979065247",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "897657897654",
+  "ownerGender": "Male",
+  "ownerBloodGroup": "A+",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "passengerCount": "1",
+  "passengerDetails": [
+    {
+      "name": "lajsu",
+      "age": "7",
+      "gender": "Female"
+    }
+  ],
+  "stayDays": "",
+  "validityDate": "",
+  "goalToHome": "",
+  "bloodGroup": "",
+  "email": "simmibisht56@gmail.com",
+  "emergencyContactNo": "8979065247",
+  "message": "nthg",
+  "registrationPassword": "gunjan",
+  "id": "YS-2026-9C01D3C4",
+  "password": {
+    "salt": "37ac0a6bbe17049efb067df8c5948997",
+    "hash": "7d6da6f72ef01609c9bd678f6ef6c4a5ea0eabc08322c957eca29ff161252b09e92ff3b9806f1c5aeaa81d455be1e867edb21e84eb11e29eb0c795e857cb94db"
+  },
+  "createdAt": "2026-08-02T07:46:57.271Z"
+}

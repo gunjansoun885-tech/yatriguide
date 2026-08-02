@@ -1,0 +1,57 @@
+{
+  "vehicleNumber": "abc123",
+  "vehicleType": "private",
+  "travelFrom": "Gangotri",
+  "travelTo": "Mussoorie",
+  "tourFrom": "2026-08-02",
+  "tourTo": "2026-08-05",
+  "driverType": "owner",
+  "ownerName": "gyus",
+  "ownerAge": "21",
+  "ownerPhone": "8979065247",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "789765467866",
+  "ownerGender": "Male",
+  "ownerBloodGroup": "A+",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "passengerCount": "2",
+  "passengerDetails": [
+    {
+      "name": "gyt",
+      "age": "10",
+      "gender": "Female"
+    },
+    {
+      "name": "gytt",
+      "age": "15",
+      "gender": "Male"
+    }
+  ],
+  "stayDays": "",
+  "validityDate": "",
+  "goalToHome": "",
+  "bloodGroup": "",
+  "email": "simmibisht56@gmail.com",
+  "emergencyContactNo": "78675645518",
+  "message": "",
+  "registrationPassword": "gs8947",
+  "id": "YS-2026-58633916",
+  "password": {
+    "salt": "6f96f9f9f10bf7f7cfa2ed3e5ac5021e",
+    "hash": "7e13a52b67967a58c3667371c33f15cf07ebe6c35bd0ede556cd43c280d415eeb5e47384c5c96a0960c6699d3e0f87ffba18a7225a59566cde2720e34692ddbd"
+  },
+  "createdAt": "2026-08-02T11:23:04.636Z"
+}

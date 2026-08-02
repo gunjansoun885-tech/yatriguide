@@ -69,7 +69,7 @@ export default function Destinations() {
       <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-orange-200/25 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Section Header */}
         <div className="text-center mb-16">
           <motion.div
@@ -142,7 +142,7 @@ export default function Destinations() {
                   <MapPin className="w-3.5 h-3.5" />
                   <span className="text-xs font-sans font-semibold tracking-wider">{dest.tagline}</span>
                 </div>
-                
+
                 <h3 className="text-xl sm:text-2xl font-serif font-black text-stone-800 group-hover:text-orange- transition-colors flex items-center justify-between">
                   <span>{dest.title}</span>
                   <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 text-black-400" />
@@ -154,7 +154,7 @@ export default function Destinations() {
                     {dest.description}
                   </p>
                 </div>
-                
+
                 {/* Rating Bar */}
                 <div className="flex items-center justify-between mt-3 text-[15px] font-sans text-black-400">
                   <span>Explore Itinerary</span>

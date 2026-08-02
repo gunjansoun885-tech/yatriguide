@@ -2,14 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Trash2 } from "lucide-react";
+import { Trash2, Download, QrCode, MapPin, PhoneCall, ShieldAlert, Ambulance, LifeBuoy, Flame, ShieldCheck } from "lucide-react";
 import { toDataURL } from "qrcode";
-import CryptoJS from "crypto-js";
-const SECRET_KEY = "YatraSarthi@2026";
-
-const encryptData = (text) => {
-  return CryptoJS.AES.encrypt(text, SECRET_KEY).toString();
-};
 
 const initialForm = {
   vehicleNumber: "",
@@ -51,6 +45,7 @@ const initialForm = {
   goalToHome: "",
   bloodGroup: "",
   email: "",
+  emergencyContactNo: "",
   message: "",
 };
 
@@ -75,7 +70,139 @@ export default function ContactForm() {
   const [form, setForm] = useState(initialForm);
   const [qrCode, setQrCode] = useState("");
   const [registrationId, setRegistrationId] = useState("");
+  const [savedVehicleNumber, setSavedVehicleNumber] = useState("");
   const [statusMessage, setStatusMessage] = useState({ type: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGettingLocation, setIsGettingLocation] = useState(false);
+
+  const handleShareLocationOnWhatsapp = () => {
+    setIsGettingLocation(true);
+
+    const openWhatsappWithMessage = (locationUrl) => {
+      const vehicleNum = savedVehicleNumber || form.vehicleNumber || "-";
+      const message = `🚗 *Yatriguide Travel Registration*\n\n📌 *Registration ID:* ${registrationId || "-"}\n🚘 *Vehicle Number:* ${vehicleNum}\n📍 *Live Current Location:* ${locationUrl || "Not provided"}\n\nSent via Yatriguide Travel Portal.`;
+      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank");
+      setIsGettingLocation(false);
+    };
+
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          const mapsUrl = `https://maps.google.com/?q=${lat},${lng}`;
+          openWhatsappWithMessage(mapsUrl);
+        },
+        (error) => {
+          console.warn("Geolocation permission denied or unavailable", error);
+          openWhatsappWithMessage("https://maps.google.com");
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      );
+    } else {
+      openWhatsappWithMessage("https://maps.google.com");
+    }
+  };
+
+  const maskPhone = (phone) => {
+    if (!phone) return "-";
+    const str = String(phone).trim();
+    if (str.length <= 2) return str;
+    return "X".repeat(str.length - 2) + str.slice(-2);
+  };
+
+  const maskAadhaar = (aadhar) => {
+    if (!aadhar) return "-";
+    const str = String(aadhar).trim();
+    if (str.length <= 3) return str;
+    return "X".repeat(str.length - 3) + str.slice(-3);
+  };
+
+  const maskDate = (dateStr) => {
+    if (!dateStr) return "-";
+    return "XXXX-XX-XX";
+  };
+
+  const maskDestination = (destStr) => {
+    if (!destStr) return "-";
+    return "XXXXXX";
+  };
+
+  const buildQrText = (regId, formData) => {
+    const travelFrom = formData.travelFrom === "Other" ? formData.travelFromOther : formData.travelFrom;
+    const travelTo = formData.travelTo === "Other" ? formData.travelToOther : formData.travelTo;
+
+    const lines = [
+      "=== YATRIGUIDE REGISTRATION ===",
+      `Registration ID: ${regId}`,
+      `Vehicle Number: ${formData.vehicleNumber}`,
+      `Vehicle Category: ${formData.vehicleType}`,
+      `Journey: ${maskDestination(travelFrom)} -> ${maskDestination(travelTo)}`,
+      `Travel Dates: ${maskDate(formData.tourFrom)} to ${maskDate(formData.tourTo)}`,
+      "----------------------------------------",
+    ];
+
+    if (formData.driverType === "owner") {
+      lines.push(
+        "[ OWNER / DRIVER DETAILS ]",
+        `Name: ${formData.ownerName || "-"}`,
+        `Age: ${formData.ownerAge || "-"} | Gender: ${formData.ownerGender || "-"}`,
+        `Contact Phone: ${maskPhone(formData.ownerPhone)}`,
+        `Blood Group: ${formData.ownerBloodGroup || "-"}`,
+      );
+      if (formData.ownerAadhar) lines.push(`Aadhaar: ${maskAadhaar(formData.ownerAadhar)}`);
+    } else if (formData.driverType === "driver") {
+      lines.push(
+        "[ VEHICLE OWNER DETAILS ]",
+        `Owner Name: ${formData.vehicleOwnerName || "-"}`,
+        `Owner Contact: ${maskPhone(formData.vehicleOwnerContact)}`,
+        "[ DRIVER DETAILS ]",
+        `Driver Name: ${formData.driverName || "-"}`,
+        `Age: ${formData.driverAge || "-"} | Gender: ${formData.driverGender || "-"}`,
+        `Contact Phone: ${maskPhone(formData.driverPhone)}`,
+        `Blood Group: ${formData.driverBloodGroup || "-"}`,
+      );
+      if (formData.driverAadhar) lines.push(`Aadhaar: ${maskAadhaar(formData.driverAadhar)}`);
+    } else if (formData.driverType === "other") {
+      lines.push(
+        "[ DRIVER DETAILS ]",
+        `Driver Name: ${formData.otherName || "-"}`,
+        `Age: ${formData.otherAge || "-"} | Gender: ${formData.otherGender || "-"}`,
+        `Contact Phone: ${maskPhone(formData.otherPhone)}`,
+        `Blood Group: ${formData.otherBloodGroup || "-"}`,
+      );
+    }
+
+    lines.push("----------------------------------------");
+    lines.push(`Emergency Contact: ${maskPhone(formData.emergencyContactNo)}`);
+    if (formData.email) {
+      lines.push(`Email: ${formData.email.replace(/^(.)(.*)(@.*)$/, (_, a, b, c) => a + "X".repeat(b.length) + c)}`);
+    }
+
+    if (formData.passengerDetails && formData.passengerDetails.length > 0) {
+      lines.push("----------------------------------------");
+      lines.push(`PASSENGERS (${formData.passengerDetails.length}):`);
+      formData.passengerDetails.forEach((p, index) => {
+        lines.push(`${index + 1}. ${p.name || "-"} (Age: ${p.age || "-"}, Gender: ${p.gender || "-"})`);
+      });
+    }
+
+    lines.push(
+      "----------------------------------------",
+      "[ UTTARAKHAND EMERGENCY CONTACTS (DIRECT CALL) ]",
+      "Call Police: tel:112",
+      "Call Ambulance: tel:108",
+      "Call UK SDRF: tel:1070",
+      "Call NDRF: tel:1078",
+      "----------------------------------------",
+      "[ SHARE LIVE / CURRENT LOCATION ]",
+      "Share Location on WhatsApp:",
+      "https://wa.me/?text=My%20Current%20Yatriguide%20Travel%20Location:%20https://maps.google.com",
+      "========================================"
+    );
+    return lines.join("\n");
+  };
 
   const handleChange = ({ target: { name, value } }) => {
     setForm((previous) => ({ ...previous, [name]: value }));
@@ -117,12 +244,34 @@ export default function ContactForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (!form.vehicleNumber?.trim()) {
+      setStatusMessage({ type: "error", message: "Vehicle registration number is required." });
+      return;
+    }
+
+    if (!form.email?.trim()) {
+      setStatusMessage({ type: "error", message: "Email address is required." });
+      return;
+    }
+
+    if (!form.registrationPassword?.trim() || !form.confirmRegistrationPassword?.trim()) {
+      setStatusMessage({ type: "error", message: "Please complete both password fields." });
+      return;
+    }
+
     if (form.registrationPassword !== form.confirmRegistrationPassword) {
       setStatusMessage({ type: "error", message: "Password and confirm password must match." });
       return;
     }
 
+    const invalidPassenger = form.passengerDetails.some((passenger) => !passenger?.name?.trim() || !passenger?.age || !passenger?.gender);
+    if (form.passengerCount && invalidPassenger) {
+      setStatusMessage({ type: "error", message: "Please complete every passenger detail before submitting." });
+      return;
+    }
+
     setStatusMessage({ type: "loading", message: "Submitting registration..." });
+    setIsSubmitting(true);
 
     try {
       const response = await fetch("/api/contact", {
@@ -134,21 +283,12 @@ export default function ContactForm() {
 
       if (!response.ok) throw new Error(data.error || "Unable to submit registration right now.");
 
-      const qrDetails = [
-        `Registration ID: ${data.registrationId}`,
-        `Vehicle: ${form.vehicleNumber}`,
-        `Category: ${form.vehicleType}`,
-        `Journey: ${form.travelFrom === "Other" ? form.travelFromOther : form.travelFrom} to ${form.travelTo === "Other" ? form.travelToOther : form.travelTo}`,
-        `Dates: ${form.tourFrom} to ${form.tourTo}`,
-        `Owner: ${form.ownerName}`,
-        `Driver: ${form.driverType === "owner" ? form.ownerName : form.driverType === "driver" ? form.driverName : form.otherName}`,
-         `driverPhone: ${form.driverType === "owner" ? form.ownerPhone : form.driverType === "driver" ? form.driverPhone : form.otherPhone}`,
-         
-      ].join("\n");
-      const encryptedData = encryptData(qrDetails);
+      const qrPayload = buildQrText(data.registrationId, form);
+      const generatedQrUrl = await toDataURL(qrPayload, { errorCorrectionLevel: "M", margin: 2 });
 
-     setQrCode(await toDataURL(encryptedData));
+      setQrCode(generatedQrUrl);
       setRegistrationId(data.registrationId);
+      setSavedVehicleNumber(form.vehicleNumber);
       setStatusMessage({
         type: "success",
         message: data.message || "Vehicle registration submitted successfully.",
@@ -159,6 +299,8 @@ export default function ContactForm() {
         type: "error",
         message: error.message || "Your registration could not be submitted. Please try again.",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -176,7 +318,7 @@ export default function ContactForm() {
         className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-lg shadow-stone-950/5"
       >
         <div className="border-b border-orange-100 bg-linear-to-r from-orange-600 to-amber-500 px-5 py-5 text-white sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-100">Yatra Sarthi</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-100">Yatriguide</p>
           <h2 className="mt-1 text-xl font-bold sm:text-2xl">Vehicle Travel Registration</h2>
           <p className="mt-1 text-xs text-orange-50">Complete the details below to register your journey.</p>
         </div>
@@ -282,7 +424,7 @@ export default function ContactForm() {
                   {Array.from({ length: 50 }, (_, index) => index + 1).map((count) => <option key={count} value={count}>{count}</option>)}
                 </select>
               </Field>
-              <Field label="Email address"><input className={fieldClass} type="email" name="email" value={form.email} onChange={handleChange} placeholder="name@example.com" /></Field>
+              <Field label="Email address *"><input className={fieldClass} type="email" name="email" value={form.email} onChange={handleChange} placeholder="name@example.com" required /></Field>
             </div>
 
             {form.passengerDetails.length > 0 && <div className="mt-4 space-y-3">
@@ -296,28 +438,52 @@ export default function ContactForm() {
                     </button>
                   </div>
                   <div className="mt-2 space-y-2">
-                    <Field label="Name *"><input className={fieldClass} value={passenger.name} onChange={(event) => handlePassengerChange(index, "name", event.target.value)} required /></Field>
-                    <Field label="Age *"><select className={fieldClass} value={passenger.age} onChange={(event) => handlePassengerChange(index, "age", event.target.value)} required><option value="">Select age</option>{passengerAges.map((age) => <option key={age}>{age}</option>)}</select></Field>
-                    <Field label="Gender *"><select className={fieldClass} value={passenger.gender} onChange={(event) => handlePassengerChange(index, "gender", event.target.value)} required><option value="">Select gender</option><option>Male</option><option>Female</option><option>Other</option></select></Field>
+                    <Field label="Name *"><input className={fieldClass} name={`passenger-${index}-name`} value={passenger.name} onChange={(event) => handlePassengerChange(index, "name", event.target.value)} required /></Field>
+                    <Field label="Age *"><select className={fieldClass} name={`passenger-${index}-age`} value={passenger.age} onChange={(event) => handlePassengerChange(index, "age", event.target.value)} required><option value="">Select age</option>{passengerAges.map((age) => <option key={age}>{age}</option>)}</select></Field>
+                    <Field label="Gender *"><select className={fieldClass} name={`passenger-${index}-gender`} value={passenger.gender} onChange={(event) => handlePassengerChange(index, "gender", event.target.value)} required><option value="">Select gender</option><option>Male</option><option>Female</option><option>Other</option></select></Field>
                   </div>
                 </div>
               ))}
             </div>}
-             <Field label="emergency contact number *"><input className={fieldClass} type="tel" name="emergency contact no." value={form.emergencyContactno} onChange={handleChange} inputMode="numeric" required /></Field>
-            <Field label="Any additional note"><textarea className={fieldClass} name="message" rows="3" value={form.message} onChange={handleChange} placeholder="Add any helpful travel information" /></Field>
+            <Field label="Emergency contact number *"><input className={fieldClass} type="tel" name="emergencyContactNo" value={form.emergencyContactNo} onChange={handleChange} inputMode="numeric" required /></Field>
           </section>
 
-          {statusMessage.message && <p className={`rounded-xl border px-4 py-3 text-sm ${statusStyle}`}>{statusMessage.message}</p>}
-          <button type="submit" className="w-full rounded-lg bg-orange-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-200">Submit registration</button>
+          {statusMessage.message && <p aria-live="polite" className={`rounded-xl border px-4 py-3 text-sm ${statusStyle}`}>{statusMessage.message}</p>}
+          <button type="submit" disabled={isSubmitting} className="relative z-10 w-full rounded-lg bg-orange-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-200 disabled:cursor-not-allowed disabled:bg-orange-400 touch-manipulation min-h-[44px]">{isSubmitting ? "Submitting..." : "Submit registration"}</button>
         </div>
       </form>
 
-      {qrCode && <div className="mt-5 rounded-2xl border border-stone-200 bg-white p-5 text-center shadow-lg shadow-stone-950/5">
-        <h3 className="text-lg font-bold text-stone-800">Registration QR code</h3>
-        <p className="mt-1 text-sm text-stone-600">Registration ID: <span className="font-semibold text-orange-700">{registrationId}</span></p>
-        <p className="mt-1 text-sm text-stone-600">Keep this QR code for your travel registration.</p>
-        <Image src={qrCode} alt="Vehicle registration QR code" width={224} height={224} unoptimized className="mx-auto mt-4 rounded-xl bg-white p-2" />
-      </div>}
+      {qrCode && (
+        <div className="mt-6 rounded-2xl border border-orange-200 bg-linear-to-b from-orange-50/50 to-white p-6 shadow-xl shadow-orange-950/5">
+          <div className="flex items-center justify-center gap-2 text-orange-600 font-bold text-lg">
+            <QrCode className="h-6 w-6" />
+            <h3>Your Vehicle Registration QR Code</h3>
+          </div>
+          <p className="mt-1 text-sm text-stone-600 text-center">
+            Registration ID: <span className="font-mono font-bold text-orange-700">{registrationId}</span>
+          </p>
+          <p className="mt-1 text-xs text-stone-500 text-center">
+            Scan this QR code with any phone camera or QR scanner app to view all filled form details.
+          </p>
+
+          <div className="mt-4 flex justify-center">
+            <div className="rounded-2xl border border-stone-200 bg-white p-3 shadow-md">
+              <Image src={qrCode} alt="Vehicle registration QR code" width={240} height={240} unoptimized className="mx-auto rounded-xl" />
+            </div>
+          </div>
+
+          <div className="mt-5 flex items-center justify-center">
+            <a
+              href={qrCode}
+              download={`Yatriguide-QR-${registrationId}.png`}
+              className="inline-flex items-center gap-2 rounded-xl bg-orange-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-orange-700 shadow-md min-h-[44px]"
+            >
+              <Download className="h-4 w-4" />
+              Download QR Code
+            </a>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

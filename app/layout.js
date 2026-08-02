@@ -16,15 +16,15 @@ const outfit = Outfit({
 });
 
 export const metadata = {
-  title: "YatraSarthi | Discover the Majestic Beauty of Uttarakhand",
+  title: "Yatriguide | Discover the Majestic Beauty of Uttarakhand",
   description: "Explore the ultimate tourism guide of Uttarakhand. Discover majestic mountains, sacred temples, Char Dham Yatra, thrilling adventure sports, premium travel packages, and high-altitude trekking in the Land of Gods.",
   keywords: "Uttarakhand Tourism, Kedarnath, Mussoorie, Rishikesh, Nainital, Auli, Jim Corbett, Travel Packages, Chardham Yatra, Trekking",
-  authors: [{ name: "YatraSarthi Tourism" }],
+  authors: [{ name: "Yatriguide Tourism" }],
   openGraph: {
-    title: "YatraSarthi - Uttarakhand Tourism",
+    title: "Yatriguide - Uttarakhand Tourism",
     description: "Explore mountains, temples, adventures and breathtaking landscapes of Uttarakhand.",
     url: "https://uttarakhand-tourism.com",
-    siteName: "YatraSarthi",
+    siteName: "Yatriguide",
     type: "website",
   },
 };

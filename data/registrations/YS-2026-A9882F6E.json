@@ -1,0 +1,31 @@
+{
+  "vehicleNumber": "SAVEFILE123",
+  "vehicleType": "private",
+  "travelFrom": "Dehradun",
+  "travelTo": "Rishikesh",
+  "tourFrom": "2026-08-10",
+  "tourTo": "2026-08-12",
+  "driverType": "owner",
+  "ownerName": "Save File Test",
+  "ownerAge": "30",
+  "ownerPhone": "9999999999",
+  "ownerGender": "Male",
+  "ownerBloodGroup": "A+",
+  "passengerCount": "1",
+  "email": "savefile@example.com",
+  "emergencyContactNo": "9898989898",
+  "passengerDetails": [
+    {
+      "name": "Save Test Passenger",
+      "age": "25",
+      "gender": "Male"
+    }
+  ],
+  "message": "verify single file save",
+  "id": "YS-2026-A9882F6E",
+  "password": {
+    "salt": "c6b6d77070204f4b7ea9196c74f671e1",
+    "hash": "3f501e55754ab8addfccc7a47b8df0c183c270a96acf451649fecd0f7fd2ba22b8855685be655ecf0e9b7190402d69d7464ebc90f4c062e2e5664a75668f2263"
+  },
+  "createdAt": "2026-08-02T06:12:15.277Z"
+}

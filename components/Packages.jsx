@@ -214,7 +214,7 @@ export default function Packages() {
                   </div>
                   <h3 className="text-2xl font-serif font-bold text-white mb-2">Booking Requested!</h3>
                   <p className="text-sm font-sans text-stone-400 max-w-xs leading-relaxed">
-                    Thank you! Our personal Yatra Sarthi guide will call you within 2 hours with customized lodging options.
+                    Thank you! Our personal Yatriguide representative will call you within 2 hours with customized lodging options.
                   </p>
                 </div>
               ) : (
