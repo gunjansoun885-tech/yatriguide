@@ -238,16 +238,29 @@ export async function POST(request) {
         registrations[targetIndex].registrationPassword = newPassword;
         registrations[targetIndex].password = passwordHash;
 
-        await mkdir(dataDirectory, { recursive: true });
-        const tmp = `${registrationsFile}.tmp`;
-        await writeFile(tmp, JSON.stringify(registrations, null, 2), "utf8");
-        await rename(tmp, registrationsFile);
+        const jsonContent = JSON.stringify(registrations, null, 2);
+        try {
+          await mkdir(dataDirectory, { recursive: true });
+          const tmp = `${registrationsFile}.tmp`;
+          await writeFile(tmp, jsonContent, "utf8");
+          try {
+            await rename(tmp, registrationsFile);
+          } catch {
+            await writeFile(registrationsFile, jsonContent, "utf8");
+          }
+        } catch (fileErr) {
+          console.warn("Reset password file save warning:", fileErr.message);
+        }
 
         const regId = registrations[targetIndex].id;
         if (regId) {
-          await mkdir(registrationsDirectory, { recursive: true });
-          const singleFile = path.join(registrationsDirectory, `${regId}.json`);
-          await writeFile(singleFile, JSON.stringify(registrations[targetIndex], null, 2), "utf8");
+          try {
+            await mkdir(registrationsDirectory, { recursive: true });
+            const singleFile = path.join(registrationsDirectory, `${regId}.json`);
+            await writeFile(singleFile, JSON.stringify(registrations[targetIndex], null, 2), "utf8");
+          } catch (singleErr) {
+            console.warn("Single registration file update warning:", singleErr.message);
+          }
         }
       }
 
