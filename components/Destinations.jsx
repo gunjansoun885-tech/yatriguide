@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { MapPin, ArrowUpRight, Compass } from "lucide-react";
+import { MapPin, ArrowUpRight, Compass, Star } from "lucide-react";
 
 const DESTINATIONS_DATA = [
   {
@@ -63,11 +63,7 @@ const DESTINATIONS_DATA = [
 
 export default function Destinations() {
   return (
-    <section id="destinations" className="py-24 bg-gradient-to-b from-stone-100 to-stone-50 relative">
-      {/* Decorative leaf/forest background elements */}
-      <div className="absolute top-1/3 left-0 w-96 h-96 bg-orange-300/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-orange-200/25 rounded-full blur-3xl pointer-events-none" />
-
+    <section id="destinations" className="py-24 bg-gradient-to-b from-stone-50 via-white to-stone-50 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Header */}
@@ -77,38 +73,41 @@ export default function Destinations() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
-            className="flex items-center justify-center space-x-2 text-gold-400 text-xs sm:text-sm font-sans font-extrabold uppercase tracking-widest mb-3"
+            className="flex items-center justify-center space-x-2 text-orange-600 text-xs sm:text-sm font-sans font-extrabold uppercase tracking-widest mb-3"
           >
-            <Compass className="w-4 h-4 text-black-400" />
+            <Compass className="w-4 h-4 text-orange-600" />
             <span>Curated Handpicked Vistas</span>
           </motion.div>
+          
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-3xl sm:text-5xl font-serif font-black text-stone-800 mb-4"
+            className="text-3xl sm:text-5xl font-serif font-black text-stone-900 mb-4"
           >
             Popular Destinations
           </motion.h2>
+
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="w-24 h-1 bg-gradient-to-r from-black-500 to-amber-500 mx-auto rounded-full mb-6"
+            className="w-24 h-1.5 bg-gradient-to-r from-orange-500 to-amber-500 mx-auto rounded-full mb-6"
           />
+
           <motion.p
-            initial={{ opacity: 3 }}
+            initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-stone-600 font-sans max-w-xl mx-auto text-sm sm:text-base font-light"
+            className="text-stone-600 font-sans max-w-xl mx-auto text-sm sm:text-base font-normal"
           >
-            Discover the magical spirit of Northern India. From rapid cold rivers to peaceful mountain shrines, adventure awaits in every corner.
+            Discover the magical spirit of Uttarakhand. From rapid white water rivers to peaceful mountain shrines, crystal-clear Himalayan adventures await.
           </motion.p>
         </div>
 
-        {/* Destinations Grid */}
+        {/* Destinations Grid (100% Crystal Clear Images - Zero Blur) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {DESTINATIONS_DATA.map((dest, idx) => (
             <motion.div
@@ -117,50 +116,57 @@ export default function Destinations() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.7, delay: idx * 0.1 }}
-              whileHover={{ y: -12 }}
-              className="group relative rounded-2xl overflow-hidden aspect-[4/5] bg-stone-950 shadow-xl shadow-black/35 cursor-pointer border border-white/5 transition-all duration-500"
+              whileHover={{ y: -10 }}
+              className="group relative rounded-3xl overflow-hidden aspect-[4/5] bg-stone-100 shadow-xl shadow-stone-900/10 cursor-pointer border border-stone-200 transition-all duration-500"
             >
-              {/* Card Image */}
+              {/* Card Image (Sharp High Definition - Zero Blur/Filter) */}
               <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-110"
-                style={{ backgroundImage: `url('${dest.image}')` }}
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
+                style={{ 
+                  backgroundImage: `url('${dest.image}')`,
+                  filter: "none",
+                  backdropFilter: "none",
+                  opacity: 1
+                }}
               />
 
-              {/* Gradient Overlays */}
-              <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/20 to-black/10 group-hover:via-stone-950/30 transition-all duration-300" />
+              {/* Minimal Bottom Text Gradient Only (Keeps 80% of Image 100% Crystal Clear) */}
+              <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/25 to-transparent transition-all duration-300" />
 
-              {/* Card Badge */}
+              {/* Category Badge */}
               <div className="absolute top-4 left-4 z-20">
-                <span className="px-3 py-1 text-[10px] font-sans font-bold uppercase tracking-widest text-black-700 bg-red/85 border border-orange-200 rounded-full">
+                <span className="px-3 py-1.5 text-[11px] font-sans font-extrabold uppercase tracking-wider text-stone-900 bg-white/95 backdrop-blur-sm border border-white shadow-md rounded-full">
                   {dest.category}
                 </span>
               </div>
 
-              {/* Card Content (Always visible/Floating up on hover) */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 z-20 text-left flex flex-col justify-end h-1/2">
-                <div className="flex items-center space-x-1.5 text-black-400 mb-1">
-                  <MapPin className="w-3.5 h-3.5" />
-                  <span className="text-xs font-sans font-semibold tracking-wider">{dest.tagline}</span>
+              {/* Rating Badge */}
+              <div className="absolute top-4 right-4 z-20 flex items-center space-x-1 px-2.5 py-1 text-[11px] font-sans font-bold text-stone-900 bg-amber-400 border border-amber-300 shadow-md rounded-full">
+                <Star className="w-3 h-3 fill-stone-900 text-stone-900" />
+                <span>{dest.rating}</span>
+              </div>
+
+              {/* Card Bottom Content */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 z-20 text-left flex flex-col justify-end">
+                <div className="flex items-center space-x-1.5 text-amber-300 mb-1 font-medium">
+                  <MapPin className="w-3.5 h-3.5 text-orange-400" />
+                  <span className="text-xs font-sans font-bold tracking-wider uppercase text-orange-300">{dest.tagline}</span>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-serif font-black text-stone-800 group-hover:text-orange- transition-colors flex items-center justify-between">
+                <h3 className="text-2xl sm:text-3xl font-serif font-black text-white flex items-center justify-between drop-shadow-md">
                   <span>{dest.title}</span>
-                  <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 text-black-400" />
+                  <ArrowUpRight className="w-6 h-6 text-orange-400 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 shrink-0 ml-2" />
                 </h3>
 
-                {/* Smooth expanding description */}
-                <div className="h-0 opacity-0.2 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden mt-3">
-                  <p className="text-xs sm:text-sm font-sans font-light text-black leading-relaxed border-t border-orange-100 pt-3">
+                {/* Expandable Details */}
+                <div className="h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden">
+                  <p className="text-xs sm:text-sm font-sans font-normal text-stone-200 leading-relaxed border-t border-white/20 pt-3 mt-3">
                     {dest.description}
                   </p>
-                </div>
-
-                {/* Rating Bar */}
-                <div className="flex items-center justify-between mt-3 text-[15px] font-sans text-black-400">
-                  <span>Explore Itinerary</span>
-                  <div className="flex items-center space-x-1">
-                    <span className="text-black-800 font-bold">★</span>
-                    <span className="text-black-200 font-bold">{dest.rating}</span>
+                  
+                  <div className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-orange-400 uppercase tracking-wider">
+                    <span>Explore Details</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
               </div>
