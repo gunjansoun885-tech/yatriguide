@@ -28,18 +28,6 @@
   --color-mountain-900: #5a2d0d;
   --color-mountain-950: #321705;
 
-  --color-black-50: #fffaf2;
-  --color-black-100: #fff0db;
-  --color-black-200: #ffe2b8;
-  --color-black-300: #f9c47f;
-  --color-black-400: #f2aa49;
-  --color-black-500: #ef8d1f;
-  --color-black-600: #d06e14;
-  --color-black-700: #a8520f;
-  --color-black-800: #7d3d0d;
-  --color-black-900: #5d2c0d;
-  --color-black-950: #331607;
-
   --color-stone-50: #fffdfa;
   --color-stone-100: #fff5e8;
   --color-stone-200: #fde6cd;
@@ -49,8 +37,8 @@
   --color-stone-600: #a96c2c;
   --color-stone-700: #7f4f20;
   --color-stone-800: #5d3a17;
-  --color-stone-900: #f7d6a5;
-  --color-stone-950: #fef7ec;
+  --color-stone-900: #2f1808;
+  --color-stone-950: #1a0c04;
 
   --color-emerald-50: #fffaf3;
   --color-emerald-100: #fff0dc;
@@ -70,11 +58,33 @@ body {
   font-family: var(--font-outfit), sans-serif;
   overflow-x: hidden;
   background: #fffdfa;
-  color: #5d3a17;
+  color: #1c1917;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-playfair), serif;
+}
+
+/* Ensure ALL typed input text, textarea text, and select options are solid 100% black */
+input, textarea, select {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  font-weight: 600 !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #78716c !important;
+  -webkit-text-fill-color: #78716c !important;
+  font-weight: 400 !important;
+}
+
+/* Override WebKit / Chrome / Edge autofill text color to solid black */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: #000000 !important;
+  color: #000000 !important;
 }
 
 /* Custom scrollbar styling */

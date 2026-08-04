@@ -1,48 +1,43 @@
-import { createHmac } from "crypto";
 import { NextResponse } from "next/server";
+import { verifyAdminCredentials, generateSessionToken, COOKIE_NAME } from "@/lib/admin-auth";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const COOKIE_NAME = "yatriguide_admin_session";
-const SECRET_KEY = process.env.ADMIN_JWT_SECRET || "yatriguide-super-secure-admin-secret-2026";
-
-function generateSessionToken(email) {
-  const payload = JSON.stringify({
-    email,
-    role: "admin",
-    exp: Date.now() + 24 * 60 * 60 * 1000, // 24 hours
-  });
-  const base64Payload = Buffer.from(payload).toString("base64url");
-  const signature = createHmac("sha256", SECRET_KEY).update(base64Payload).digest("base64url");
-  return `${base64Payload}.${signature}`;
-}
-
 export async function POST(request) {
   try {
     const body = await request.json();
-    const email = body.email?.trim()?.toLowerCase();
+    const email = body.email?.trim();
     const password = body.password?.trim();
 
-    const expectedEmail = (process.env.ADMIN_EMAIL || "admin@yatriguide.in").trim().toLowerCase();
-    const expectedPassword = (process.env.ADMIN_PASSWORD || "Admin@12345").trim();
-
     if (!email || !password) {
-      return NextResponse.json({ error: "Email and password are required." }, { status: 400 });
+      return NextResponse.json({ error: "Admin email and password are required." }, { status: 400 });
     }
 
-    if (email !== expectedEmail || password !== expectedPassword) {
-      return NextResponse.json({ error: "Invalid admin email or password." }, { status: 401 });
+    // Verify against authorized admin accounts (Owner & Admin)
+    const adminUser = verifyAdminCredentials(email, password);
+
+    if (!adminUser) {
+      return NextResponse.json(
+        { error: "Invalid admin email or password. Access restricted to authorized admins." },
+        { status: 401 }
+      );
     }
 
-    const token = generateSessionToken(email);
+    // Generate cryptographically signed JWT/HMAC session token
+    const token = generateSessionToken(adminUser.email, adminUser.role);
 
     const response = NextResponse.json({
       success: true,
-      message: "Admin login successful.",
-      user: { email, role: "admin" },
+      message: `Admin login successful. Welcome ${adminUser.name}!`,
+      user: {
+        email: adminUser.email,
+        role: adminUser.role,
+        name: adminUser.name,
+      },
     });
 
+    // Set secure HTTP-Only session cookie
     response.cookies.set({
       name: COOKIE_NAME,
       value: token,
@@ -50,12 +45,12 @@ export async function POST(request) {
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",
-      maxAge: 24 * 60 * 60,
+      maxAge: 24 * 60 * 60, // 24 hours
     });
 
     return response;
   } catch (error) {
     console.error("Admin login error:", error);
-    return NextResponse.json({ error: "Unable to process login right now." }, { status: 500 });
+    return NextResponse.json({ error: "Unable to process login request." }, { status: 500 });
   }
 }

@@ -1,13 +1,11 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { getAllRegistrations, updateRegistration, deleteRegistration, getDbStatus } from "@/lib/db";
-import { verifySessionToken } from "../check/route";
+import { verifySessionToken, COOKIE_NAME } from "@/lib/admin-auth";
 import nodemailer from "nodemailer";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-const COOKIE_NAME = "yatriguide_admin_session";
 
 async function isAuthorized() {
   const cookieStore = await cookies();

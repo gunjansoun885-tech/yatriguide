@@ -289,7 +289,8 @@ export default function LoginModal({ isOpen, onClose }) {
                         value={identifier}
                         onChange={(e) => setIdentifier(e.target.value)}
                         placeholder="email@example.com or UK07AB1234"
-                        className="w-full bg-transparent text-sm text-stone-800 outline-none placeholder:text-stone-400"
+                        className="w-full bg-transparent text-sm font-semibold outline-none placeholder:text-stone-400 text-black"
+                        style={{ color: "#000000", WebkitTextFillColor: "#000000", fontWeight: 600 }}
                         required
                       />
                     </div>
@@ -320,7 +321,8 @@ export default function LoginModal({ isOpen, onClose }) {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Enter your password"
-                        className="w-full bg-transparent text-sm text-stone-800 outline-none placeholder:text-stone-400"
+                        className="w-full bg-transparent text-sm font-semibold outline-none placeholder:text-stone-400 text-black"
+                        style={{ color: "#000000", WebkitTextFillColor: "#000000", fontWeight: 600 }}
                         required
                       />
                     </div>
