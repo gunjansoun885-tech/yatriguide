@@ -39,7 +39,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative h-[60vh] sm:h-[75vh] md:h-[85vh] lg:h-[90vh] xl:h-screen w-full overflow-hidden bg-stone-950 flex items-center justify-center"
+      className="relative h-[70vh] sm:h-[80vh] md:h-[85vh] lg:h-[90vh] xl:h-screen w-full overflow-hidden bg-stone-950 flex items-center justify-center"
     >
       {/* Full-bleed Hero Image covering 100% screen */}
       <div className="absolute inset-0 z-0 overflow-hidden flex items-center justify-center">
@@ -61,7 +61,7 @@ export default function Hero() {
               sizes="100vw"
               className={`h-full w-full transition-all duration-700 ${HERO_IMAGES[currentBg] === "/n1.png"
                 ? "object-contain object-center p-2 sm:p-4 md:p-6"
-                : "object-contain md:object-cover object-center"
+                : "object-cover object-center"
                 }`}
             />
           </motion.div>
