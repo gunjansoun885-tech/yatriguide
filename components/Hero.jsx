@@ -6,15 +6,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const HERO_IMAGES = [
-  "/oo1.png",
-  "/g1.png",
-  "/ch.png",
-  "/nw.png",
-  "/opp.png",
-  "/jj1.png",
-  "/nn1.png",
-  "/s1.png",
-  "/kk2.png",
+  { desktop: "/oo1.png", mobile: "/mobile/oo1.png" },
+  { desktop: "/g1.png", mobile: "/mobile/g1.png" },
+  { desktop: "/ch.png", mobile: "/mobile/ch.png" },
+  { desktop: "/nw.png", mobile: "/mobile/nw.png" },
+  { desktop: "/opp.png", mobile: "/mobile/opp.png" },
+  { desktop: "/jj1.png", mobile: "/mobile/jj1.png" },
+  { desktop: "/nn1.png", mobile: "/mobile/nn1.png" },
+  { desktop: "/s1.png", mobile: "/mobile/s1.png" },
+  { desktop: "/kk2.png", mobile: "/mobile/kk2.png" },
 ];
 
 export default function Hero() {
@@ -52,17 +52,26 @@ export default function Hero() {
             transition={{ duration: 1.2, ease: "easeInOut" }}
             className="absolute inset-0 h-full w-full flex items-center justify-center"
           >
+            {/* Desktop Hero Image (Unchanged) */}
             <Image
-              src={HERO_IMAGES[currentBg]}
-              alt="Uttarakhand travel destination"
+              src={HERO_IMAGES[currentBg].desktop}
+              alt="Uttarakhand travel destination desktop"
               fill
               priority={currentBg === 0}
               unoptimized
-              sizes="100vw"
-              className={`h-full w-full transition-all duration-700 ${HERO_IMAGES[currentBg] === "/n1.png"
-                ? "object-contain object-center p-2 sm:p-4 md:p-6"
-                : "object-cover object-center"
-                }`}
+              sizes="(min-width: 640px) 100vw, 0vw"
+              className="hidden sm:block h-full w-full object-cover object-center transition-all duration-700"
+            />
+
+            {/* Mobile Hero Image (Custom generated portrait format for mobile) */}
+            <Image
+              src={HERO_IMAGES[currentBg].mobile}
+              alt="Uttarakhand travel destination mobile"
+              fill
+              priority={currentBg === 0}
+              unoptimized
+              sizes="(max-width: 639px) 100vw, 0vw"
+              className="block sm:hidden h-full w-full object-cover object-center transition-all duration-700"
             />
           </motion.div>
         </AnimatePresence>
