@@ -36,7 +36,7 @@ const GALLERY_IMAGES = [
   },
   {
     id: 5,
-    url: "/auli.jpeg",
+    url: "/7.png",
     title: "Auli Snow Slopes",
     caption: "Thick ski slopes facing the monumental Nanda Devi Himalayan Peak.",
     size: "wide"
@@ -50,7 +50,7 @@ const GALLERY_IMAGES = [
   },
   {
     id: 7,
-    url: "/auli.jpeg",
+    url: "/5.png",
     title: "Alpine Meadows of Auli",
     caption: "Lush bugyals blooming with wildflower colonies under sun-kissed peaks.",
     size: "wide"
@@ -118,7 +118,7 @@ export default function Gallery() {
         </div>
 
         {/* Masonry Layout Grid using CSS columns */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 box-border mx-auto w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 box-border mx-auto w-full items-start">
           {GALLERY_IMAGES.map((img, idx) => (
             <motion.div
               key={img.id}
@@ -127,13 +127,13 @@ export default function Gallery() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.05 }}
               onClick={() => setActiveIdx(idx)}
-              className="relative break-inside-avoid mb-6 rounded-2xl overflow-hidden cursor-pointer group bg-white border border-orange-100 shadow-lg hover:shadow-2xl transition-all duration-300"
+              className="relative break-inside-avoid rounded-2xl overflow-hidden cursor-pointer group bg-white border border-orange-100 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
             >
               <img
                 src={img.url}
                 alt={img.title}
                 loading="lazy"
-                className="w-full object-cover rounded-2xl transition-transform duration-700 ease-out group-hover:scale-105"
+                className="w-full h-full object-cover rounded-2xl transition-transform duration-700 ease-out group-hover:scale-105"
               />
 
               {/* Hover Overlay */}
@@ -142,8 +142,8 @@ export default function Gallery() {
                   <ZoomIn className="w-4 h-4" />
                 </div>
                 <div className="text-left">
-                  <h4 className="text-sm font-serif font-bold text-gold-400">{img.title}</h4>
-                  <p className="text-[11px] font-sans text-stone-200 font-light mt-1 line-clamp-2 leading-relaxed">
+                  <h3 className="text-base sm:text-lg font-sans font-extrabold text-white drop-shadow-md">{img.title}</h3>
+                  <p className="text-xs font-sans text-white/90 font-medium mt-1 line-clamp-2 leading-relaxed drop-shadow">
                     {img.caption}
                   </p>
                 </div>
@@ -217,7 +217,7 @@ export default function Gallery() {
 
               {/* Description Drawer Details */}
               <div className="w-full max-w-2xl bg-stone-900/90 border border-white/5 rounded-2xl p-5 mt-6 text-center text-white backdrop-blur-md">
-                <h3 className="text-xl font-serif font-black text-gold-400">
+                <h3 className="text-xl font-serif font-black text-white drop-shadow-md">
                   {GALLERY_IMAGES[activeIdx].title}
                 </h3>
                 <p className="text-sm font-sans font-light text-stone-300 mt-2 leading-relaxed">
