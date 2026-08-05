@@ -1,5 +1,8 @@
 import { readdir, readFile } from "fs/promises";
 import path from "path";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { COOKIE_NAME, verifySessionToken } from "@/lib/admin-auth";
 
 async function getRegistrations() {
   const registrationsDirectory = path.join(process.cwd(), "data", "registrations");
@@ -23,6 +26,14 @@ async function getRegistrations() {
 }
 
 export default async function RegistrationsPage() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(COOKIE_NAME)?.value;
+  const session = verifySessionToken(token);
+
+  if (!session) {
+    redirect("/admin/login");
+  }
+
   const registrations = await getRegistrations();
 
   return (
