@@ -30,7 +30,7 @@ function hashPassword(password) {
   return { salt, hash };
 }
 
-import { saveRegistration } from "@/lib/db";
+import { getAllRegistrations, saveRegistration } from "@/lib/db";
 
 async function listRegistrations() {
   await mkdir(registrationsDirectory, { recursive: true });
@@ -268,6 +268,27 @@ export async function POST(request) {
     }
     if (!body.registrationPassword || body.registrationPassword !== body.confirmRegistrationPassword) {
       return NextResponse.json({ error: "Please enter matching passwords." }, { status: 400 });
+    }
+
+    const cleanVehicleNumber = body.vehicleNumber.trim();
+    const normSubmittedVehicle = cleanVehicleNumber.replace(/[\s-]/g, "").toLowerCase();
+
+    // Verify if same vehicle number already exists with a different password
+    const allRegistrations = await getAllRegistrations();
+    const existingRegistration = allRegistrations.find((r) => {
+      const normRegVehicle = (r.vehicleNumber || "").replace(/[\s-]/g, "").toLowerCase();
+      return normRegVehicle && normRegVehicle === normSubmittedVehicle;
+    });
+
+    if (existingRegistration && existingRegistration.registrationPassword) {
+      if (existingRegistration.registrationPassword !== body.registrationPassword) {
+        return NextResponse.json(
+          {
+            error: "Yeh vehicle number pehle se registered hai. Aap kisi alag password se register/login nahi kar sakte. Kripya apna purana password hi dalein."
+          },
+          { status: 400 }
+        );
+      }
     }
 
     const { registrationPassword, confirmRegistrationPassword, travelFromOther, travelToOther, ...details } = body;

@@ -331,8 +331,8 @@ export default function LoginModal({ isOpen, onClose }) {
                   {status.message && (
                     <div
                       className={`rounded-2xl border p-3 text-xs font-semibold ${status.type === "success"
-                          ? "border-emerald-200 bg-emerald-50 text-emerald-700"
-                          : "border-rose-200 bg-rose-50 text-rose-700"
+                        ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+                        : "border-rose-200 bg-rose-50 text-rose-700"
                         }`}
                     >
                       {status.message}
@@ -416,8 +416,8 @@ export default function LoginModal({ isOpen, onClose }) {
                     {status.message && (
                       <div
                         className={`rounded-2xl border p-3 text-xs font-semibold ${status.type === "success"
-                            ? "border-emerald-200 bg-emerald-50 text-emerald-700"
-                            : "border-rose-200 bg-rose-50 text-rose-700"
+                          ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+                          : "border-rose-200 bg-rose-50 text-rose-700"
                           }`}
                       >
                         {status.message}
@@ -478,8 +478,8 @@ export default function LoginModal({ isOpen, onClose }) {
                     {status.message && (
                       <div
                         className={`rounded-2xl border p-3 text-xs font-semibold ${status.type === "success"
-                            ? "border-emerald-200 bg-emerald-50 text-emerald-700"
-                            : "border-rose-200 bg-rose-50 text-rose-700"
+                          ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+                          : "border-rose-200 bg-rose-50 text-rose-700"
                           }`}
                       >
                         {status.message}
@@ -552,8 +552,8 @@ export default function LoginModal({ isOpen, onClose }) {
                     {status.message && (
                       <div
                         className={`rounded-2xl border p-3 text-xs font-semibold ${status.type === "success"
-                            ? "border-emerald-200 bg-emerald-50 text-emerald-700"
-                            : "border-rose-200 bg-rose-50 text-rose-700"
+                          ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+                          : "border-rose-200 bg-rose-50 text-rose-700"
                           }`}
                       >
                         {status.message}

@@ -36,7 +36,7 @@ const GALLERY_IMAGES = [
   },
   {
     id: 5,
-    url: "/7.png",
+    url: "/auli.jpeg",
     title: "Auli Snow Slopes",
     caption: "Thick ski slopes facing the monumental Nanda Devi Himalayan Peak.",
     size: "wide"
@@ -50,7 +50,7 @@ const GALLERY_IMAGES = [
   },
   {
     id: 7,
-    url: "/5.png",
+    url: "/auli.jpeg",
     title: "Alpine Meadows of Auli",
     caption: "Lush bugyals blooming with wildflower colonies under sun-kissed peaks.",
     size: "wide"
