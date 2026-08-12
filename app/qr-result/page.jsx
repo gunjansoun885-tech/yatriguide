@@ -13,14 +13,11 @@ import {
   Ambulance,
   LifeBuoy,
   Flame,
-  Download,
-  Share2,
-  Calendar,
   Car,
   User,
   Users,
   AlertCircle,
-  QrCode as QrIcon,
+  Phone,
 } from "lucide-react";
 import { toDataURL } from "qrcode";
 
@@ -38,10 +35,9 @@ const maskAadhaar = (aadhar) => {
   return "X".repeat(str.length - 3) + str.slice(-3);
 };
 
-export default function TravelPassPage({ searchParams }) {
-  // Unwrap searchParams if passed as a promise in Next.js 15+
+export default function QrResultPage({ searchParams }) {
   const resolvedSearchParams = searchParams ? use(Promise.resolve(searchParams)) : {};
-  const passId = resolvedSearchParams?.id;
+  const passId = resolvedSearchParams?.id || resolvedSearchParams?.registrationId;
 
   const [registration, setRegistration] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -60,19 +56,18 @@ export default function TravelPassPage({ searchParams }) {
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.error || "Unable to load travel pass.");
+          throw new Error(data.error || "Unable to load registration details.");
         }
 
         setRegistration(data.registration);
 
-        // Generate QR code for current pass page URL
         if (typeof window !== "undefined") {
           const currentUrl = window.location.href;
           const qr = await toDataURL(currentUrl, { errorCorrectionLevel: "M", margin: 2 });
           setQrCodeUrl(qr);
         }
       } catch (err) {
-        setError(err.message || "Failed to load pass details.");
+        setError(err.message || "Failed to load registration details.");
       } finally {
         setLoading(false);
       }
@@ -89,7 +84,7 @@ export default function TravelPassPage({ searchParams }) {
       const vehicleNum = registration?.vehicleNumber || "-";
       const route = `${registration?.travelFrom || "-"} to ${registration?.travelTo || "-"}`;
 
-      const message = `🚗 *Yatriguide Digital Travel Pass*\n\n📌 *Registration ID:* ${regId}\n🚘 *Vehicle Number:* ${vehicleNum}\n🗺️ *Route:* ${route}\n📍 *Live Current Location:* ${locationUrl || "Not provided"}\n\nPass Verification Link:\n${window.location.href}`;
+      const message = `🚗 *Yatriguide Digital Pass Verification*\n\n📌 *Registration ID:* ${regId}\n🚘 *Vehicle Number:* ${vehicleNum}\n🗺️ *Route:* ${route}\n📍 *Live Location:* ${locationUrl || "Not provided"}\n\nVerification Link:\n${window.location.href}`;
 
       const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, "_blank");
@@ -146,50 +141,50 @@ export default function TravelPassPage({ searchParams }) {
           {noPassIdState ? (
             <div className="rounded-3xl border border-rose-200 bg-white p-8 text-center shadow-lg">
               <AlertCircle className="mx-auto h-12 w-12 text-rose-500 mb-3" />
-              <h2 className="text-xl font-bold text-stone-900">Pass Not Found</h2>
+              <h2 className="text-xl font-bold text-stone-900">Registration Not Found</h2>
               <p className="mt-2 text-sm text-stone-600">No Registration ID provided in URL.</p>
               <Link
                 href="/contact"
                 className="mt-6 inline-block rounded-xl bg-orange-600 px-6 py-3 text-sm font-bold text-white shadow-md hover:bg-orange-700"
               >
-                Register Travel Vehicle
+                Go to Vehicle Registration
               </Link>
             </div>
           ) : loading ? (
             <div className="rounded-3xl border border-stone-200 bg-white p-12 text-center shadow-lg">
               <div className="mx-auto h-12 w-12 animate-spin rounded-full border-4 border-orange-500 border-t-transparent" />
-              <p className="mt-4 font-bold text-stone-700">Loading Yatriguide Travel Pass...</p>
+              <p className="mt-4 font-bold text-stone-700">Loading Registration Result...</p>
             </div>
           ) : error ? (
             <div className="rounded-3xl border border-rose-200 bg-white p-8 text-center shadow-lg">
               <AlertCircle className="mx-auto h-12 w-12 text-rose-500 mb-3" />
-              <h2 className="text-xl font-bold text-stone-900">Pass Not Found</h2>
+              <h2 className="text-xl font-bold text-stone-900">Registration Not Found</h2>
               <p className="mt-2 text-sm text-stone-600">{error}</p>
               <Link
                 href="/contact"
                 className="mt-6 inline-block rounded-xl bg-orange-600 px-6 py-3 text-sm font-bold text-white shadow-md hover:bg-orange-700"
               >
-                Register Travel Vehicle
+                Go to Vehicle Registration
               </Link>
             </div>
           ) : (
             <div className="overflow-hidden rounded-3xl border border-orange-200 bg-white shadow-2xl">
-              {/* Pass Header */}
+              {/* Header */}
               <div className="bg-linear-to-r from-orange-600 via-amber-600 to-orange-500 p-6 text-white text-center relative">
                 <div className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3.5 py-1 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
                   <ShieldCheck className="h-4 w-4 text-emerald-300" />
-                  Verified Yatriguide Pass
+                  Verified Travel Pass Result
                 </div>
 
                 <h1 className="mt-3 text-2xl font-black sm:text-3xl tracking-tight">
-                  Uttarakhand Digital Travel Pass
+                  Uttarakhand Travel Pass Result
                 </h1>
                 <p className="mt-1 text-xs text-orange-100 font-mono font-bold">
                   Registration ID: <span className="text-white underline">{registration.id}</span>
                 </p>
               </div>
 
-              {/* Pass Details Body */}
+              {/* Body */}
               <div className="p-6 space-y-6">
                 {/* Vehicle & Journey Info */}
                 <section className="rounded-2xl border border-orange-100 bg-orange-50/50 p-4">
@@ -239,7 +234,7 @@ export default function TravelPassPage({ searchParams }) {
                       </div>
                     )}
                     <div>
-                      <span className="block text-xs font-semibold text-stone-500">Emergency Phone (Click to Call)</span>
+                      <span className="block text-xs font-semibold text-stone-500">Emergency Phone</span>
                       {registration.emergencyContactNo ? (
                         <a
                           href={`tel:${registration.emergencyContactNo}`}
@@ -273,15 +268,85 @@ export default function TravelPassPage({ searchParams }) {
                   </section>
                 )}
 
-                {/* QR Code Verification Image */}
+                {/* UTTARAKHAND EMERGENCY CONTACTS (DIRECT CALL) */}
+                <section className="rounded-2xl border border-rose-200 bg-rose-50/50 p-5 space-y-3">
+                  <h2 className="text-xs font-bold uppercase tracking-wider text-rose-900 flex items-center gap-2 border-b border-rose-200/60 pb-3">
+                    <ShieldAlert className="h-5 w-5 text-rose-600 shrink-0" />
+                    UTTARAKHAND EMERGENCY CONTACTS (DIRECT CALL)
+                  </h2>
+
+                  <div className="space-y-2 text-xs sm:text-sm pt-1">
+                    <div className="flex items-center justify-between rounded-xl bg-white p-3 border border-rose-200 font-medium text-stone-900 shadow-2xs">
+                      <span className="font-bold">Police —</span>
+                      <a
+                        href="tel:112"
+                        className="inline-flex items-center font-mono font-bold text-rose-600 text-sm bg-rose-50 px-2.5 py-1 rounded-lg border border-rose-200 transition hover:bg-rose-100 active:scale-95"
+                        aria-label="Call police helpline 112"
+                        title="Call 112"
+                      >
+                        112
+                      </a>
+                    </div>
+
+                    <div className="flex items-center justify-between rounded-xl bg-white p-3 border border-amber-200 font-medium text-stone-900 shadow-2xs">
+                      <span className="font-bold">Ambulance —</span>
+                      <a
+                        href="tel:108"
+                        className="inline-flex items-center font-mono font-bold text-amber-600 text-sm bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200 transition hover:bg-amber-100 active:scale-95"
+                        aria-label="Call ambulance helpline 108"
+                        title="Call 108"
+                      >
+                        108
+                      </a>
+                    </div>
+
+                    <div className="flex items-center justify-between rounded-xl bg-white p-3 border border-blue-200 font-medium text-stone-900 shadow-2xs">
+                      <span className="font-bold">UK SDRF —</span>
+                      <a
+                        href="tel:1070"
+                        className="inline-flex items-center font-mono font-bold text-blue-600 text-sm bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200 transition hover:bg-blue-100 active:scale-95"
+                        aria-label="Call UK SDRF helpline 1070"
+                        title="Call 1070"
+                      >
+                        1070
+                      </a>
+                    </div>
+
+                    <div className="flex items-center justify-between rounded-xl bg-white p-3 border border-emerald-200 font-medium text-stone-900 shadow-2xs">
+                      <span className="font-bold">NDRF —</span>
+                      <a
+                        href="tel:1078"
+                        className="inline-flex items-center font-mono font-bold text-emerald-600 text-sm bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200 transition hover:bg-emerald-100 active:scale-95"
+                        aria-label="Call NDRF helpline 1078"
+                        title="Call 1078"
+                      >
+                        1078
+                      </a>
+                    </div>
+
+                    <div className="flex items-center justify-between rounded-xl bg-white p-3 border border-purple-200 font-medium text-stone-900 shadow-2xs">
+                      <span className="font-bold">Women —</span>
+                      <a
+                        href="tel:1090"
+                        className="inline-flex items-center font-mono font-bold text-purple-600 text-sm bg-purple-50 px-2.5 py-1 rounded-lg border border-purple-200 transition hover:bg-purple-100 active:scale-95"
+                        aria-label="Call women helpline 1090"
+                        title="Call 1090"
+                      >
+                        1090
+                      </a>
+                    </div>
+                  </div>
+                </section>
+
+                {/* QR Image Verification */}
                 {qrCodeUrl && (
                   <div className="text-center pt-2">
-                    <p className="text-xs font-bold text-stone-600 mb-2">QR Code Pass Link</p>
-                    <Image src={qrCodeUrl} alt="Pass QR Code" width={160} height={160} unoptimized className="mx-auto rounded-xl border p-2 bg-white shadow-xs" />
+                    <p className="text-xs font-bold text-stone-600 mb-2">Verification Link QR Code</p>
+                    <Image src={qrCodeUrl} alt="Result Pass QR Code" width={150} height={150} unoptimized className="mx-auto rounded-xl border p-2 bg-white shadow-xs" />
                   </div>
                 )}
 
-                {/* Action Buttons: WhatsApp Location Share */}
+                {/* Location Share Button */}
                 <div className="pt-2">
                   <button
                     type="button"
@@ -290,128 +355,8 @@ export default function TravelPassPage({ searchParams }) {
                     className="w-full flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-4 py-3.5 text-sm font-bold text-white shadow-lg transition hover:bg-emerald-700 active:scale-98 disabled:opacity-70 touch-manipulation min-h-[46px]"
                   >
                     <MapPin className="h-5 w-5 animate-bounce" />
-                    {isGettingLocation ? "Fetching Live GPS Location..." : "📍 Share Live Location on WhatsApp"}
+                    {isGettingLocation ? "Fetching GPS Location..." : "📍 Share Live Location on WhatsApp"}
                   </button>
-                </div>
-
-                {/* Uttarakhand Emergency Helplines Direct Calling Buttons */}
-                <div className="border-t border-stone-200 pt-5">
-                  <h3 className="text-center text-xs font-bold uppercase tracking-wider text-stone-600 mb-3 flex items-center justify-center gap-1.5">
-                    📞 Uttarakhand Emergency Helplines (Click to Call)
-                  </h3>
-                  <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-5">
-                    <a
-                      href="tel:112"
-
-                      className="flex flex-col items-center justify-center rounded-xl border border-rose-200 bg-rose-50 p-3 text-center transition hover:bg-rose-100 active:scale-95 shadow-xs cursor-pointer"
-                    >
-                      <ShieldAlert className="h-5 w-5 text-rose-600 mb-1" />
-                      <span className="text-xs font-bold text-rose-900">Police</span>
-                      <span className="text-[11px] font-bold text-rose-600">📞 112 / 100</span>
-                    </a>
-
-                    <a
-                      href="tel:108"
-
-                      className="flex flex-col items-center justify-center rounded-xl border border-amber-200 bg-amber-50 p-3 text-center transition hover:bg-amber-100 active:scale-95 shadow-xs cursor-pointer"
-                    >
-                      <Ambulance className="h-5 w-5 text-amber-600 mb-1" />
-                      <span className="text-xs font-bold text-amber-900">Ambulance</span>
-                      <span className="text-[11px] font-bold text-amber-600">📞 108</span>
-                    </a>
-
-                    <a
-                      href="tel:1070"
-                      className="flex flex-col items-center justify-center rounded-xl border border-blue-200 bg-blue-50 p-3 text-center transition hover:bg-blue-100 active:scale-95 shadow-xs cursor-pointer"
-                    >
-                      <LifeBuoy className="h-5 w-5 text-blue-600 mb-1" />
-                      <span className="text-xs font-bold text-blue-900">UK SDRF</span>
-                      <span className="text-[11px] font-bold text-blue-600">📞 1070</span>
-                    </a>
-
-                    <a
-                      href="tel:1078"
-                      className="flex flex-col items-center justify-center rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-center transition hover:bg-emerald-100 active:scale-95 shadow-xs cursor-pointer"
-                    >
-                      <Flame className="h-5 w-5 text-emerald-600 mb-1" />
-                      <span className="text-xs font-bold text-emerald-900">NDRF</span>
-                      <span className="text-[11px] font-bold text-emerald-600">📞 1078</span>
-                    </a>
-
-                    <a
-                      href="tel:1090"
-                      className="flex flex-col items-center justify-center rounded-xl border border-purple-200 bg-purple-50 p-3 text-center transition hover:bg-purple-100 active:scale-95 shadow-xs cursor-pointer col-span-2 sm:col-span-1"
-                    >
-                      <PhoneCall className="h-5 w-5 text-purple-600 mb-1" />
-                      <span className="text-xs font-bold text-purple-900">Women Helpline</span>
-                      <span className="text-[11px] font-bold text-purple-600">📞 1090</span>
-                    </a>
-                  </div>
-
-                  {/* Uttarakhand Emergency Contact List Rows */}
-                  <div className="mt-5 rounded-2xl border border-rose-200 bg-rose-50/40 p-4">
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-rose-900 mb-3 flex items-center gap-1.5">
-                      <ShieldAlert className="h-4 w-4 text-rose-600" />
-                      UTTARAKHAND EMERGENCY CONTACTS (DIRECT CALL)
-                    </h4>
-                    <div className="space-y-2 text-xs sm:text-sm">
-                      <div className="flex items-center justify-between rounded-xl bg-white p-3 border border-rose-200 font-medium text-stone-900 shadow-2xs">
-                        <span className="font-bold">Police Helpline —</span>
-                        <a
-                          href="tel:112"
-                          className="inline-flex items-center font-mono font-bold text-rose-600 text-sm bg-rose-50 px-2.5 py-1 rounded-lg border border-rose-200 transition hover:bg-rose-100 active:scale-95"
-                          aria-label="Call police helpline 112"
-                          title="Call 112"
-                        >
-                          📞 112
-                        </a>
-                      </div>
-                      <div className="flex items-center justify-between rounded-xl bg-white p-3 border border-amber-200 font-medium text-stone-900 shadow-2xs">
-                        <span className="font-bold">Ambulance Helpline —</span>
-                        <a
-                          href="tel:108"
-                          className="inline-flex items-center font-mono font-bold text-amber-600 text-sm bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200 transition hover:bg-amber-100 active:scale-95"
-                          aria-label="Call ambulance helpline 108"
-                          title="Call 108"
-                        >
-                          📞 108
-                        </a>
-                      </div>
-                      <div className="flex items-center justify-between rounded-xl bg-white p-3 border border-blue-200 font-medium text-stone-900 shadow-2xs">
-                        <span className="font-bold">UK SDRF Helpline —</span>
-                        <a
-                          href="tel:1070"
-                          className="inline-flex items-center font-mono font-bold text-blue-600 text-sm bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200 transition hover:bg-blue-100 active:scale-95"
-                          aria-label="Call UK SDRF helpline 1070"
-                          title="Call 1070"
-                        >
-                          📞 1070
-                        </a>
-                      </div>
-                      <div className="flex items-center justify-between rounded-xl bg-white p-3 border border-emerald-200 font-medium text-stone-900 shadow-2xs">
-                        <span className="font-bold">NDRF Helpline —</span>
-                        <a
-                          href="tel:1078"
-                          className="inline-flex items-center font-mono font-bold text-emerald-600 text-sm bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200 transition hover:bg-emerald-100 active:scale-95"
-                          aria-label="Call NDRF helpline 1078"
-                          title="Call 1078"
-                        >
-                          📞 1078
-                        </a>
-                      </div>
-                      <div className="flex items-center justify-between rounded-xl bg-white p-3 border border-purple-200 font-medium text-stone-900 shadow-2xs">
-                        <span className="font-bold">Women Helpline —</span>
-                        <a
-                          href="tel:1090"
-                          className="inline-flex items-center font-mono font-bold text-purple-600 text-sm bg-purple-50 px-2.5 py-1 rounded-lg border border-purple-200 transition hover:bg-purple-100 active:scale-95"
-                          aria-label="Call women helpline 1090"
-                          title="Call 1090"
-                        >
-                          📞 1090
-                        </a>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

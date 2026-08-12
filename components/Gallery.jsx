@@ -36,7 +36,7 @@ const GALLERY_IMAGES = [
   },
   {
     id: 5,
-    url: "/7.png",
+    url: "/ii.png",
     title: "Auli Snow Slopes",
     caption: "Thick ski slopes facing the monumental Nanda Devi Himalayan Peak.",
     size: "wide"
@@ -50,7 +50,7 @@ const GALLERY_IMAGES = [
   },
   {
     id: 7,
-    url: "/5.png",
+    url: "/aul3.png",
     title: "Alpine Meadows of Auli",
     caption: "Lush bugyals blooming with wildflower colonies under sun-kissed peaks.",
     size: "wide"
@@ -91,7 +91,7 @@ export default function Gallery() {
   return (
     <section id="gallery" className="py-24 bg-gradient-to-b from-stone-100 to-stone-50 relative border-t border-orange-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="text-center mb-16">
           <motion.div
@@ -118,7 +118,7 @@ export default function Gallery() {
         </div>
 
         {/* Masonry Layout Grid using CSS columns */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 box-border mx-auto w-full items-start">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 box-border mx-auto w-full items-start">
           {GALLERY_IMAGES.map((img, idx) => (
             <motion.div
               key={img.id}

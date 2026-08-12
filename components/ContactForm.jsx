@@ -191,10 +191,16 @@ export default function ContactForm() {
     lines.push(
       "----------------------------------------",
       "[ UTTARAKHAND EMERGENCY CONTACTS (DIRECT CALL) ]",
-      "Call Police: tel:112",
-      "Call Ambulance: tel:108",
-      "Call UK SDRF: tel:1070",
-      "Call NDRF: tel:1078",
+      "Police Helpline: 112",
+      "tel:112",
+      "Ambulance Helpline: 108",
+      "tel:108",
+      "UK SDRF Helpline: 1070",
+      "tel:1070",
+      "NDRF Helpline: 1078",
+      "tel:1078",
+      "Women Helpline: 1090",
+      "tel:1090",
       "----------------------------------------",
       "[ SHARE LIVE / CURRENT LOCATION ]",
       "Share Location on WhatsApp:",
@@ -213,20 +219,21 @@ export default function ContactForm() {
 
     setForm((previous) => ({
       ...previous,
-      passengerCount: value,
-      passengerDetails: Array.from({ length: passengerCount }, (_, index) =>
-        previous.passengerDetails[index] || { name: "", age: "", gender: "" },
-      ),
+      passengerCount,
+      passengerDetails: Array.from({ length: passengerCount }, (_, idx) => ({
+        name: previous.passengerDetails[idx]?.name || "",
+        age: previous.passengerDetails[idx]?.age || "",
+        gender: previous.passengerDetails[idx]?.gender || "Male",
+      })),
     }));
   };
 
   const handlePassengerChange = (index, field, value) => {
-    setForm((previous) => ({
-      ...previous,
-      passengerDetails: previous.passengerDetails.map((passenger, passengerIndex) =>
-        passengerIndex === index ? { ...passenger, [field]: value } : passenger,
-      ),
-    }));
+    setForm((previous) => {
+      const updatedDetails = [...previous.passengerDetails];
+      updatedDetails[index] = { ...updatedDetails[index], [field]: value };
+      return { ...previous, passengerDetails: updatedDetails };
+    });
   };
 
   const handlePassengerDelete = (index) => {
@@ -241,16 +248,16 @@ export default function ContactForm() {
     });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    if (!form.vehicleNumber?.trim()) {
-      setStatusMessage({ type: "error", message: "Vehicle registration number is required." });
+    if (!form.tourFrom || !form.tourTo) {
+      setStatusMessage({ type: "error", message: "Please select both Tour From and Tour To dates." });
       return;
     }
 
-    if (!form.email?.trim()) {
-      setStatusMessage({ type: "error", message: "Email address is required." });
+    if (!form.emergencyContactNo?.trim()) {
+      setStatusMessage({ type: "error", message: "Emergency Contact Number is required." });
       return;
     }
 
@@ -481,6 +488,59 @@ export default function ContactForm() {
               <Download className="h-4 w-4" />
               Download QR Code
             </a>
+          </div>
+
+          {/* Uttarakhand Emergency Helplines Direct Calling Buttons */}
+          <div className="border-t border-stone-200 mt-6 pt-5">
+            <h4 className="text-center text-xs font-bold uppercase tracking-wider text-stone-600 mb-3 flex items-center justify-center gap-1.5">
+              📞 Uttarakhand Emergency Helplines (Click to Call)
+            </h4>
+            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-5">
+              <a
+                href="tel:112"
+                className="flex flex-col items-center justify-center rounded-xl border border-rose-200 bg-rose-50 p-3 text-center transition hover:bg-rose-100 active:scale-95 shadow-xs cursor-pointer"
+              >
+                <ShieldAlert className="h-5 w-5 text-rose-600 mb-1" />
+                <span className="text-xs font-bold text-rose-900">Police</span>
+                <span className="text-[11px] font-bold text-rose-600">📞 112 / 100</span>
+              </a>
+
+              <a
+                href="tel:108"
+                className="flex flex-col items-center justify-center rounded-xl border border-amber-200 bg-amber-50 p-3 text-center transition hover:bg-amber-100 active:scale-95 shadow-xs cursor-pointer"
+              >
+                <Ambulance className="h-5 w-5 text-amber-600 mb-1" />
+                <span className="text-xs font-bold text-amber-900">Ambulance</span>
+                <span className="text-[11px] font-bold text-amber-600">📞 108</span>
+              </a>
+
+              <a
+                href="tel:1070"
+                className="flex flex-col items-center justify-center rounded-xl border border-blue-200 bg-blue-50 p-3 text-center transition hover:bg-blue-100 active:scale-95 shadow-xs cursor-pointer"
+              >
+                <LifeBuoy className="h-5 w-5 text-blue-600 mb-1" />
+                <span className="text-xs font-bold text-blue-900">UK SDRF</span>
+                <span className="text-[11px] font-bold text-blue-600">📞 1070</span>
+              </a>
+
+              <a
+                href="tel:1078"
+                className="flex flex-col items-center justify-center rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-center transition hover:bg-emerald-100 active:scale-95 shadow-xs cursor-pointer"
+              >
+                <Flame className="h-5 w-5 text-emerald-600 mb-1" />
+                <span className="text-xs font-bold text-emerald-900">NDRF</span>
+                <span className="text-[11px] font-bold text-emerald-600">📞 1078</span>
+              </a>
+
+              <a
+                href="tel:1090"
+                className="flex flex-col items-center justify-center rounded-xl border border-purple-200 bg-purple-50 p-3 text-center transition hover:bg-purple-100 active:scale-95 shadow-xs cursor-pointer col-span-2 sm:col-span-1"
+              >
+                <PhoneCall className="h-5 w-5 text-purple-600 mb-1" />
+                <span className="text-xs font-bold text-purple-900">Women</span>
+                <span className="text-[11px] font-bold text-purple-600">📞 1090</span>
+              </a>
+            </div>
           </div>
         </div>
       )}
