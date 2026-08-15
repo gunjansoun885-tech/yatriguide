@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "up9878",
+  "vehicleType": "private",
+  "travelFrom": "Dehradun",
+  "travelTo": "Nainital",
+  "tourFrom": "2026-08-15",
+  "tourTo": "2026-08-19",
+  "driverType": "owner",
+  "ownerName": "yutr",
+  "ownerAge": "24",
+  "ownerPhone": "6789876542",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "989765768975",
+  "ownerGender": "Female",
+  "ownerBloodGroup": "A-",
+  "driverName": "ythgfterd",
+  "vehicleOwnerName": "ghhjj",
+  "vehicleOwnerContact": "788877667788",
+  "driverAge": "20",
+  "driverPhone": "6767897654",
+  "driverWhatsapp": "",
+  "driverAadhar": "677556768997",
+  "driverGender": "Female",
+  "driverBloodGroup": "A-",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "9877667788",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "hhhh",
+      "age": "4",
+      "gender": "Male"
+    }
+  ],
+  "email": "hgfg@gmail.com",
+  "message": "",
+  "registrationPassword": "66554433",
+  "id": "YS-2026-40E57D74",
+  "password": {
+    "salt": "d5808693d86b11614d8c440c05d55b18",
+    "hash": "89c9b17d3001d639bf6928ee81c9c4a747faabdb860b4519dc3fbf496d258acada38b176f7e44a548323ffa1bec22f015109020c3c44d6e69ffb4ed610b9cf49"
+  },
+  "createdAt": "2026-08-15T06:45:37.251Z",
+  "status": "Pending",
+  "updatedAt": "2026-08-15T06:45:37.251Z"
+}

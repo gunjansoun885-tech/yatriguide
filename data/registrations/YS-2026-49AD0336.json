@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "yu6545",
+  "vehicleType": "private",
+  "travelFrom": "Dehradun",
+  "travelTo": "Haldwani",
+  "tourFrom": "2026-08-16",
+  "tourTo": "2026-08-20",
+  "driverType": "owner",
+  "ownerName": "yhggt",
+  "ownerAge": "21",
+  "ownerPhone": "6788765676",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "987867564567",
+  "ownerGender": "Other",
+  "ownerBloodGroup": "A-",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "6798786786",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "gfhgfgfg",
+      "age": "0",
+      "gender": "Female"
+    }
+  ],
+  "email": "dds@gmail.com",
+  "message": "",
+  "registrationPassword": "12345654321",
+  "id": "YS-2026-49AD0336",
+  "password": {
+    "salt": "c44e6fed71672e384d4669db74dbd777",
+    "hash": "e20356b839a3270d9dd3c9572c6d80144ec3cc1d93cff15c14d52c79faaa35c51762aad3b9b69ba1e23cd5bcfd6df7788efe1ecc897261754a1f8189b91ca956"
+  },
+  "createdAt": "2026-08-15T07:09:29.816Z",
+  "status": "Pending",
+  "updatedAt": "2026-08-15T07:09:29.817Z"
+}

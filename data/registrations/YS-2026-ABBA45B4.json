@@ -1,0 +1,52 @@
+{
+  "vehicleNumber": "uk0765",
+  "vehicleType": "private",
+  "travelFrom": "Haldwani",
+  "travelTo": "Badrinath",
+  "tourFrom": "2026-08-02",
+  "tourTo": "2026-08-05",
+  "driverType": "driver",
+  "ownerName": "gunjan",
+  "ownerAge": "",
+  "ownerPhone": "",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "",
+  "ownerGender": "",
+  "ownerBloodGroup": "",
+  "driverName": "huij",
+  "vehicleOwnerName": "hsh",
+  "vehicleOwnerContact": "9876567895",
+  "driverAge": "33",
+  "driverPhone": "7617665247",
+  "driverWhatsapp": "",
+  "driverAadhar": "773748598372",
+  "driverGender": "Female",
+  "driverBloodGroup": "AB+",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "passengerCount": "1",
+  "passengerDetails": [
+    {
+      "name": "gyt",
+      "age": "14",
+      "gender": "Male"
+    }
+  ],
+  "stayDays": "",
+  "validityDate": "",
+  "goalToHome": "",
+  "bloodGroup": "",
+  "email": "simmibisht56@gmail.com",
+  "emergencyContactNo": "8979065247",
+  "message": "",
+  "registrationPassword": "gyss123",
+  "id": "YS-2026-ABBA45B4",
+  "password": {
+    "salt": "f218e72cb666fa9b1acc690ab7fd8668",
+    "hash": "e76bf6c003fa88a10990b4003a7e659e242494f426f3435deb9111cc4d0cedfedb094987606658820c99ce1836a173045ec9a043e9ead81bf9faa7e21a35a987"
+  },
+  "createdAt": "2026-08-02T10:20:34.975Z"
+}

@@ -1,0 +1,52 @@
+{
+  "vehicleNumber": "uk0765",
+  "vehicleType": "private",
+  "travelFrom": "Nainital",
+  "travelTo": "Gangotri",
+  "tourFrom": "2026-08-02",
+  "tourTo": "2026-08-07",
+  "driverType": "driver",
+  "ownerName": "",
+  "ownerAge": "",
+  "ownerPhone": "",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "",
+  "ownerGender": "",
+  "ownerBloodGroup": "",
+  "driverName": "llb",
+  "vehicleOwnerName": "hsh",
+  "vehicleOwnerContact": "9876567895",
+  "driverAge": "25",
+  "driverPhone": "7617665247",
+  "driverWhatsapp": "",
+  "driverAadhar": "773748598372",
+  "driverGender": "Female",
+  "driverBloodGroup": "A+",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "passengerCount": "1",
+  "passengerDetails": [
+    {
+      "name": "lajsu",
+      "age": "11",
+      "gender": "Other"
+    }
+  ],
+  "stayDays": "",
+  "validityDate": "",
+  "goalToHome": "",
+  "bloodGroup": "",
+  "email": "simmibisht56@gmail.com",
+  "emergencyContactNo": "8979065247",
+  "message": "wjshs",
+  "registrationPassword": "gunjan",
+  "id": "YS-2026-BBA8FE90",
+  "password": {
+    "salt": "3e6a11ea1b5b77625a6814c4bf90bc5e",
+    "hash": "89ea7e220b782c15854a2b628a1f8e9ee275c9bf7103b3093226b8c168db6dab7534112c3934678fafb5b9fc05c149b859f97f9161c6eb41b0d5526b685925cb"
+  },
+  "createdAt": "2026-08-02T06:58:40.354Z"
+}

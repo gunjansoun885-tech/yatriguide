@@ -1,0 +1,52 @@
+{
+  "vehicleNumber": "abc123",
+  "vehicleType": "private",
+  "travelFrom": "Kedarnath",
+  "travelTo": "Rishikesh",
+  "tourFrom": "2026-08-02",
+  "tourTo": "2026-08-06",
+  "driverType": "driver",
+  "ownerName": "",
+  "ownerAge": "",
+  "ownerPhone": "",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "",
+  "ownerGender": "",
+  "ownerBloodGroup": "",
+  "driverName": "huij",
+  "vehicleOwnerName": "hsh",
+  "vehicleOwnerContact": "9876567895",
+  "driverAge": "32",
+  "driverPhone": "7617665247",
+  "driverWhatsapp": "",
+  "driverAadhar": "773748598372",
+  "driverGender": "Male",
+  "driverBloodGroup": "AB+",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "passengerCount": "1",
+  "passengerDetails": [
+    {
+      "name": "gyt",
+      "age": "11",
+      "gender": "Male"
+    }
+  ],
+  "stayDays": "",
+  "validityDate": "",
+  "goalToHome": "",
+  "bloodGroup": "",
+  "email": "simmibisht56@gmail.com",
+  "emergencyContactNo": "8979065247",
+  "message": "",
+  "registrationPassword": "kk890755",
+  "id": "YS-2026-26B68342",
+  "password": {
+    "salt": "6099c2b11111625fb943cd7ddf95b3d5",
+    "hash": "9a3f93a8e9483236cb154b3879a5d6faf1fba8c96fcaa24ae62d82f050703a2a83b81259259f1cd187b70ffb5ca13fb00641685bf052fb660fc046362184cf44"
+  },
+  "createdAt": "2026-08-02T12:03:02.950Z"
+}

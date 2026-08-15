@@ -1,0 +1,52 @@
+{
+  "vehicleNumber": "uk0765",
+  "vehicleType": "private",
+  "travelFrom": "Haridwar",
+  "travelTo": "Kedarnath",
+  "tourFrom": "2026-08-02",
+  "tourTo": "2026-08-06",
+  "driverType": "owner",
+  "ownerName": "gtyr",
+  "ownerAge": "31",
+  "ownerPhone": "8979065247",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "676655444556",
+  "ownerGender": "Female",
+  "ownerBloodGroup": "A-",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "passengerCount": "1",
+  "passengerDetails": [
+    {
+      "name": "gyt",
+      "age": "10",
+      "gender": "Female"
+    }
+  ],
+  "stayDays": "",
+  "validityDate": "",
+  "goalToHome": "",
+  "bloodGroup": "",
+  "email": "simmibisht56@gmail.com",
+  "emergencyContactNo": "78675645518",
+  "message": "hytr",
+  "registrationPassword": "gunjan",
+  "id": "YS-2026-29BBEF7F",
+  "password": {
+    "salt": "f51107659486c2f43fdf27174590c981",
+    "hash": "43a6a9c3fc077cbd2d34d4ba711f4deb496b9dd5b781f1b82a866dc4252de7004dac4f3b448013e3908ccd772d0a6df88e0fa33de750d277384ca775534f6851"
+  },
+  "createdAt": "2026-08-02T08:02:28.913Z"
+}

@@ -1,0 +1,52 @@
+{
+  "vehicleNumber": "abc123",
+  "vehicleType": "private",
+  "travelFrom": "Haldwani",
+  "travelTo": "Nainital",
+  "tourFrom": "2026-08-02",
+  "tourTo": "2026-08-05",
+  "driverType": "driver",
+  "ownerName": "",
+  "ownerAge": "",
+  "ownerPhone": "",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "",
+  "ownerGender": "",
+  "ownerBloodGroup": "",
+  "driverName": "huij",
+  "vehicleOwnerName": "hsh",
+  "vehicleOwnerContact": "9876567895",
+  "driverAge": "31",
+  "driverPhone": "7617665247",
+  "driverWhatsapp": "",
+  "driverAadhar": "773748598372",
+  "driverGender": "Female",
+  "driverBloodGroup": "AB+",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "passengerCount": "1",
+  "passengerDetails": [
+    {
+      "name": "gyt",
+      "age": "12",
+      "gender": "Male"
+    }
+  ],
+  "stayDays": "",
+  "validityDate": "",
+  "goalToHome": "",
+  "bloodGroup": "",
+  "email": "simmibisht56@gmail.com",
+  "emergencyContactNo": "8979065247",
+  "message": "",
+  "registrationPassword": "kk45678",
+  "id": "YS-2026-1D47BBF9",
+  "password": {
+    "salt": "0b73d4c16dfb7bf25d90358d96394a91",
+    "hash": "278380d33da7f52cf4c362c1824331ef7bbe1956ded2bc307523063ce7fdbcc9359629bbcd4ee8dd1096a48edbd5b9e17d9331c5bad09b04fe269a19c91a94af"
+  },
+  "createdAt": "2026-08-02T12:10:40.913Z"
+}

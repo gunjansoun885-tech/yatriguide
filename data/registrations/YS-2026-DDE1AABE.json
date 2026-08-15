@@ -1,0 +1,52 @@
+{
+  "vehicleNumber": "abc123",
+  "vehicleType": "private",
+  "travelFrom": "Delhi",
+  "travelTo": "Haldwani",
+  "tourFrom": "2026-08-05",
+  "tourTo": "2026-08-08",
+  "driverType": "driver",
+  "ownerName": "",
+  "ownerAge": "",
+  "ownerPhone": "",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "",
+  "ownerGender": "",
+  "ownerBloodGroup": "",
+  "driverName": "huij",
+  "vehicleOwnerName": "hsh",
+  "vehicleOwnerContact": "9876567895",
+  "driverAge": "34",
+  "driverPhone": "7617665247",
+  "driverWhatsapp": "",
+  "driverAadhar": "773748598372",
+  "driverGender": "Female",
+  "driverBloodGroup": "A+",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "passengerCount": "1",
+  "passengerDetails": [
+    {
+      "name": "lajsu",
+      "age": "15",
+      "gender": "Female"
+    }
+  ],
+  "stayDays": "",
+  "validityDate": "",
+  "goalToHome": "",
+  "bloodGroup": "",
+  "email": "simmibisht56@gmail.com",
+  "emergencyContactNo": "8979065247",
+  "message": "",
+  "registrationPassword": "oprajput123",
+  "id": "YS-2026-DDE1AABE",
+  "password": {
+    "salt": "9dcc360aef10a935b7199d8f27fa950f",
+    "hash": "23d688a1255bfe36a73b58fa221d082c380f0f1a9103f56f04de5d5aa06e317d15a4b88e911478ec096dbdbbba663d92eb953ea560f0af5595a37badfcba2124"
+  },
+  "createdAt": "2026-08-02T11:49:17.890Z"
+}

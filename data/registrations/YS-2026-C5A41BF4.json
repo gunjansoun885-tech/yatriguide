@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "up2345",
+  "vehicleType": "private",
+  "travelFrom": "Gangotri",
+  "travelTo": "Nainital",
+  "tourFrom": "2026-08-17",
+  "tourTo": "2026-08-20",
+  "driverType": "owner",
+  "ownerName": "iuyiue",
+  "ownerAge": "18",
+  "ownerPhone": "9878978967",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "678987652345",
+  "ownerGender": "Female",
+  "ownerBloodGroup": "A-",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "7898734567",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "hgfh",
+      "age": "0",
+      "gender": "Male"
+    }
+  ],
+  "email": "gfgf@gmail.com",
+  "message": "",
+  "registrationPassword": "765567",
+  "id": "YS-2026-C5A41BF4",
+  "password": {
+    "salt": "7c4c14cab2eb504e1558e1ff09393c38",
+    "hash": "daf49838eb9dd2c7f12d81dbb4381982d871e875257b2384c5bc0a1a717a8be75eb9cd3d8b735f2291b9ab114638e2d375ebcf7d8d0e38fcf3f96c32ee91a300"
+  },
+  "createdAt": "2026-08-15T07:21:20.976Z",
+  "status": "Pending",
+  "updatedAt": "2026-08-15T07:21:20.976Z"
+}

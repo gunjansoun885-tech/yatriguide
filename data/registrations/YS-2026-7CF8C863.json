@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "uk9088",
+  "vehicleType": "private",
+  "travelFrom": "Dehradun",
+  "travelTo": "Haridwar",
+  "tourFrom": "2026-08-16",
+  "tourTo": "2026-08-17",
+  "driverType": "owner",
+  "ownerName": "hjj",
+  "ownerAge": "21",
+  "ownerPhone": "7877766667",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "788887665557",
+  "ownerGender": "Female",
+  "ownerBloodGroup": "A-",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "676778898777",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "yggb",
+      "age": "1",
+      "gender": "Male"
+    }
+  ],
+  "email": "hgfg@gmail.com",
+  "message": "",
+  "registrationPassword": "77889900",
+  "id": "YS-2026-7CF8C863",
+  "password": {
+    "salt": "22675a64065d3fb57113c6dc498dce66",
+    "hash": "8e9aa5ff3f92f2a1acc2f724b775726781d22ceba96d46209838a7e64e355e8626a6280149c030a76917c07c0790adda9d8f6c5b98bc40a16e65cde0393806e2"
+  },
+  "createdAt": "2026-08-15T06:39:14.779Z",
+  "status": "Pending",
+  "updatedAt": "2026-08-15T06:39:14.779Z"
+}

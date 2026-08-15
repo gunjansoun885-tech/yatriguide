@@ -1,0 +1,52 @@
+{
+  "vehicleNumber": "uk0456",
+  "vehicleType": "private",
+  "travelFrom": "Haldwani",
+  "travelTo": "Dehradun",
+  "tourFrom": "2026-08-04",
+  "tourTo": "2026-08-07",
+  "driverType": "driver",
+  "ownerName": "",
+  "ownerAge": "",
+  "ownerPhone": "",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "",
+  "ownerGender": "",
+  "ownerBloodGroup": "",
+  "driverName": "ggss",
+  "vehicleOwnerName": "hsh",
+  "vehicleOwnerContact": "9876567895",
+  "driverAge": "19",
+  "driverPhone": "7617665247",
+  "driverWhatsapp": "",
+  "driverAadhar": "773748598372",
+  "driverGender": "Male",
+  "driverBloodGroup": "A+",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "passengerCount": "1",
+  "passengerDetails": [
+    {
+      "name": "lajsu",
+      "age": "14",
+      "gender": "Male"
+    }
+  ],
+  "stayDays": "",
+  "validityDate": "",
+  "goalToHome": "",
+  "bloodGroup": "",
+  "email": "gunjansoun885@gmail.com",
+  "emergencyContactNo": "8979065247",
+  "message": "",
+  "registrationPassword": "gunjan8947",
+  "id": "YS-2026-AC14AFF9",
+  "password": {
+    "salt": "aea5fe1e90b68dff28af26861ed46262",
+    "hash": "609a59cbc2981fb6b6583971f0e2ea478c95c53bd7f9ab3757c88e9029eff14df9b4bd2824eea7890cb2797c04e3c9057cbb4bbe2fe66009d93c18a39c3c96af"
+  },
+  "createdAt": "2026-08-02T11:32:22.172Z"
+}

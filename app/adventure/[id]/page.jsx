@@ -1,0 +1,299 @@
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { 
+  ChevronLeft, 
+  Star, 
+  CheckCircle2, 
+  Clock, 
+  ShieldCheck, 
+  Sparkles, 
+  Compass, 
+  ArrowRight,
+  Ticket,
+  Flame,
+  Waves,
+  Snowflake,
+  Zap,
+  Trees
+} from "lucide-react";
+import { ADVENTURES_DATA } from "@/lib/adventure-data";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
+const ICON_MAP = {
+  Compass,
+  Waves,
+  Flame,
+  Snowflake,
+  Zap,
+  Trees
+};
+
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  const id = resolvedParams?.id?.toLowerCase();
+  const adv = ADVENTURES_DATA[id];
+
+  if (!adv) {
+    return {
+      title: "Adventure Package Not Found | YatriGuide",
+      description: "Explore top adventure packages in Uttarakhand.",
+    };
+  }
+
+  return {
+    title: `${adv.title} Packages & Expeditions | YatriGuide Uttarakhand`,
+    description: `${adv.title} (${adv.subtitle}) — Book official adventure packages, trekking expeditions, rafting, skiing & wilderness packages with certified guides.`,
+    keywords: `${adv.title}, Uttarakhand adventure packages, ${adv.title} booking, YatriGuide adventure`,
+  };
+}
+
+export default async function AdventureDetailPage({ params }) {
+  const resolvedParams = await params;
+  const id = resolvedParams?.id?.toLowerCase();
+  const adv = ADVENTURES_DATA[id];
+
+  if (!adv) {
+    notFound();
+  }
+
+  const IconComponent = ICON_MAP[adv.icon] || Compass;
+
+  return (
+    <div className="min-h-screen bg-stone-50 text-stone-900 font-sans selection:bg-orange-500 selection:text-white">
+      <Navbar />
+
+      {/* Hero Banner */}
+      <section className="relative pt-28 pb-20 sm:pt-36 sm:pb-28 bg-stone-950 text-white overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={adv.heroImage}
+            alt={adv.title}
+            fill
+            priority
+            className="object-cover object-center opacity-85 scale-100"
+            unoptimized
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-stone-950/90 via-stone-950/50 to-transparent max-w-4xl" />
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-black/20" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="mb-6 flex items-center space-x-2 text-xs sm:text-sm text-stone-300">
+            <Link href="/" className="hover:text-orange-400 transition flex items-center gap-1">
+              <ChevronLeft className="w-4 h-4" />
+              <span>Home</span>
+            </Link>
+            <span className="text-stone-600">/</span>
+            <Link href="/#adventure" className="hover:text-orange-400 transition">
+              Adventure
+            </Link>
+            <span className="text-stone-600">/</span>
+            <span className="text-orange-400 font-bold">{adv.title}</span>
+          </div>
+
+          <div className="max-w-3xl">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="px-3.5 py-1 text-xs font-sans font-extrabold uppercase tracking-wider text-stone-900 bg-orange-400 rounded-full shadow-md flex items-center gap-1.5">
+                <IconComponent className="w-3.5 h-3.5 text-stone-900" />
+                <span>{adv.difficulty}</span>
+              </span>
+              <div className="flex items-center space-x-1.5 px-3 py-1 bg-stone-900/80 border border-stone-700/80 rounded-full text-xs font-bold text-amber-400 backdrop-blur-md">
+                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                <span>{adv.rating}</span>
+                <span className="text-stone-400 font-normal">({adv.reviewsCount} reviews)</span>
+              </div>
+            </div>
+
+            <h1 className="text-4xl sm:text-6xl font-serif font-black tracking-tight text-white mb-3 drop-shadow-md">
+              {adv.title}
+            </h1>
+            <p className="text-lg sm:text-2xl font-serif text-orange-300 font-semibold mb-4 italic">
+              "{adv.subtitle}"
+            </p>
+            <p className="text-sm sm:text-base text-stone-300 font-sans font-normal leading-relaxed mb-8 max-w-2xl">
+              {adv.tagline}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Content Area */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          
+          {/* Main Packages Column (2 Cols) */}
+          <div className="lg:col-span-2 space-y-12">
+            
+            {/* Overview */}
+            <section className="bg-white rounded-3xl p-6 sm:p-10 border border-stone-200 shadow-sm">
+              <h2 className="text-2xl sm:text-3xl font-serif font-black text-stone-900 mb-4">
+                About {adv.title}
+              </h2>
+              <p className="text-stone-700 leading-relaxed text-base sm:text-lg font-normal">
+                {adv.overview}
+              </p>
+            </section>
+
+            {/* Packages Section */}
+            <section id="packages-list" className="space-y-8">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-orange-600 mb-1">
+                    <Sparkles className="w-4 h-4" />
+                    <span>Curated Expeditions</span>
+                  </div>
+                  <h2 className="text-3xl sm:text-4xl font-serif font-black text-stone-900">
+                    Available {adv.title} Packages
+                  </h2>
+                </div>
+              </div>
+
+              {/* Package Cards List */}
+              <div className="space-y-8">
+                {adv.packages?.map((pkg) => (
+                  <div 
+                    key={pkg.id}
+                    className="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col md:flex-row"
+                  >
+                    {/* Package Image */}
+                    <div className="relative w-full md:w-2/5 aspect-[4/3] md:aspect-auto shrink-0 bg-stone-950 overflow-hidden">
+                      <Image
+                        src={pkg.image || adv.heroImage}
+                        alt={pkg.title}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                      <div className="absolute top-3 left-3">
+                        <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider bg-orange-500 text-white rounded-full shadow-md">
+                          Verified Package
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Package Details */}
+                    <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center justify-between gap-2 mb-2">
+                          <span className="flex items-center gap-1 text-xs font-extrabold text-stone-600 bg-stone-100 px-3 py-1 rounded-lg">
+                            <Clock className="w-3.5 h-3.5 text-orange-500" />
+                            {pkg.duration}
+                          </span>
+                          <div className="flex items-center gap-1 text-xs font-bold text-amber-500">
+                            <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                            <span>{pkg.rating} ({pkg.reviews} reviews)</span>
+                          </div>
+                        </div>
+
+                        <h3 className="text-xl sm:text-2xl font-serif font-black text-stone-900 mb-3">
+                          {pkg.title}
+                        </h3>
+
+                        <p className="text-stone-600 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
+                          {pkg.description}
+                        </p>
+
+                        {/* Inclusions */}
+                        <div className="mb-6 space-y-2 pt-4 border-t border-stone-100">
+                          <p className="text-[11px] font-bold uppercase tracking-wider text-stone-700 mb-2">
+                            Package Inclusions:
+                          </p>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            {pkg.inclusions?.map((inc, i) => (
+                              <div key={i} className="flex items-center gap-2 text-xs text-stone-700">
+                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                                <span>{inc}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Pricing & Booking CTA */}
+                      <div className="pt-4 border-t border-stone-100 flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                          <span className="text-xs text-stone-400 line-through mr-2 font-medium">{pkg.priceOriginal}</span>
+                          <span className="text-2xl font-black text-stone-900">{pkg.price}</span>
+                          <span className="text-xs text-stone-500 font-medium"> / person</span>
+                        </div>
+
+                        <Link
+                          href={`/#packages`}
+                          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-orange-500/20 transition active:scale-95"
+                        >
+                          <Ticket className="w-4 h-4" />
+                          <span>Book Now</span>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+            </section>
+
+          </div>
+
+          {/* Right Column / Sticky Sidebar */}
+          <div className="space-y-8">
+            <div className="sticky top-28 bg-gradient-to-b from-stone-900 to-stone-950 text-white rounded-3xl p-7 border border-stone-800 shadow-2xl space-y-6">
+              
+              <div className="flex items-center gap-3 pb-4 border-b border-stone-800">
+                <div className="p-3 bg-gradient-to-tr from-orange-500 to-amber-500 rounded-2xl shadow-lg shadow-orange-500/30 text-stone-950">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <div>
+                  <span className="text-[10px] uppercase tracking-widest font-extrabold text-orange-400 block">Uttarakhand Tourism</span>
+                  <h3 className="text-lg font-black text-white">Certified Safety Standards</h3>
+                </div>
+              </div>
+
+              <p className="text-xs text-stone-300 leading-relaxed font-light">
+                All <strong>{adv.title}</strong> expeditions are led by government-certified instructors with high-altitude safety equipment and instant digital permit verification.
+              </p>
+
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center gap-2.5 text-xs text-stone-300">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Licensed Mount Guides & Instructors</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-xs text-stone-300">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Oxygen & Medical Support Included</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-xs text-stone-300">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Instant Yatri Travel Permit Support</span>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-stone-800">
+                <Link
+                  href="/registrations"
+                  className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-orange-500 via-orange-600 to-amber-600 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/25 hover:from-orange-400 hover:to-amber-500 transition active:scale-[0.98]"
+                >
+                  <Ticket className="w-4 h-4" />
+                  <span>Get Official Yatri Pass</span>
+                </Link>
+              </div>
+
+              <div className="text-center pt-2">
+                <p className="text-[11px] text-stone-400 font-medium">Have questions about itineraries?</p>
+                <a href="tel:+917897654567" className="text-xs font-bold text-orange-400 hover:underline">
+                  Helpline: +91 78976 54567
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}

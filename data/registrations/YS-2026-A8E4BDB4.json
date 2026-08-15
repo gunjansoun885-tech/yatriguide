@@ -1,0 +1,56 @@
+{
+  "vehicleNumber": "abc123",
+  "vehicleType": "private",
+  "travelFrom": "Mussoorie",
+  "travelTo": "Badrinath",
+  "tourFrom": "2026-08-02",
+  "tourTo": "2026-08-09",
+  "driverType": "owner",
+  "ownerName": "gunjan",
+  "ownerAge": "29",
+  "ownerPhone": "8979065247",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "786567888887",
+  "ownerGender": "Female",
+  "ownerBloodGroup": "A+",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "passengerCount": "2",
+  "passengerDetails": [
+    {
+      "name": "guyt",
+      "age": "7",
+      "gender": "Female"
+    },
+    {
+      "name": "uyty",
+      "age": "5",
+      "gender": "Male"
+    }
+  ],
+  "stayDays": "",
+  "validityDate": "",
+  "goalToHome": "",
+  "bloodGroup": "",
+  "email": "gunjansoun885@gmail.com",
+  "emergencyContactNo": "8979065247",
+  "message": "njyt",
+  "id": "YS-2026-A8E4BDB4",
+  "password": {
+    "salt": "e0740f0e48891920c94cbba8f330c230",
+    "hash": "bddf0d2f400a6def82102db969bd5c9804cb8a5f107c98cb6f933be1373f394f873f0a47bff03e616812db6f5efb2da1a8030ddb520af216dd7f4a9b6e9237c0"
+  },
+  "createdAt": "2026-08-02T06:45:25.599Z"
+}
