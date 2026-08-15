@@ -57,6 +57,7 @@ function hashPassword(password) {
 }
 
 import { getAllRegistrations, saveRegistration } from "@/lib/db";
+import { encodePassData } from "@/lib/pass-utils";
 
 async function listRegistrations() {
   await mkdir(registrationsDirectory, { recursive: true });
@@ -339,7 +340,10 @@ export async function POST(request) {
     }
 
     const baseUrl = getNetworkBaseUrl(request);
-    const passUrl = `${baseUrl}/pass?id=${encodeURIComponent(registration.id)}`;
+    const passToken = encodePassData(registration);
+    const passUrl = passToken
+      ? `${baseUrl}/pass?id=${encodeURIComponent(registration.id)}&d=${encodeURIComponent(passToken)}`
+      : `${baseUrl}/pass?id=${encodeURIComponent(registration.id)}`;
 
     return NextResponse.json({
       message: emailSent
