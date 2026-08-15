@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Compass, Menu, X, Search, Phone, Calendar } from "lucide-react";
 
@@ -16,6 +17,9 @@ const MENU_ITEMS = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const isPassPage = pathname?.startsWith("/pass") || pathname?.startsWith("/qr-result");
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -54,16 +58,18 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.button
-        whileHover={{ scale: 1.04 }}
-        whileTap={{ scale: 0.97 }}
-        animate={{ scale: [1, 1.08, 1] }}
-        transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-        onClick={handleOpenRegistrationModal}
-        className="fixed left-1/2 top-20 z-[60] -translate-x-1/2 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-orange-500/30 md:hidden"
-      >
-        Registration
-      </motion.button>
+      {!isPassPage && (
+        <motion.button
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.97 }}
+          animate={{ scale: [1, 1.08, 1] }}
+          transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+          onClick={handleOpenRegistrationModal}
+          className="fixed left-1/2 top-20 z-[60] -translate-x-1/2 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-orange-500/30 md:hidden"
+        >
+          Registration
+        </motion.button>
+      )}
 
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${

@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "up0088",
+  "vehicleType": "private",
+  "travelFrom": "Delhi",
+  "travelTo": "Badrinath",
+  "tourFrom": "2026-08-16",
+  "tourTo": "2026-08-20",
+  "driverType": "owner",
+  "ownerName": "nghfg",
+  "ownerAge": "19",
+  "ownerPhone": "6789653456",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "789876545678",
+  "ownerGender": "Male",
+  "ownerBloodGroup": "B+",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "9890768975",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "ghfgfg",
+      "age": "1",
+      "gender": "Male"
+    }
+  ],
+  "email": "hgyf@gmail.com",
+  "message": "",
+  "registrationPassword": "gunjannnn",
+  "id": "YS-2026-07BD7E69",
+  "password": {
+    "salt": "e7e847ae2304c043c4538818189f24e8",
+    "hash": "c60efbbb2a54bbf7f58fcd2f67c47a3dcd44bfc817ec62167970b8dc6cc3c290861430a29b8a254966b83d697b500241dc9731ed30a32f510afcb4fbfea0b63b"
+  },
+  "createdAt": "2026-08-15T09:23:49.567Z",
+  "status": "Pending",
+  "updatedAt": "2026-08-15T09:23:49.567Z"
+}

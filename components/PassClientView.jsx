@@ -73,7 +73,6 @@ const formatAadhaar = (aadhar) => {
 
 export default function PassClientView({ registration, qrCodeUrl, error }) {
   const [copied, setCopied] = useState(false);
-  const [isGettingLocation, setIsGettingLocation] = useState(false);
 
   const handleCopyPassLink = () => {
     if (typeof window !== "undefined") {
@@ -87,40 +86,6 @@ export default function PassClientView({ registration, qrCodeUrl, error }) {
   const handlePrint = () => {
     if (typeof window !== "undefined") {
       window.print();
-    }
-  };
-
-  const handleShareLocationOnWhatsapp = () => {
-    setIsGettingLocation(true);
-
-    const openWhatsappWithMessage = (locationUrl) => {
-      const regId = registration?.id || "-";
-      const vehicleNum = maskVehicleNumber(registration?.vehicleNumber);
-      const route = `${maskRoute(registration?.travelFrom)} to ${maskRoute(registration?.travelTo)}`;
-
-      const message = `🚗 *Yatriguide Digital Travel Pass (Encrypted)*\n\n📌 *Registration ID:* ${regId}\n🚘 *Vehicle Number:* ${vehicleNum}\n🗺️ *Route:* ${route}\n📍 *Live Current Location:* ${locationUrl || "Not provided"}\n\nPass Verification Link:\n${typeof window !== "undefined" ? window.location.href : ""}`;
-
-      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
-      window.open(whatsappUrl, "_blank");
-      setIsGettingLocation(false);
-    };
-
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const lat = position.coords.latitude;
-          const lng = position.coords.longitude;
-          const mapsUrl = `https://maps.google.com/?q=${lat},${lng}`;
-          openWhatsappWithMessage(mapsUrl);
-        },
-        (err) => {
-          console.warn("Geolocation permission error", err);
-          openWhatsappWithMessage("https://maps.google.com");
-        },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-      );
-    } else {
-      openWhatsappWithMessage("https://maps.google.com");
     }
   };
 
@@ -161,7 +126,16 @@ export default function PassClientView({ registration, qrCodeUrl, error }) {
         ? registration.driverAadhar
         : null;
 
-  const isCommercial = registration.vehicleType?.toLowerCase() === "commercial";
+  const isCommercial = registration?.vehicleType?.toLowerCase() === "commercial";
+
+  const destinationQuery = encodeURIComponent(
+    registration?.travelTo ? `${registration.travelTo}, Uttarakhand` : "Uttarakhand"
+  );
+  const liveLocationTrackingUrl = `https://maps.google.com/?q=${destinationQuery}`;
+
+  const whatsappMessage = `📍 *My Live / Current Location:*\n${liveLocationTrackingUrl}`;
+
+  const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
     <div className="overflow-hidden rounded-3xl border-2 border-orange-200 bg-white shadow-2xl print:border print:shadow-none">
@@ -406,15 +380,15 @@ export default function PassClientView({ registration, qrCodeUrl, error }) {
 
         {/* Action Buttons: WhatsApp Location Share (Hidden in print) */}
         <div className="pt-2 print:hidden">
-          <button
-            type="button"
-            onClick={handleShareLocationOnWhatsapp}
-            disabled={isGettingLocation}
-            className="w-full flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-4 py-3.5 text-sm font-bold text-white shadow-lg transition hover:bg-emerald-700 active:scale-98 disabled:opacity-70 touch-manipulation min-h-[46px] cursor-pointer"
+          <a
+            href={whatsappShareUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 px-4 py-4 text-base font-extrabold text-white shadow-xl transition touch-manipulation cursor-pointer"
           >
             <MapPin className="h-5 w-5 animate-bounce" />
-            {isGettingLocation ? "Fetching Live GPS Location..." : "📍 Share Live Location on WhatsApp"}
-          </button>
+            📍 Share Live Location on WhatsApp
+          </a>
         </div>
 
         {/* Uttarakhand Emergency Helplines Direct Calling Buttons */}

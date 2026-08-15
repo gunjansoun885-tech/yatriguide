@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "up3388",
+  "vehicleType": "private",
+  "travelFrom": "Dehradun",
+  "travelTo": "Haridwar",
+  "tourFrom": "2026-08-16",
+  "tourTo": "2026-08-20",
+  "driverType": "owner",
+  "ownerName": "hello",
+  "ownerAge": "23",
+  "ownerPhone": "6783562987",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "893764738463",
+  "ownerGender": "Female",
+  "ownerBloodGroup": "B+",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "789356273656",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "hydyedgt",
+      "age": "3",
+      "gender": "Male"
+    }
+  ],
+  "email": "hgd@gmail.com",
+  "message": "",
+  "registrationPassword": "gunjansoun",
+  "id": "YS-2026-04B4B522",
+  "password": {
+    "salt": "cd068318165dd7e8bd71b64d7ccf0ad3",
+    "hash": "0e9a2dfb1207d88c414afa9b1a8c93b9001cb8b26e57e90985ba78134fdac49ef14c2a82ffc747c8768c047c191d86e6e6db6b1b85d3f329c69b33b889491186"
+  },
+  "createdAt": "2026-08-15T09:34:13.954Z",
+  "status": "Pending",
+  "updatedAt": "2026-08-15T09:34:13.954Z"
+}
