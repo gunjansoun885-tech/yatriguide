@@ -58,19 +58,6 @@ export default function Navbar() {
 
   return (
     <>
-      {!isPassPage && (
-        <motion.button
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.97 }}
-          animate={{ scale: [1, 1.08, 1] }}
-          transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-          onClick={handleOpenRegistrationModal}
-          className="fixed left-1/2 top-20 z-[60] -translate-x-1/2 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-orange-500/30 md:hidden"
-        >
-          Registration
-        </motion.button>
-      )}
-
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
@@ -89,70 +76,59 @@ export default function Navbar() {
               }}
               className="flex items-center space-x-2 group focus:outline-none min-w-0"
             >
-              <motion.div
-                whileHover={{ rotate: 15 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="p-2 bg-gradient-to-tr from-gold-500 to-emerald-400 rounded-xl shrink-0"
-              >
-                <Compass className="w-5 h-5 sm:w-6 sm:h-6 text-forest-950" />
-              </motion.div>
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-md shadow-orange-500/20 group-hover:scale-105 transition-transform shrink-0">
+                <Compass className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              </div>
               <div className="flex flex-col min-w-0">
-                <span className="font-serif text-lg sm:text-xl lg:text-2xl font-black tracking-wider text-stone-800 group-hover:text-orange-500 transition-colors whitespace-nowrap">
+                <span className="font-serif text-lg sm:text-xl font-bold tracking-tight text-stone-900 leading-none truncate">
                   Yatri guide
                 </span>
-                <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-orange-600 font-bold -mt-1 font-sans whitespace-nowrap">
+                <span className="text-[9px] sm:text-[10px] font-sans tracking-[0.15em] sm:tracking-[0.2em] text-orange-600 font-bold uppercase mt-0.5">
                   Devbhoomi Guide
                 </span>
               </div>
             </a>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
+            {/* Desktop Navigation Links */}
+            <nav className="hidden lg:flex items-center space-x-1 border border-stone-200/60 bg-white/70 backdrop-blur-md px-4 py-1.5 rounded-full shadow-xs">
               {MENU_ITEMS.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
-                  onClick={(e) => {
-                    if (item.label === "Home") {
-                      e.preventDefault();
-                      window.location.href = "/";
-                    } else {
-                      handleScrollTo(e, item.href);
-                    }
-                  }}
-                  className="font-sans text-sm font-semibold text-stone-700 hover:text-orange-500 transition-colors duration-300 relative py-2 group"
+                  onClick={(e) => handleScrollTo(e, item.href)}
+                  className="font-sans text-xs font-semibold px-3 py-1.5 rounded-full text-stone-700 hover:text-orange-600 hover:bg-orange-50/80 transition-all duration-200"
                 >
                   {item.label}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-400 transition-all duration-300 group-hover:w-full" />
                 </a>
               ))}
             </nav>
 
-            {/* CTA & Actions */}
-            <div className="hidden lg:flex items-center space-x-3">
+            {/* Action Buttons (Desktop) */}
+            <div className="hidden md:flex items-center space-x-3">
               {/* Search Toggle */}
               <div className="relative">
                 <button
                   onClick={() => setIsSearchOpen(!isSearchOpen)}
-                  className="p-2 text-stone-700 hover:text-orange-500 transition-colors focus:outline-none"
-                  aria-label="Toggle Search"
+                  className="p-2.5 rounded-full bg-white/80 border border-stone-200 text-stone-700 hover:text-orange-600 hover:border-orange-300 transition-all duration-300 shadow-xs"
+                  aria-label="Search"
                 >
-                  <Search className="w-5 h-5" />
+                  <Search className="w-4 h-4" />
                 </button>
+
                 <AnimatePresence>
                   {isSearchOpen && (
                     <motion.div
-                      initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                      initial={{ opacity: 0, scale: 0.95, y: 10 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
-                      exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                      className="absolute right-0 mt-2 w-64 bg-white/95 border border-orange-200 rounded-lg p-2 shadow-xl backdrop-blur-md"
+                      exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                      className="absolute right-0 mt-2 w-72 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-orange-200 p-2 z-50"
                     >
                       <input
                         type="text"
-                        placeholder="Search sacred destinations..."
+                        placeholder="Search destinations, treks, activities..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full px-3 py-1.5 bg-stone-50 text-stone-800 placeholder-stone-400 text-sm border border-orange-200 rounded focus:outline-none focus:border-orange-500 font-sans"
+                        className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-xl font-sans text-xs text-stone-800 focus:outline-none focus:border-orange-500"
                         autoFocus
                       />
                     </motion.div>
@@ -165,28 +141,65 @@ export default function Navbar() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={(e) => handleScrollTo(e, "#packages")}
-                className="flex items-center space-x-2 px-5 py-2.5 bg-white/90 border border-orange-200 text-orange-700 font-sans font-bold text-sm rounded-full shadow-sm hover:bg-orange-50 transition-all duration-300"
+                className="flex items-center space-x-2 px-5 py-2.5 bg-white/90 border border-orange-200 text-orange-700 font-sans font-bold text-sm rounded-full shadow-sm hover:bg-orange-50 transition-all duration-300 cursor-pointer"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Plan Your Trip</span>
               </motion.button>
 
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                animate={{ scale: [1, 1.08, 1] }}
-                transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-                onClick={handleOpenRegistrationModal}
-                className="flex items-center space-x-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-sans font-bold text-sm rounded-full shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all duration-300"
-              >
-                <Calendar className="w-4 h-4" />
-                <span>Registration</span>
-              </motion.button>
+              {/* Blinking & Pulsing Desktop Registration Button */}
+              {!isPassPage && (
+                <motion.button
+                  whileHover={{ scale: 1.06 }}
+                  whileTap={{ scale: 0.95 }}
+                  animate={{
+                    scale: [1, 1.05, 1],
+                    boxShadow: [
+                      "0 0 0 0 rgba(249, 115, 22, 0.7)",
+                      "0 0 0 10px rgba(249, 115, 22, 0)",
+                      "0 0 0 0 rgba(249, 115, 22, 0)",
+                    ],
+                  }}
+                  transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+                  onClick={handleOpenRegistrationModal}
+                  className="relative flex items-center space-x-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 hover:from-orange-600 hover:to-amber-600 text-white font-sans font-bold text-sm rounded-full shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 transition-all duration-300 cursor-pointer"
+                >
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-90"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+                  </span>
+                  <Calendar className="w-4 h-4" />
+                  <span>Registration</span>
+                </motion.button>
+              )}
             </div>
 
-            {/* Mobile Hamburger Button */}
+            {/* Mobile Header: Sticky Blinking Registration Button & Menu */}
             <div className="flex md:hidden items-center space-x-2">
+              {!isPassPage && (
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  animate={{
+                    scale: [1, 1.06, 1],
+                    boxShadow: [
+                      "0 0 0 0 rgba(249, 115, 22, 0.7)",
+                      "0 0 0 8px rgba(249, 115, 22, 0)",
+                      "0 0 0 0 rgba(249, 115, 22, 0)",
+                    ],
+                  }}
+                  transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+                  onClick={handleOpenRegistrationModal}
+                  className="relative inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 hover:from-orange-600 hover:to-amber-600 text-white font-sans font-extrabold text-xs rounded-full shadow-md shadow-orange-500/30 touch-manipulation cursor-pointer"
+                >
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-90"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                  </span>
+                  <span>Registration</span>
+                </motion.button>
+              )}
+
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
                 className="p-2 text-stone-700 hover:text-orange-500 transition-colors focus:outline-none sm:hidden"
