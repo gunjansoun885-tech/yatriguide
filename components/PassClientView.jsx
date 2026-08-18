@@ -139,14 +139,9 @@ export default function PassClientView({ registration, qrCodeUrl, error }) {
 
   return (
     <div className="overflow-hidden rounded-3xl border-2 border-orange-200 bg-white shadow-2xl print:border print:shadow-none">
-      {/* Official Government Pass Header */}
+      {/* Official Travel Pass Header */}
       <div className="bg-linear-to-r from-orange-600 via-amber-600 to-orange-500 p-6 text-white text-center relative print:bg-orange-600 print:text-white">
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3.5 py-1 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
-          <ShieldCheck className="h-4 w-4 text-emerald-300" />
-          Government of Uttarakhand • Verified Digital Pass
-        </div>
-
-        <h1 className="mt-3 text-2xl font-black sm:text-3xl tracking-tight">
+        <h1 className="text-2xl font-black sm:text-3xl tracking-tight">
           Uttarakhand Digital Travel Pass
         </h1>
         <p className="mt-1 text-xs text-orange-100 font-mono font-bold">
