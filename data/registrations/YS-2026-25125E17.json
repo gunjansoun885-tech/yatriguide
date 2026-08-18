@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "uk5555",
+  "vehicleType": "private",
+  "travelFrom": "Haridwar",
+  "travelTo": "Dehradun",
+  "tourFrom": "2026-08-19",
+  "tourTo": "2026-08-22",
+  "driverType": "driver",
+  "ownerName": "",
+  "ownerAge": "",
+  "ownerPhone": "",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "",
+  "ownerGender": "",
+  "ownerBloodGroup": "",
+  "driverName": "ramm",
+  "vehicleOwnerName": "gunjan",
+  "vehicleOwnerContact": "8979896734",
+  "driverAge": "24",
+  "driverPhone": "6798234567",
+  "driverWhatsapp": "",
+  "driverAadhar": "784659234590",
+  "driverGender": "Female",
+  "driverBloodGroup": "B+",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "6567895432",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "gunjan",
+      "age": "0",
+      "gender": "Male"
+    }
+  ],
+  "email": "simmibisht56@gmail.com",
+  "message": "",
+  "registrationPassword": "gunjan1234",
+  "id": "YS-2026-25125E17",
+  "password": {
+    "salt": "f99aafc7b15f253bdf15d50b758dc314",
+    "hash": "149fa30b63fa80dab85d02649a8eb47aee4de3d9053e8388dae996513cc41c919f21e5189e91c2928595acd2bbff3901e246bd55abd35ecf32e91580412b5716"
+  },
+  "createdAt": "2026-08-18T05:18:39.719Z",
+  "status": "Pending",
+  "updatedAt": "2026-08-18T05:18:39.719Z"
+}

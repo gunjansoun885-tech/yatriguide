@@ -75,13 +75,28 @@ export default function LoginModal({ isOpen, onClose }) {
         JSON.stringify({
           email: cleanIdentifier,
           password: cleanPassword,
+          registrationId: data.registration?.id,
         })
       );
 
-      setStatus({ type: "success", message: "Login successful! Welcome to Yatriguide." });
-      setTimeout(() => {
-        handleClose();
-      }, 1200);
+      const targetPassUrl =
+        data.passUrl ||
+        (data.registration?.id ? `/pass?id=${encodeURIComponent(data.registration.id)}` : null);
+
+      if (targetPassUrl) {
+        setStatus({
+          type: "success",
+          message: `🎉 Login successful! Loading registration details for ${data.registration?.vehicleNumber || cleanIdentifier}...`,
+        });
+        setTimeout(() => {
+          window.location.href = targetPassUrl;
+        }, 700);
+      } else {
+        setStatus({ type: "success", message: "Login successful! Welcome to Yatriguide." });
+        setTimeout(() => {
+          handleClose();
+        }, 1200);
+      }
     } catch (err) {
       setStatus({ type: "error", message: err.message || "Unable to log in right now." });
     } finally {

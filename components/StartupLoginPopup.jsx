@@ -94,11 +94,20 @@ export default function StartupLoginPopup() {
         JSON.stringify({
           email: trimmedEmail,
           password: trimmedPassword,
+          registrationId: data.registration?.id,
         }),
       );
 
       setError("");
       setIsOpen(false);
+
+      const targetPassUrl =
+        data.passUrl ||
+        (data.registration?.id ? `/pass?id=${encodeURIComponent(data.registration.id)}` : null);
+
+      if (targetPassUrl) {
+        window.location.href = targetPassUrl;
+      }
     } catch {
       setError("Unable to process login right now.");
     }

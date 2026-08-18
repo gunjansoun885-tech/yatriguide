@@ -3,13 +3,14 @@
 import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Compass, Menu, X, Search, Phone, Calendar } from "lucide-react";
+import { Compass, Menu, X, Search, Phone, Calendar, User, LockKeyhole } from "lucide-react";
+import LoginModal from "@/components/LoginModal";
 
 const MENU_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Destinations", href: "#destinations" },
   { label: "Adventure", href: "#adventure" },
-  { label: "Char Dham", href: "#packages" }, // links to packages
+  { label: "Char Dham", href: "#packages" },
   { label: "Travel Guide", href: "#about" }, 
   { label: "Gallery", href: "#gallery" },
   { label: "Hotels", href: "#footer" },
@@ -24,6 +25,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -109,7 +111,7 @@ export default function Navbar() {
               <div className="relative">
                 <button
                   onClick={() => setIsSearchOpen(!isSearchOpen)}
-                  className="p-2.5 rounded-full bg-white/80 border border-stone-200 text-stone-700 hover:text-orange-600 hover:border-orange-300 transition-all duration-300 shadow-xs"
+                  className="p-2.5 rounded-full bg-white/80 border border-stone-200 text-stone-700 hover:text-orange-600 hover:border-orange-300 transition-all duration-300 shadow-xs cursor-pointer"
                   aria-label="Search"
                 >
                   <Search className="w-4 h-4" />
@@ -136,12 +138,23 @@ export default function Navbar() {
                 </AnimatePresence>
               </div>
 
+              {/* Login ID Button */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsLoginModalOpen(true)}
+                className="flex items-center space-x-1.5 px-4 py-2.5 bg-stone-900 hover:bg-black border border-stone-800 text-white font-sans font-bold text-xs sm:text-sm rounded-full shadow-sm transition-all duration-300 cursor-pointer"
+              >
+                <User className="w-3.5 h-3.5 text-orange-400" />
+                <span>Login ID</span>
+              </motion.button>
+
               {/* Plan Your Trip CTA */}
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={(e) => handleScrollTo(e, "#packages")}
-                className="flex items-center space-x-2 px-5 py-2.5 bg-white/90 border border-orange-200 text-orange-700 font-sans font-bold text-sm rounded-full shadow-sm hover:bg-orange-50 transition-all duration-300 cursor-pointer"
+                className="flex items-center space-x-2 px-4 py-2.5 bg-white/90 border border-orange-200 text-orange-700 font-sans font-bold text-xs sm:text-sm rounded-full shadow-sm hover:bg-orange-50 transition-all duration-300 cursor-pointer"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Plan Your Trip</span>
@@ -174,8 +187,18 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Mobile Header: Sticky Blinking Registration Button & Menu */}
-            <div className="flex md:hidden items-center space-x-2">
+            {/* Mobile Header: Sticky Login ID + Blinking Registration Button & Menu */}
+            <div className="flex md:hidden items-center space-x-1.5">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsLoginModalOpen(true)}
+                className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-stone-900 text-white font-sans font-bold text-xs rounded-full shadow-xs border border-stone-700 touch-manipulation cursor-pointer"
+              >
+                <User className="w-3 h-3 text-orange-400" />
+                <span>Login ID</span>
+              </motion.button>
+
               {!isPassPage && (
                 <motion.button
                   whileHover={{ scale: 1.05 }}
@@ -190,7 +213,7 @@ export default function Navbar() {
                   }}
                   transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
                   onClick={handleOpenRegistrationModal}
-                  className="relative inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 hover:from-orange-600 hover:to-amber-600 text-white font-sans font-extrabold text-xs rounded-full shadow-md shadow-orange-500/30 touch-manipulation cursor-pointer"
+                  className="relative inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 hover:from-orange-600 hover:to-amber-600 text-white font-sans font-extrabold text-xs rounded-full shadow-md shadow-orange-500/30 touch-manipulation cursor-pointer"
                 >
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-90"></span>
@@ -202,20 +225,20 @@ export default function Navbar() {
 
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="p-2 text-stone-700 hover:text-orange-500 transition-colors focus:outline-none sm:hidden"
+                className="p-1.5 text-stone-700 hover:text-orange-500 transition-colors focus:outline-none sm:hidden"
                 aria-label="Toggle Search"
               >
-                <Search className="w-5 h-5" />
+                <Search className="w-4.5 h-4.5" />
               </button>
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 text-stone-700 hover:text-orange-500 focus:outline-none"
+                className="p-1.5 text-stone-700 hover:text-orange-500 focus:outline-none"
                 aria-label="Toggle Mobile Menu"
               >
                 {isMobileMenuOpen ? (
-                  <X className="w-6 h-6" />
+                  <X className="w-5 h-5" />
                 ) : (
-                  <Menu className="w-6 h-6" />
+                  <Menu className="w-5 h-5" />
                 )}
               </button>
             </div>
@@ -229,14 +252,14 @@ export default function Navbar() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden w-full bg-forest-950 border-t border-white/10 px-4 py-3 sm:hidden"
+              className="lg:hidden w-full bg-stone-900 border-t border-white/10 px-4 py-3 sm:hidden"
             >
               <input
                 type="text"
                 placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-2 bg-forest-900 text-white border border-emerald-800 rounded font-sans text-sm focus:outline-none"
+                className="w-full px-4 py-2 bg-stone-800 text-white border border-stone-700 rounded-xl font-sans text-xs focus:outline-none"
               />
             </motion.div>
           )}
@@ -267,8 +290,8 @@ export default function Navbar() {
               <div>
                 <div className="flex items-center justify-between pb-6 border-b border-white/10">
                   <div className="flex items-center space-x-2">
-                    <div className="p-2 bg-gradient-to-tr from-gold-500 to-emerald-400 rounded-xl shrink-0">
-                      <Compass className="w-5 h-5 text-forest-950" />
+                    <div className="p-2 bg-gradient-to-tr from-orange-500 to-amber-400 rounded-xl shrink-0">
+                      <Compass className="w-5 h-5 text-white" />
                     </div>
                     <div className="flex flex-col">
                       <span className="font-serif text-xl font-black tracking-wider text-white">
@@ -304,25 +327,30 @@ export default function Navbar() {
                 </nav>
               </div>
 
-              <div className="pt-6 border-t border-white/10 space-y-4">
-                <a
-                  href="tel:+91800XXXXXXX"
-                  className="flex items-center space-x-2 text-sm text-emerald-300 font-semibold"
+              <div className="pt-6 border-t border-white/10 space-y-3">
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setIsLoginModalOpen(true);
+                  }}
+                  className="w-full flex items-center justify-center gap-2 py-3 bg-stone-800 hover:bg-stone-700 text-white font-sans font-bold rounded-xl border border-stone-700 transition"
                 >
-                  <Phone className="w-4 h-4" />
-                  <span>Helpline: +91-800-UTTARA</span>
-                </a>
+                  <User className="w-4 h-4 text-orange-400" />
+                  <span>Login ID</span>
+                </motion.button>
+
                 <motion.button
                   whileTap={{ scale: 0.95 }}
                   onClick={handleOpenRegistrationModal}
-                  className="w-full text-center py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-sans font-bold rounded-lg shadow-lg hover:brightness-110"
+                  className="w-full text-center py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-sans font-bold rounded-xl shadow-lg hover:brightness-110"
                 >
                   Registration
                 </motion.button>
                 <motion.button
                   whileTap={{ scale: 0.95 }}
                   onClick={(e) => handleScrollTo(e, "#packages")}
-                  className="w-full text-center py-3 bg-gradient-to-r from-gold-500 to-amber-500 text-forest-950 font-sans font-bold rounded-lg shadow-lg hover:brightness-110"
+                  className="w-full text-center py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-stone-950 font-sans font-bold rounded-xl shadow-lg hover:brightness-110"
                 >
                   Plan Your Trip
                 </motion.button>
@@ -331,6 +359,9 @@ export default function Navbar() {
           </>
         )}
       </AnimatePresence>
+
+      {/* User / Owner Login Modal */}
+      <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
     </>
   );
 }

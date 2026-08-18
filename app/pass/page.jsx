@@ -12,6 +12,10 @@ export default async function TravelPassPage({ searchParams }) {
   const resolvedSearchParams = await searchParams;
   const passId = resolvedSearchParams?.id || resolvedSearchParams?.registrationId;
   const passToken = resolvedSearchParams?.d || resolvedSearchParams?.token || resolvedSearchParams?.p;
+  const isAuth =
+    resolvedSearchParams?.auth === "1" ||
+    resolvedSearchParams?.unmask === "1" ||
+    resolvedSearchParams?.login === "1";
 
   if (!passId && !passToken) {
     return (
@@ -81,7 +85,7 @@ export default async function TravelPassPage({ searchParams }) {
 
       <main className="min-h-screen bg-stone-100 py-10 px-4 sm:px-6 lg:px-8 text-stone-800 print:bg-white print:p-0">
         <div className="mx-auto max-w-2xl pt-12 print:pt-0">
-          <PassClientView registration={safeDetails} qrCodeUrl={qrCodeUrl} />
+          <PassClientView registration={safeDetails} qrCodeUrl={qrCodeUrl} isInitialAuth={isAuth} />
         </div>
       </main>
 

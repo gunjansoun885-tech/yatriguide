@@ -102,21 +102,21 @@ function buildPayload(registration) {
   ].join("\n");
 }
 
-function buildHtmlEmail(registration) {
+function buildHtmlEmail(registration, passUrl) {
   const passengerRows = registration.passengerDetails?.length
     ? registration.passengerDetails
         .map(
           (p, i) => `
-          <tr style="border-bottom: 1px solid #f0f0f0;">
-            <td style="padding: 8px 12px; color: #444;">${i + 1}</td>
-            <td style="padding: 8px 12px; color: #111; font-weight: 600;">${escapeHtml(p.name || "-")}</td>
-            <td style="padding: 8px 12px; color: #444;">${escapeHtml(p.age || "-")} yrs</td>
-            <td style="padding: 8px 12px; color: #444;">${escapeHtml(p.gender || "-")}</td>
+          <tr style="border-bottom: 1px solid #f1f5f9;">
+            <td style="padding: 10px 8px; color: #64748b; text-align: center; font-weight: 700;">${i + 1}</td>
+            <td style="padding: 10px 8px; color: #0f172a; font-weight: 700;">${escapeHtml(p.name || "-")}</td>
+            <td style="padding: 10px 8px; color: #475569; text-align: center;">${escapeHtml(p.age || "-")} yrs</td>
+            <td style="padding: 10px 8px; color: #475569; text-align: center;">${escapeHtml(p.gender || "-")}</td>
           </tr>
         `,
         )
         .join("")
-    : `<tr><td colspan="4" style="padding: 8px 12px; color: #888; text-align: center;">No passenger details added</td></tr>`;
+    : `<tr><td colspan="4" style="padding: 12px; color: #94a3b8; text-align: center;">No additional passenger details</td></tr>`;
 
   const driverName =
     registration.driverType === "owner"
@@ -137,85 +137,146 @@ function buildHtmlEmail(registration) {
     <html>
       <head>
         <meta charset="utf-8" />
-        <style>
-          body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f6f8fa; margin: 0; padding: 20px; color: #333; }
-          .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #eee; }
-          .header { background: linear-gradient(135deg, #ea580c 0%, #f59e0b 100%); padding: 30px 24px; text-align: center; color: #ffffff; }
-          .header h1 { margin: 0; font-size: 24px; font-weight: 800; letter-spacing: 0.5px; }
-          .header p { margin: 8px 0 0 0; font-size: 14px; opacity: 0.95; }
-          .badge { display: inline-block; background: #ffffff; color: #c2410c; font-weight: 700; padding: 6px 16px; border-radius: 20px; margin-top: 12px; font-size: 13px; font-family: monospace; }
-          .body-content { padding: 24px; }
-          .section-title { font-size: 15px; font-weight: 700; color: #ea580c; border-bottom: 2px solid #ffedd5; padding-bottom: 6px; margin-top: 20px; margin-bottom: 12px; }
-          .grid { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
-          .grid td { padding: 6px 0; font-size: 14px; }
-          .grid td.label { color: #666; width: 40%; font-weight: 500; }
-          .grid td.val { color: #111; font-weight: 600; }
-          .table-custom { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; text-align: left; }
-          .table-custom th { background: #fff7ed; color: #c2410c; padding: 8px 12px; border-bottom: 2px solid #ffedd5; }
-          .footer { background: #fafafa; padding: 20px; text-align: center; font-size: 12px; color: #777; border-top: 1px solid #eee; }
-        </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Registration Successful - Yatriguide</title>
       </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <h1>Yatriguide</h1>
-            <p>Registration Successful!</p>
-            <div class="badge">ID: ${escapeHtml(registration.id)}</div>
-          </div>
-          <div class="body-content">
-            <p style="font-size: 15px; color: #15803d; font-weight: 600; text-align: center; margin-bottom: 20px;">
-              ✅ Your vehicle travel registration has been processed successfully.
-            </p>
-
-            <div class="section-title">🚘 Vehicle & Travel Summary</div>
-            <table class="grid">
-              <tr><td class="label">Registration ID:</td><td class="val">${escapeHtml(registration.id)}</td></tr>
-              <tr><td class="label">Vehicle Number:</td><td class="val">${escapeHtml(registration.vehicleNumber || "-")}</td></tr>
-              <tr><td class="label">Category:</td><td class="val" style="text-transform: capitalize;">${escapeHtml(registration.vehicleType || "-")}</td></tr>
-              <tr><td class="label">Route:</td><td class="val">${escapeHtml(registration.travelFrom || "-")} &rarr; ${escapeHtml(registration.travelTo || "-")}</td></tr>
-              <tr><td class="label">Travel Dates:</td><td class="val">${escapeHtml(registration.tourFrom || "-")} to ${escapeHtml(registration.tourTo || "-")}</td></tr>
-            </table>
-
-            <div class="section-title">👤 Driver & Contact Details</div>
-            <table class="grid">
-              <tr><td class="label">Driver Name:</td><td class="val">${escapeHtml(driverName || "-")}</td></tr>
-              <tr><td class="label">Contact Phone:</td><td class="val">${escapeHtml(driverPhone || "-")}</td></tr>
-              <tr><td class="label">Emergency Contact:</td><td class="val" style="color: #dc2626;">${escapeHtml(registration.emergencyContactNo || "-")}</td></tr>
-            </table>
-
-            <div class="section-title">👥 Passenger List</div>
-            <table class="table-custom">
-              <thead>
+      <body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b;">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #f8fafc; padding: 24px 12px;">
+          <tr>
+            <td align="center">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 600px; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
+                <!-- Header -->
                 <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Age</th>
-                  <th>Gender</th>
+                  <td style="background: linear-gradient(135deg, #ea580c 0%, #f59e0b 100%); padding: 32px 24px; text-align: center; color: #ffffff;">
+                    <h1 style="margin: 0; font-size: 24px; font-weight: 800; letter-spacing: 0.5px;">Yatriguide Devbhoomi Guide</h1>
+                    <p style="margin: 6px 0 0; font-size: 15px; opacity: 0.95; font-weight: 600;">Registration Successful! 🎉</p>
+                    <div style="display: inline-block; background: #ffffff; color: #c2410c; font-weight: 800; padding: 8px 18px; border-radius: 20px; margin-top: 14px; font-size: 14px; font-family: monospace; letter-spacing: 0.5px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                      ID: ${escapeHtml(registration.id)}
+                    </div>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                ${passengerRows}
-              </tbody>
-            </table>
 
-            ${
-              registration.message
-                ? `
-              <div class="section-title">📝 Additional Note</div>
-              <p style="font-size: 13px; color: #444; background: #fff7ed; padding: 12px; border-radius: 8px; border-left: 4px solid #f97316;">${escapeHtml(registration.message)}</p>
-            `
-                : ""
-            }
+                <!-- Body -->
+                <tr>
+                  <td style="padding: 28px 24px;">
+                    <div style="background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 14px 16px; margin-bottom: 24px; text-align: center;">
+                      <p style="margin: 0; font-size: 15px; color: #15803d; font-weight: 700;">
+                        ✅ Your Travel Registration has been recorded successfully.
+                      </p>
+                      <p style="margin: 4px 0 0; font-size: 13px; color: #166534;">
+                        Please keep your registration ID safe for checkposts across Uttarakhand.
+                      </p>
+                    </div>
 
-            <p style="font-size: 13px; color: #666; margin-top: 24px; text-align: center;">
-              Please save your Registration QR code for easy verification at check-posts during your travel.
-            </p>
-          </div>
-          <div class="footer">
-            &copy; 2026 Yatriguide | Safe Uttarakhand Travel Portal<br/>
-            For support, contact support@yatriguide.in
-          </div>
-        </div>
+                    ${
+                      passUrl
+                        ? `
+                    <!-- Action Button -->
+                    <div style="text-align: center; margin-bottom: 28px;">
+                      <a href="${passUrl}" target="_blank" style="display: inline-block; background-color: #ea580c; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 15px; padding: 14px 28px; border-radius: 12px; box-shadow: 0 4px 12px rgba(234, 88, 12, 0.35);">
+                        📄 View & Download Digital Travel Pass &rarr;
+                      </a>
+                    </div>
+                    `
+                        : ""
+                    }
+
+                    <!-- Section 1: Vehicle & Journey -->
+                    <div style="margin-bottom: 24px;">
+                      <div style="font-size: 14px; font-weight: 800; text-transform: uppercase; color: #ea580c; border-bottom: 2px solid #ffedd5; padding-bottom: 6px; margin-bottom: 12px; letter-spacing: 0.5px;">
+                        🚘 Important Vehicle & Journey Details
+                      </div>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size: 14px;">
+                        <tr>
+                          <td style="padding: 7px 0; color: #64748b; font-weight: 600; width: 45%;">Vehicle Number:</td>
+                          <td style="padding: 7px 0; color: #0f172a; font-weight: 700; font-family: monospace;">${escapeHtml(registration.vehicleNumber || "-")}</td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 7px 0; color: #64748b; font-weight: 600;">Vehicle Category:</td>
+                          <td style="padding: 7px 0; color: #0f172a; font-weight: 700; text-transform: capitalize;">${escapeHtml(registration.vehicleType || "Private")}</td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 7px 0; color: #64748b; font-weight: 600;">Authorized Route:</td>
+                          <td style="padding: 7px 0; color: #0f172a; font-weight: 700;">${escapeHtml(registration.travelFrom || "-")} &rarr; ${escapeHtml(registration.travelTo || "-")}</td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 7px 0; color: #64748b; font-weight: 600;">Travel Dates:</td>
+                          <td style="padding: 7px 0; color: #0f172a; font-weight: 700;">${escapeHtml(registration.tourFrom || "-")} to ${escapeHtml(registration.tourTo || "-")}</td>
+                        </tr>
+                      </table>
+                    </div>
+
+                    <!-- Section 2: Driver & Contacts -->
+                    <div style="margin-bottom: 24px;">
+                      <div style="font-size: 14px; font-weight: 800; text-transform: uppercase; color: #ea580c; border-bottom: 2px solid #ffedd5; padding-bottom: 6px; margin-bottom: 12px; letter-spacing: 0.5px;">
+                        👤 Driver & Emergency Contacts
+                      </div>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size: 14px;">
+                        <tr>
+                          <td style="padding: 7px 0; color: #64748b; font-weight: 600; width: 45%;">Driver / Owner Name:</td>
+                          <td style="padding: 7px 0; color: #0f172a; font-weight: 700;">${escapeHtml(driverName || "-")}</td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 7px 0; color: #64748b; font-weight: 600;">Contact Phone:</td>
+                          <td style="padding: 7px 0; color: #0f172a; font-weight: 700;">${escapeHtml(driverPhone || "-")}</td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 7px 0; color: #64748b; font-weight: 600;">Emergency Contact No:</td>
+                          <td style="padding: 7px 0; color: #dc2626; font-weight: 800;">🚨 ${escapeHtml(registration.emergencyContactNo || "-")}</td>
+                        </tr>
+                      </table>
+                    </div>
+
+                    <!-- Section 3: Passenger List -->
+                    <div style="margin-bottom: 24px;">
+                      <div style="font-size: 14px; font-weight: 800; text-transform: uppercase; color: #ea580c; border-bottom: 2px solid #ffedd5; padding-bottom: 6px; margin-bottom: 12px; letter-spacing: 0.5px;">
+                        👥 Passenger Details (${registration.passengerDetails?.length || 0})
+                      </div>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; font-size: 13px;">
+                        <thead>
+                          <tr style="background-color: #fff7ed; color: #c2410c;">
+                            <th style="padding: 8px 10px; text-align: center; border-bottom: 2px solid #ffedd5;">#</th>
+                            <th style="padding: 8px 10px; text-align: left; border-bottom: 2px solid #ffedd5;">Passenger Name</th>
+                            <th style="padding: 8px 10px; text-align: center; border-bottom: 2px solid #ffedd5;">Age</th>
+                            <th style="padding: 8px 10px; text-align: center; border-bottom: 2px solid #ffedd5;">Gender</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          ${passengerRows}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <!-- Uttarakhand Emergency Helplines -->
+                    <div style="background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 14px 16px; margin-top: 24px;">
+                      <div style="font-size: 13px; font-weight: 800; color: #991b1b; text-transform: uppercase; margin-bottom: 8px; text-align: center;">
+                        📞 Uttarakhand Emergency Helplines
+                      </div>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size: 12px; text-align: center;">
+                        <tr>
+                          <td style="padding: 4px; font-weight: 700; color: #b91c1c;">Police: 112 / 100</td>
+                          <td style="padding: 4px; font-weight: 700; color: #b91c1c;">Ambulance: 108</td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 4px; font-weight: 700; color: #b91c1c;">UK SDRF: 1070</td>
+                          <td style="padding: 4px; font-weight: 700; color: #b91c1c;">Women Helpline: 1090</td>
+                        </tr>
+                      </table>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                  <td style="background-color: #fafafa; padding: 20px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0;">
+                    &copy; 2026 Yatriguide | Devbhoomi Uttarakhand Tourism Portal<br/>
+                    For 24x7 travel assistance, email: <a href="mailto:support@yatriguide.in" style="color: #ea580c; text-decoration: none;">support@yatriguide.in</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
       </body>
     </html>
   `;
@@ -225,13 +286,13 @@ function getSmtpConfig() {
   const host = process.env.SMTP_HOST?.trim() || "smtp.gmail.com";
   const user = process.env.SMTP_USER?.trim();
   const pass = process.env.SMTP_PASS?.trim();
-  const sender = process.env.SMTP_FROM?.trim() || user;
+  const sender = process.env.SMTP_FROM?.trim() || (user ? `"Yatriguide Uttarakhand" <${user}>` : "");
   const port = Number(process.env.SMTP_PORT || 587);
   const secure = process.env.SMTP_SECURE === "true" || port === 465;
   return { host, user, pass, sender, port, secure };
 }
 
-async function sendConfirmationEmail(registration) {
+async function sendConfirmationEmail(registration, passUrl) {
   const { host, user, pass, sender, port, secure } = getSmtpConfig();
   if (!registration.email) return false;
 
@@ -249,17 +310,17 @@ async function sendConfirmationEmail(registration) {
     connectionTimeout: 10000,
     greetingTimeout: 10000,
     socketTimeout: 10000,
-    tls: { rejectUnauthorized: true },
+    tls: { rejectUnauthorized: false },
   });
 
   const payload = buildPayload(registration);
-  const htmlPayload = buildHtmlEmail(registration);
+  const htmlPayload = buildHtmlEmail(registration, passUrl);
 
   await transporter.sendMail({
     from: sender,
     to: registration.email,
     replyTo: sender,
-    subject: `Yatriguide Registration Successful - ID: ${registration.id}`,
+    subject: `Registration Successful - Uttarakhand Travel Pass (${registration.id})`,
     text: payload,
     html: htmlPayload,
   });
@@ -332,18 +393,18 @@ export async function POST(request) {
 
     await saveRegistration(registration);
 
-    let emailSent = false;
-    try {
-      emailSent = await sendConfirmationEmail(registration);
-    } catch (emailError) {
-      console.error("Registration saved, but confirmation email failed", emailError);
-    }
-
     const baseUrl = getNetworkBaseUrl(request);
     const passToken = encodePassData(registration);
     const passUrl = passToken
       ? `${baseUrl}/pass?id=${encodeURIComponent(registration.id)}&d=${encodeURIComponent(passToken)}`
       : `${baseUrl}/pass?id=${encodeURIComponent(registration.id)}`;
+
+    let emailSent = false;
+    try {
+      emailSent = await sendConfirmationEmail(registration, passUrl);
+    } catch (emailError) {
+      console.error("Registration saved, but confirmation email failed", emailError);
+    }
 
     return NextResponse.json({
       message: emailSent
