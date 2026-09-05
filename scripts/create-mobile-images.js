@@ -5,10 +5,13 @@ const sharp = require('sharp');
 const HERO_IMAGES = [
   "oo1.png",
   "g1.png",
+  "sp1.png",
   "ch.png",
   "nw.png",
+  "sp22.png",
   "opp.png",
   "jj1.png",
+  "sp3.png",
   "nn1.png",
   "s1.png",
   "kk2.png",
