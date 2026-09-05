@@ -8,7 +8,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const HERO_IMAGES = [
   { desktop: "/oo1.png", mobile: "/mobile/oo1.png" },
   { desktop: "/g1.png", mobile: "/mobile/g1.png" },
-  { desktop: "/sp1.png", mobile: "/mobile/sp1.png" },
+  { desktop: "/sp1.png", mobile: "/sp1.png", containOnMobile: true },
   { desktop: "/ch.png", mobile: "/mobile/ch.png" },
   { desktop: "/nw.png", mobile: "/mobile/nw.png" },
   { desktop: "/sp22.png", mobile: "/mobile/sp22.png" },
@@ -74,7 +74,9 @@ export default function Hero() {
               priority={currentBg === 0}
               unoptimized
               sizes="(max-width: 639px) 100vw, 0vw"
-              className="block sm:hidden h-full w-full object-cover object-center transition-all duration-700"
+              className={`block sm:hidden h-full w-full object-center transition-all duration-700 ${
+                HERO_IMAGES[currentBg].containOnMobile ? "object-contain" : "object-cover"
+              }`}
             />
           </motion.div>
         </AnimatePresence>
