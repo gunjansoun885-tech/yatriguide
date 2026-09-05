@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "up123",
+  "vehicleType": "private",
+  "travelFrom": "Delhi",
+  "travelTo": "Rishikesh",
+  "tourFrom": "2026-09-05",
+  "tourTo": "2026-09-08",
+  "driverType": "driver",
+  "ownerName": "",
+  "ownerAge": "",
+  "ownerPhone": "",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "",
+  "ownerGender": "",
+  "ownerBloodGroup": "",
+  "driverName": "hyy",
+  "vehicleOwnerName": "hy",
+  "vehicleOwnerContact": "6789657896",
+  "driverAge": "21",
+  "driverPhone": "7898765678",
+  "driverWhatsapp": "",
+  "driverAadhar": "767893456123",
+  "driverGender": "Male",
+  "driverBloodGroup": "A-",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "7654567890",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "hyyy",
+      "age": "0",
+      "gender": "Male"
+    }
+  ],
+  "email": "hyy@gmail.com",
+  "message": "",
+  "registrationPassword": "asdfghj",
+  "id": "YS-2026-54BA3405",
+  "password": {
+    "salt": "7d1707b80d2841100ee05846c86cb226",
+    "hash": "5cd2cc8820633076811a10d23cbf1b5e31ccf81ea7fd3394494d8337c00dfd1a7191e9b0448f5ea1f512f65483431eacc1ed97eaae1cdd3fb6632d22fb3f9161"
+  },
+  "createdAt": "2026-09-04T12:53:57.359Z",
+  "status": "Pending",
+  "updatedAt": "2026-09-04T12:53:57.359Z"
+}

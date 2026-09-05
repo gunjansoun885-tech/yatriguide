@@ -10,7 +10,6 @@ const MENU_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Destinations", href: "#destinations" },
   { label: "Adventure", href: "#adventure" },
-  { label: "Char Dham", href: "#packages" },
   { label: "Travel Guide", href: "#about" }, 
   { label: "Gallery", href: "#gallery" },
   { label: "Hotels", href: "#footer" },
@@ -147,17 +146,6 @@ export default function Navbar() {
               >
                 <User className="w-3.5 h-3.5 text-orange-400" />
                 <span>Login ID</span>
-              </motion.button>
-
-              {/* Plan Your Trip CTA */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={(e) => handleScrollTo(e, "#packages")}
-                className="flex items-center space-x-2 px-4 py-2.5 bg-white/90 border border-orange-200 text-orange-700 font-sans font-bold text-xs sm:text-sm rounded-full shadow-sm hover:bg-orange-50 transition-all duration-300 cursor-pointer"
-              >
-                <Calendar className="w-4 h-4" />
-                <span>Plan Your Trip</span>
               </motion.button>
 
               {/* Blinking & Pulsing Desktop Registration Button */}
@@ -346,13 +334,6 @@ export default function Navbar() {
                   className="w-full text-center py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-sans font-bold rounded-xl shadow-lg hover:brightness-110"
                 >
                   Registration
-                </motion.button>
-                <motion.button
-                  whileTap={{ scale: 0.95 }}
-                  onClick={(e) => handleScrollTo(e, "#packages")}
-                  className="w-full text-center py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-stone-950 font-sans font-bold rounded-xl shadow-lg hover:brightness-110"
-                >
-                  Plan Your Trip
                 </motion.button>
               </div>
             </motion.div>

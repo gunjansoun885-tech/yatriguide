@@ -6,12 +6,8 @@ import {
   ChevronLeft, 
   Star, 
   CheckCircle2, 
-  Clock, 
   ShieldCheck, 
-  Sparkles, 
   Compass, 
-  ArrowRight,
-  Ticket,
   Flame,
   Waves,
   Snowflake,
@@ -38,15 +34,15 @@ export async function generateMetadata({ params }) {
 
   if (!adv) {
     return {
-      title: "Adventure Package Not Found | YatriGuide",
-      description: "Explore top adventure packages in Uttarakhand.",
+      title: "Adventure Not Found | YatriGuide",
+      description: "Explore Uttarakhand adventure activities.",
     };
   }
 
   return {
-    title: `${adv.title} Packages & Expeditions | YatriGuide Uttarakhand`,
-    description: `${adv.title} (${adv.subtitle}) — Book official adventure packages, trekking expeditions, rafting, skiing & wilderness packages with certified guides.`,
-    keywords: `${adv.title}, Uttarakhand adventure packages, ${adv.title} booking, YatriGuide adventure`,
+    title: `${adv.title} | YatriGuide Uttarakhand`,
+    description: `${adv.title} (${adv.subtitle}) — Explore trekking, rafting, skiing and wilderness activities with certified guides.`,
+    keywords: `${adv.title}, Uttarakhand adventure, YatriGuide adventure`,
   };
 }
 
@@ -124,7 +120,7 @@ export default async function AdventureDetailPage({ params }) {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           
-          {/* Main Packages Column (2 Cols) */}
+          {/* Main Activity Column (2 Cols) */}
           <div className="lg:col-span-2 space-y-12">
             
             {/* Overview */}
@@ -135,104 +131,6 @@ export default async function AdventureDetailPage({ params }) {
               <p className="text-stone-700 leading-relaxed text-base sm:text-lg font-normal">
                 {adv.overview}
               </p>
-            </section>
-
-            {/* Packages Section */}
-            <section id="packages-list" className="space-y-8">
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-orange-600 mb-1">
-                    <Sparkles className="w-4 h-4" />
-                    <span>Curated Expeditions</span>
-                  </div>
-                  <h2 className="text-3xl sm:text-4xl font-serif font-black text-stone-900">
-                    Available {adv.title} Packages
-                  </h2>
-                </div>
-              </div>
-
-              {/* Package Cards List */}
-              <div className="space-y-8">
-                {adv.packages?.map((pkg) => (
-                  <div 
-                    key={pkg.id}
-                    className="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col md:flex-row"
-                  >
-                    {/* Package Image */}
-                    <div className="relative w-full md:w-2/5 aspect-[4/3] md:aspect-auto shrink-0 bg-stone-950 overflow-hidden">
-                      <Image
-                        src={pkg.image || adv.heroImage}
-                        alt={pkg.title}
-                        fill
-                        className="object-cover"
-                        unoptimized
-                      />
-                      <div className="absolute top-3 left-3">
-                        <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider bg-orange-500 text-white rounded-full shadow-md">
-                          Verified Package
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Package Details */}
-                    <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
-                      <div>
-                        <div className="flex items-center justify-between gap-2 mb-2">
-                          <span className="flex items-center gap-1 text-xs font-extrabold text-stone-600 bg-stone-100 px-3 py-1 rounded-lg">
-                            <Clock className="w-3.5 h-3.5 text-orange-500" />
-                            {pkg.duration}
-                          </span>
-                          <div className="flex items-center gap-1 text-xs font-bold text-amber-500">
-                            <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                            <span>{pkg.rating} ({pkg.reviews} reviews)</span>
-                          </div>
-                        </div>
-
-                        <h3 className="text-xl sm:text-2xl font-serif font-black text-stone-900 mb-3">
-                          {pkg.title}
-                        </h3>
-
-                        <p className="text-stone-600 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
-                          {pkg.description}
-                        </p>
-
-                        {/* Inclusions */}
-                        <div className="mb-6 space-y-2 pt-4 border-t border-stone-100">
-                          <p className="text-[11px] font-bold uppercase tracking-wider text-stone-700 mb-2">
-                            Package Inclusions:
-                          </p>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            {pkg.inclusions?.map((inc, i) => (
-                              <div key={i} className="flex items-center gap-2 text-xs text-stone-700">
-                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                                <span>{inc}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Pricing & Booking CTA */}
-                      <div className="pt-4 border-t border-stone-100 flex flex-wrap items-center justify-between gap-4">
-                        <div>
-                          <span className="text-xs text-stone-400 line-through mr-2 font-medium">{pkg.priceOriginal}</span>
-                          <span className="text-2xl font-black text-stone-900">{pkg.price}</span>
-                          <span className="text-xs text-stone-500 font-medium"> / person</span>
-                        </div>
-
-                        <Link
-                          href={`/#packages`}
-                          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-orange-500/20 transition active:scale-95"
-                        >
-                          <Ticket className="w-4 h-4" />
-                          <span>Book Now</span>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
             </section>
 
           </div>
@@ -272,11 +170,11 @@ export default async function AdventureDetailPage({ params }) {
 
               <div className="pt-4 border-t border-stone-800">
                 <Link
-                  href="/registrations"
+                  href="/contact"
                   className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-orange-500 via-orange-600 to-amber-600 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/25 hover:from-orange-400 hover:to-amber-500 transition active:scale-[0.98]"
                 >
-                  <Ticket className="w-4 h-4" />
-                  <span>Get Official Yatri Pass</span>
+                  <ShieldCheck className="w-4 h-4" />
+                  <span>Registration</span>
                 </Link>
               </div>
 

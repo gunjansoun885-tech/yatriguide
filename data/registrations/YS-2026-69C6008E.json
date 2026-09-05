@@ -2,7 +2,7 @@
   "vehicleNumber": "uk2233",
   "vehicleType": "private",
   "travelFrom": "Delhi",
-  "travelTo": "Dehradun",
+  "travelTo": "Haridwar",
   "tourFrom": "2026-08-16",
   "tourTo": "2026-08-19",
   "driverType": "owner",
@@ -46,5 +46,46 @@
   },
   "createdAt": "2026-08-15T09:14:24.776Z",
   "status": "Pending",
-  "updatedAt": "2026-08-15T09:14:24.777Z"
+  "updatedAt": "2026-09-04T11:35:18.074Z",
+  "routeStops": [
+    "Delhi",
+    "Dehradun",
+    "Rudrapur",
+    "Bareilly",
+    "Rishikesh",
+    "Mussoorie",
+    "Haridwar"
+  ],
+  "routeHistory": [
+    {
+      "from": "Delhi → Dehradun",
+      "addedDestination": "Rudrapur",
+      "newRoute": "Delhi → Dehradun → Rudrapur",
+      "extendedAt": "2026-09-03T15:25:25.504Z"
+    },
+    {
+      "from": "Delhi → Dehradun → Rudrapur",
+      "addedDestination": "Bareilly",
+      "newRoute": "Delhi → Dehradun → Rudrapur → Bareilly",
+      "extendedAt": "2026-09-03T15:25:25.556Z"
+    },
+    {
+      "from": "Delhi → Dehradun → Rudrapur → Bareilly",
+      "addedDestination": "Rishikesh",
+      "newRoute": "Delhi → Dehradun → Rudrapur → Bareilly → Rishikesh",
+      "extendedAt": "2026-09-04T11:17:15.018Z"
+    },
+    {
+      "from": "Delhi → Dehradun → Rudrapur → Bareilly → Rishikesh",
+      "addedDestination": "Mussoorie",
+      "newRoute": "Delhi → Dehradun → Rudrapur → Bareilly → Rishikesh → Mussoorie",
+      "extendedAt": "2026-09-04T11:35:17.295Z"
+    },
+    {
+      "from": "Delhi → Dehradun → Rudrapur → Bareilly → Rishikesh → Mussoorie",
+      "addedDestination": "Haridwar",
+      "newRoute": "Delhi → Dehradun → Rudrapur → Bareilly → Rishikesh → Mussoorie → Haridwar",
+      "extendedAt": "2026-09-04T11:35:18.073Z"
+    }
+  ]
 }

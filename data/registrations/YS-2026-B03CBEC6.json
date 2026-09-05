@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "abcd1234",
+  "vehicleType": "private",
+  "travelFrom": "Dehradun",
+  "travelTo": "Rishikesh",
+  "tourFrom": "2026-09-06",
+  "tourTo": "2026-09-09",
+  "driverType": "owner",
+  "ownerName": "abccc",
+  "ownerAge": "19",
+  "ownerPhone": "7867893453",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "897345612985",
+  "ownerGender": "Female",
+  "ownerBloodGroup": "A-",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "8978965678",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "hgdhjdgc",
+      "age": "3",
+      "gender": "Male"
+    }
+  ],
+  "email": "hyy@gmail.com",
+  "message": "",
+  "registrationPassword": "qwert321",
+  "id": "YS-2026-B03CBEC6",
+  "password": {
+    "salt": "3218e1860b85c59cfb66dcef43aafdeb",
+    "hash": "e7538a42e024e4d540eb6a62ff9147ac3f28f2d7b1c4fbf02a9217b1b18b43a24d8d8ae1fd6df5d870b18e1b6f0eb413df79dd92e3c067fcafcdba8d92c2cdeb"
+  },
+  "createdAt": "2026-09-05T03:11:01.131Z",
+  "status": "Pending",
+  "updatedAt": "2026-09-05T03:11:01.131Z"
+}

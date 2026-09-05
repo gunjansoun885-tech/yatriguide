@@ -318,7 +318,6 @@ export default function Destinations() {
                           <span className="flex items-center gap-1">
                             <Clock className="w-3 h-3 text-stone-400" /> {place.timings}
                           </span>
-                          <span className="text-stone-900 font-bold">{place.entryFee}</span>
                         </div>
                       </div>
                     ))}
@@ -363,12 +362,12 @@ export default function Destinations() {
                     Close
                   </button>
                   <Link
-                    href="/registrations"
+                    href="/contact"
                     onClick={() => setActiveModalDest(null)}
                     className="px-5 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold text-xs uppercase tracking-wider shadow-md transition flex items-center gap-1.5"
                   >
                     <Ticket className="w-3.5 h-3.5" />
-                    <span>Get Travel Pass</span>
+                    <span>Registration</span>
                   </Link>
                 </div>
               </div>

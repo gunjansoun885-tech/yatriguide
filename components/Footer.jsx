@@ -92,7 +92,6 @@ export default function Footer() {
               { label: "Home Base", id: "#home" },
               { label: "Sacred Destinations", id: "#destinations" },
               { label: "Adventure Thrills", id: "#adventure" },
-              { label: "All Packages", id: "#packages" },
               { label: "Postcard Gallery", id: "#gallery" },
               { label: "Testimonials", id: "#testimonials" }
             ].map((link) => (
@@ -113,11 +112,6 @@ export default function Footer() {
         <div>
           <h3 className="font-serif text-lg font-bold text-stone-800 mb-6">Travel Categories</h3>
           <ul className="space-y-3 text-sm font-light">
-            <li>
-              <a href="#packages" onClick={(e) => handleScrollTo(e, "#packages")} className="hover:text-gold-400 hover:translate-x-1 inline-block transition-all duration-300">
-                Char Dham Pilgrimages
-              </a>
-            </li>
             <li>
               <a href="#adventure" onClick={(e) => handleScrollTo(e, "#adventure")} className="hover:text-gold-400 hover:translate-x-1 inline-block transition-all duration-300">
                 White-Water Rafting Rishikesh

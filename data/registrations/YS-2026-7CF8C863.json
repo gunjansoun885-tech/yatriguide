@@ -2,7 +2,7 @@
   "vehicleNumber": "uk9088",
   "vehicleType": "private",
   "travelFrom": "Dehradun",
-  "travelTo": "Haridwar",
+  "travelTo": "Rishikesh",
   "tourFrom": "2026-08-16",
   "tourTo": "2026-08-17",
   "driverType": "owner",
@@ -46,5 +46,25 @@
   },
   "createdAt": "2026-08-15T06:39:14.779Z",
   "status": "Pending",
-  "updatedAt": "2026-08-15T06:39:14.779Z"
+  "updatedAt": "2026-09-05T04:47:05.759Z",
+  "routeStops": [
+    "Dehradun",
+    "Haridwar",
+    "Kausani",
+    "Rishikesh"
+  ],
+  "routeHistory": [
+    {
+      "from": "Dehradun → Haridwar",
+      "addedDestination": "Kausani",
+      "newRoute": "Dehradun → Haridwar → Kausani",
+      "extendedAt": "2026-09-05T04:16:04.888Z"
+    },
+    {
+      "from": "Dehradun → Haridwar → Kausani",
+      "addedDestination": "Rishikesh",
+      "newRoute": "Dehradun → Haridwar → Kausani → Rishikesh",
+      "extendedAt": "2026-09-05T04:47:05.757Z"
+    }
+  ]
 }

@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "up9999",
+  "vehicleType": "private",
+  "travelFrom": "Delhi",
+  "travelTo": "Mussoorie",
+  "tourFrom": "2026-09-05",
+  "tourTo": "2026-09-08",
+  "driverType": "owner",
+  "ownerName": "helo",
+  "ownerAge": "21",
+  "ownerPhone": "8979065247",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "678908764567",
+  "ownerGender": "Male",
+  "ownerBloodGroup": "A-",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "7867896512",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "hyyy",
+      "age": "1",
+      "gender": "Other"
+    }
+  ],
+  "email": "hy@gmail.com",
+  "message": "",
+  "registrationPassword": "asdfgh",
+  "id": "YS-2026-C6D66F9F",
+  "password": {
+    "salt": "f4b28c099f9dc30fd433206b72dc5316",
+    "hash": "2e00edbc0fa4d2a3d3cbfe66be78ca3ded7fe453c48ee6ffea0eac067873de54534c58fe93c50a85bf99067e5cf16d15d94af1fc3f853af97a6d652e52c601cf"
+  },
+  "createdAt": "2026-09-04T11:00:16.954Z",
+  "status": "Pending",
+  "updatedAt": "2026-09-04T11:00:16.954Z"
+}

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   ShieldCheck,
   MapPin,
@@ -122,30 +123,28 @@ export default function PassClientView({
 
   // Extend Journey Route Modal States
   const [isExtendModalOpen, setIsExtendModalOpen] = useState(false);
-  const [extendDestination, setExtendDestination] = useState("Haldwani");
-  const [extendOtherDestination, setExtendOtherDestination] = useState("");
+  const [extendDestination, setExtendDestination] = useState("");
   const [extendNewTourTo, setExtendNewTourTo] = useState("");
   const [extendPassword, setExtendPassword] = useState("");
   const [extendStatus, setExtendStatus] = useState({ type: "", message: "" });
   const [isExtending, setIsExtending] = useState(false);
+  const [locationShareStatus, setLocationShareStatus] = useState("");
 
   useEffect(() => {
     if (typeof window === "undefined" || !registration) return;
 
     if (isInitialAuth) {
       setIsLoggedIn(true);
-      return;
     }
 
     const params = new URLSearchParams(window.location.search);
-    const authParam =
+    const hasAuthParam =
       params.get("auth") === "1" ||
       params.get("unmask") === "1" ||
       params.get("login") === "1";
 
-    if (authParam) {
+    if (hasAuthParam) {
       setIsLoggedIn(true);
-      return;
     }
 
     const savedAuth = window.localStorage.getItem("yatri-guide-owner-auth");
@@ -155,23 +154,27 @@ export default function PassClientView({
         if (parsed.password) {
           setExtendPassword(parsed.password);
         }
-        if (parsed.auth === true || (parsed.registrationId && parsed.registrationId === registration.id)) {
-          setIsLoggedIn(true);
-          return;
-        }
+
         const normSaved = (parsed.email || "").replace(/[\s-]/g, "").toLowerCase();
         const normVeh = (registration.vehicleNumber || "").replace(/[\s-]/g, "").toLowerCase();
         const normEmail = (registration.email || "").trim().toLowerCase();
         const normId = (registration.id || "").replace(/[\s-]/g, "").toLowerCase();
+        const normRegId = (parsed.registrationId || "").replace(/[\s-]/g, "").toLowerCase();
 
-        if (
-          normSaved &&
-          (normSaved === normVeh || normSaved === normEmail || normSaved === normId)
-        ) {
+        const isOwner =
+          (normRegId && normRegId === normId) ||
+          (normSaved && (normSaved === normVeh || normSaved === normEmail || normSaved === normId)) ||
+          parsed.auth === true;
+
+        if (isOwner) {
           setIsLoggedIn(true);
           return;
         }
       } catch {}
+    }
+
+    if (!hasAuthParam && !isInitialAuth) {
+      setIsLoggedIn(false);
     }
   }, [registration, isInitialAuth]);
 
@@ -190,16 +193,71 @@ export default function PassClientView({
     }
   };
 
+  const handleShareCurrentLocation = (event) => {
+    event.preventDefault();
+
+    if (typeof window === "undefined" || !navigator.geolocation) {
+      setLocationShareStatus("Your browser does not support location sharing.");
+      return;
+    }
+
+    const isLocalhost = ["localhost", "127.0.0.1", "[::1]"].includes(window.location.hostname);
+    if (!window.isSecureContext && !isLocalhost) {
+      setLocationShareStatus(
+        "GPS sharing needs HTTPS. Open this pass on localhost or use the secure HTTPS link."
+      );
+      return;
+    }
+
+    setLocationShareStatus("Getting your current location...");
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        const mapsUrl = `https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`;
+        const whatsappMessage = `📍 *My Current Location:*\n${mapsUrl}`;
+        const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMessage)}`;
+
+        setLocationShareStatus("");
+        window.open(whatsappShareUrl, "_blank", "noopener,noreferrer");
+      },
+      (error) => {
+        const message =
+          error.code === error.PERMISSION_DENIED
+            ? "Please allow location permission to share your current location."
+            : "Unable to get your current location. Please try again.";
+        setLocationShareStatus(message);
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
+  };
+
+  const handleOpenExtendModal = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setExtendStatus({ type: "", message: "" });
+    setIsExtendModalOpen(true);
+  };
+
   const handleExtendSubmit = async (e) => {
     e.preventDefault();
-    const finalDestination =
-      extendDestination === "Other" ? extendOtherDestination.trim() : extendDestination.trim();
+    const cleanDestination = extendDestination.trim();
 
-    if (!finalDestination) {
+    if (!cleanDestination) {
       setExtendStatus({ type: "error", message: "Please enter or select a destination." });
       return;
     }
-    if (!extendPassword.trim()) {
+
+    let pwd = extendPassword.trim();
+    if (!pwd && typeof window !== "undefined") {
+      try {
+        const saved = JSON.parse(window.localStorage.getItem("yatri-guide-owner-auth") || "{}");
+        if (saved.password) {
+          pwd = saved.password.trim();
+          setExtendPassword(pwd);
+        }
+      } catch {}
+    }
+
+    if (!pwd) {
       setExtendStatus({ type: "error", message: "Please enter your registration password." });
       return;
     }
@@ -213,8 +271,8 @@ export default function PassClientView({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           registrationId: registration.id,
-          password: extendPassword.trim(),
-          newDestination: finalDestination,
+          password: pwd,
+          newDestination: cleanDestination,
           newTourTo: extendNewTourTo.trim() || undefined,
         }),
       });
@@ -227,6 +285,7 @@ export default function PassClientView({
         return;
       }
 
+      // Immediately update local registration object
       setRegistration(data.registration);
       if (data.passUrl && typeof window !== "undefined") {
         const nextUrl = isLoggedIn && !data.passUrl.includes("auth=1") ? `${data.passUrl}&auth=1` : data.passUrl;
@@ -235,14 +294,14 @@ export default function PassClientView({
 
       setExtendStatus({
         type: "success",
-        message: `✅ Route extended to ${finalDestination}!`,
+        message: "Route extended successfully!",
       });
 
       setTimeout(() => {
         setIsExtendModalOpen(false);
-        setExtendOtherDestination("");
+        setExtendDestination("");
         setExtendStatus({ type: "", message: "" });
-      }, 1400);
+      }, 1200);
     } catch (err) {
       setExtendStatus({ type: "error", message: "Network error. Please try again." });
     } finally {
@@ -293,14 +352,6 @@ export default function PassClientView({
     Array.isArray(registration.routeStops) && registration.routeStops.length > 0
       ? registration.routeStops
       : [registration.travelFrom, registration.travelTo].filter(Boolean);
-
-  const destinationQuery = encodeURIComponent(
-    stops.length ? `${stops[stops.length - 1]}, Uttarakhand` : "Uttarakhand"
-  );
-  const liveLocationTrackingUrl = `https://maps.google.com/?q=${destinationQuery}`;
-
-  const whatsappMessage = `📍 *My Live / Current Location:*\n${liveLocationTrackingUrl}`;
-  const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
     <>
@@ -444,22 +495,23 @@ export default function PassClientView({
 
             <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
               {/* Authorized Route with Extend Route Button */}
-              <div className="rounded-xl bg-white p-3.5 border border-orange-100 sm:col-span-2">
-                <div className="flex items-center justify-between gap-2 mb-1.5">
+              <div className="rounded-xl bg-white p-3.5 border border-orange-100 sm:col-span-2 shadow-2xs">
+                <div className="flex items-center justify-between gap-2 mb-2">
                   <span className="block text-[10px] font-bold uppercase tracking-wider text-stone-500">
                     Authorized Journey Route
                   </span>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setExtendStatus({ type: "", message: "" });
-                      setIsExtendModalOpen(true);
-                    }}
-                    className="inline-flex items-center gap-1 text-[11px] font-bold text-orange-700 hover:text-orange-950 bg-orange-100/80 hover:bg-orange-200 px-2.5 py-1 rounded-lg border border-orange-300/80 shadow-2xs transition active:scale-95 print:hidden cursor-pointer"
-                  >
-                    <PlusCircle className="h-3.5 w-3.5 text-orange-600" />
-                    Extend Route
-                  </button>
+                  {isLoggedIn && (
+                    <button
+                      type="button"
+                      id="extend-route-btn"
+                      onClick={handleOpenExtendModal}
+                      style={{ position: "relative", zIndex: 10, pointerEvents: "auto" }}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 active:scale-95 px-3 py-1.5 rounded-lg shadow-xs hover:shadow transition print:hidden cursor-pointer select-none"
+                    >
+                      <PlusCircle className="h-4 w-4 shrink-0" />
+                      Extend Route
+                    </button>
+                  )}
                 </div>
 
                 <div className="flex flex-wrap items-center gap-1.5 font-mono font-bold text-stone-900 text-sm sm:text-base mt-1">
@@ -638,15 +690,19 @@ export default function PassClientView({
 
           {/* Action Buttons: WhatsApp Location Share (Hidden in print) */}
           <div className="pt-2 print:hidden">
-            <a
-              href={whatsappShareUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={handleShareCurrentLocation}
               className="w-full flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 px-4 py-4 text-base font-extrabold text-white shadow-xl transition touch-manipulation cursor-pointer"
             >
               <MapPin className="h-5 w-5 animate-bounce" />
-              📍 Share Live Location on WhatsApp
-            </a>
+              📍 Share Current Location on WhatsApp
+            </button>
+            {locationShareStatus && (
+              <p className="mt-2 text-center text-xs font-semibold text-stone-600" role="status">
+                {locationShareStatus}
+              </p>
+            )}
           </div>
 
           {/* Uttarakhand Emergency Helplines Direct Calling Buttons */}
@@ -705,139 +761,191 @@ export default function PassClientView({
       </div>
 
       {/* Extend Journey Route Modal */}
-      {isExtendModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
-          <div className="relative w-full max-w-md bg-white rounded-3xl p-6 shadow-2xl border border-orange-200 animate-in fade-in zoom-in-95 duration-200">
-            <button
-              onClick={() => setIsExtendModalOpen(false)}
-              className="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-700 rounded-full hover:bg-stone-100 transition cursor-pointer"
+      <AnimatePresence>
+        {isExtendModalOpen && (
+          <motion.div
+            key="extend-modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="extend-route-modal-title"
+            className="fixed inset-0 flex items-center justify-center bg-stone-950/80 p-4 backdrop-blur-md overflow-y-auto"
+            style={{ zIndex: 9999999 }}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setIsExtendModalOpen(false);
+            }}
+          >
+            <motion.div
+              initial={{ y: 20, opacity: 0, scale: 0.95 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: 10, opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.15 }}
+              className="relative w-full max-w-md my-auto rounded-3xl border border-orange-200 bg-white p-6 shadow-2xl shadow-stone-950/40 max-h-[90vh] overflow-y-auto"
             >
-              <X className="w-5 h-5" />
-            </button>
+              <button
+                type="button"
+                onClick={() => setIsExtendModalOpen(false)}
+                className="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-700 rounded-full hover:bg-stone-100 transition cursor-pointer"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
 
-            <div className="flex items-center gap-2 mb-1.5 text-orange-600">
-              <Route className="w-5 h-5" />
-              <h3 className="text-lg font-black text-stone-900">Extend Journey Route</h3>
-            </div>
-            <p className="text-xs text-stone-600 mb-4">
-              Add your next destination to this travel pass without deleting or replacing previous stops.
-            </p>
+              <div className="flex items-center gap-2 mb-1.5 text-orange-600">
+                <Route className="w-5 h-5" />
+                <h3 id="extend-route-modal-title" className="text-lg font-black text-stone-900">
+                  Extend Journey Route
+                </h3>
+              </div>
+              <p className="text-xs text-stone-600 mb-4">
+                Add your next destination to this travel pass without deleting or replacing previous stops.
+              </p>
 
-            {/* Current Itinerary Display */}
-            <div className="bg-orange-50/70 border border-orange-200 rounded-xl p-3 mb-4">
-              <span className="block text-[10px] font-bold uppercase tracking-wider text-orange-800 mb-1">
-                Current Route Itinerary
-              </span>
-              <div className="flex flex-wrap items-center gap-1.5 text-xs font-bold font-mono text-stone-800">
-                {stops.map((stop, i) => (
-                  <span key={i} className="flex items-center gap-1">
-                    <span className="bg-white px-2 py-0.5 rounded-md border border-orange-200 shadow-2xs">
-                      {isLoggedIn ? stop : maskRoute(stop)}
-                    </span>
-                    {i < stops.length - 1 && <span className="text-orange-600 font-extrabold">&rarr;</span>}
-                  </span>
-                ))}
-                <span className="text-orange-600 font-extrabold">&rarr;</span>
-                <span className="bg-amber-100 text-amber-900 px-2 py-0.5 rounded-md border border-amber-300 font-bold animate-pulse">
-                  + Next Destination
+              {/* Current Route Itinerary Display */}
+              <div className="bg-orange-50/70 border border-orange-200 rounded-2xl p-3.5 mb-4">
+                <span className="block text-[10px] font-bold uppercase tracking-wider text-orange-800 mb-1">
+                  Current Route
                 </span>
-              </div>
-            </div>
-
-            <form onSubmit={handleExtendSubmit} className="space-y-3.5">
-              <div>
-                <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">
-                  Select Next Destination
-                </label>
-                <select
-                  value={extendDestination}
-                  onChange={(e) => setExtendDestination(e.target.value)}
-                  className="w-full rounded-xl border border-stone-300 bg-white px-3.5 py-2.5 text-sm font-semibold text-stone-900 focus:border-orange-500 focus:outline-none"
-                  required
-                >
-                  {EXTEND_DESTINATIONS.map((loc) => (
-                    <option key={loc} value={loc}>
-                      {loc}
-                    </option>
+                <div className="flex flex-wrap items-center gap-1.5 text-xs font-bold font-mono text-stone-800">
+                  {stops.map((stop, i) => (
+                    <span key={i} className="flex items-center gap-1">
+                      <span className="bg-white px-2.5 py-1 rounded-lg border border-orange-200 shadow-2xs text-stone-900">
+                        {stop}
+                      </span>
+                      {i < stops.length - 1 && <span className="text-orange-600 font-extrabold">&rarr;</span>}
+                    </span>
                   ))}
-                </select>
+                  <span className="text-orange-600 font-extrabold">&rarr;</span>
+                  <span className="bg-amber-100 text-amber-900 px-2.5 py-1 rounded-lg border border-amber-300 font-bold animate-pulse">
+                    + {extendDestination.trim() || "Next Destination"}
+                  </span>
+                </div>
               </div>
 
-              {extendDestination === "Other" && (
+              <form onSubmit={handleExtendSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">
-                    Custom Destination Name
+                  <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">
+                    Select or Enter Next Destination *
+                  </label>
+                  
+                  {/* Quick Dropdown Selector */}
+                  <select
+                    value={EXTEND_DESTINATIONS.includes(extendDestination) ? extendDestination : (extendDestination ? "Other" : "")}
+                    onChange={(e) => {
+                      if (e.target.value && e.target.value !== "Other") {
+                        setExtendDestination(e.target.value);
+                      } else if (e.target.value === "Other") {
+                        setExtendDestination("");
+                      }
+                    }}
+                    className="w-full mb-2 rounded-2xl border border-stone-200 bg-stone-50 px-3.5 py-2.5 text-sm font-semibold text-stone-900 focus:border-orange-500 focus:outline-none cursor-pointer"
+                    style={{ color: "#000000", WebkitTextFillColor: "#000000", fontWeight: 600 }}
+                  >
+                    <option value="">-- Choose from Popular Destinations --</option>
+                    {EXTEND_DESTINATIONS.map((loc) => (
+                      <option key={loc} value={loc}>
+                        {loc}
+                      </option>
+                    ))}
+                    <option value="Other">✍️ Other (Custom Destination)</option>
+                  </select>
+
+                  <div className="flex items-center gap-2 rounded-2xl border border-stone-200 bg-stone-50 px-3.5 py-2.5 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-100">
+                    <MapPin className="h-4 w-4 text-orange-600 shrink-0" />
+                    <input
+                      type="text"
+                      placeholder="e.g. Rudrapur, Nainital, Almora, etc."
+                      value={extendDestination}
+                      onChange={(e) => setExtendDestination(e.target.value)}
+                      className="w-full bg-transparent text-sm font-semibold outline-none text-black placeholder:text-stone-400"
+                      style={{ color: "#000000", WebkitTextFillColor: "#000000", fontWeight: 600 }}
+                      required
+                    />
+                  </div>
+
+                  {/* Popular Uttarakhand Quick Select suggestions */}
+                  <div className="flex flex-wrap gap-1.5 mt-2.5">
+                    {["Rudrapur", "Haldwani", "Nainital", "Almora", "Rishikesh", "Dehradun", "Mussoorie", "Haridwar", "Kausani", "Ranikhet"].map((city) => (
+                      <button
+                        key={city}
+                        type="button"
+                        onClick={() => setExtendDestination(city)}
+                        className={`text-xs font-bold px-2.5 py-1 rounded-lg border transition cursor-pointer ${
+                          extendDestination.toLowerCase() === city.toLowerCase()
+                            ? "bg-orange-600 text-white border-orange-600 shadow-2xs"
+                            : "bg-stone-50 text-stone-700 border-stone-200 hover:bg-orange-50"
+                        }`}
+                      >
+                        + {city}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">
+                    Extend Tour End Date (Optional)
                   </label>
                   <input
-                    type="text"
-                    placeholder="Enter destination in Uttarakhand"
-                    value={extendOtherDestination}
-                    onChange={(e) => setExtendOtherDestination(e.target.value)}
-                    className="w-full rounded-xl border border-stone-300 px-3.5 py-2.5 text-sm font-semibold text-stone-900 focus:border-orange-500 focus:outline-none"
+                    type="date"
+                    value={extendNewTourTo}
+                    min={registration.tourFrom || ""}
+                    onChange={(e) => setExtendNewTourTo(e.target.value)}
+                    className="w-full rounded-2xl border border-stone-200 bg-stone-50 px-3.5 py-2.5 text-xs font-semibold text-stone-900 focus:border-orange-500 focus:outline-none"
+                    style={{ color: "#000000", WebkitTextFillColor: "#000000", fontWeight: 600 }}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">
+                    Registration Password *
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="Enter your registration password"
+                    value={extendPassword}
+                    onChange={(e) => setExtendPassword(e.target.value)}
+                    className="w-full rounded-2xl border border-stone-200 bg-stone-50 px-3.5 py-2.5 text-sm font-semibold text-stone-900 focus:border-orange-500 focus:outline-none"
+                    style={{ color: "#000000", WebkitTextFillColor: "#000000", fontWeight: 600 }}
                     required
                   />
                 </div>
-              )}
 
-              <div>
-                <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">
-                  Extend Tour End Date (Optional)
-                </label>
-                <input
-                  type="date"
-                  value={extendNewTourTo}
-                  min={registration.tourFrom || ""}
-                  onChange={(e) => setExtendNewTourTo(e.target.value)}
-                  className="w-full rounded-xl border border-stone-300 px-3.5 py-2 text-sm text-stone-900 focus:border-orange-500 focus:outline-none"
-                />
-              </div>
+                {extendStatus.message && (
+                  <div
+                    className={`p-3 rounded-2xl text-xs font-bold ${
+                      extendStatus.type === "success"
+                        ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
+                        : "bg-rose-50 text-rose-800 border border-rose-200"
+                    }`}
+                  >
+                    {extendStatus.message}
+                  </div>
+                )}
 
-              <div>
-                <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">
-                  Registration Password
-                </label>
-                <input
-                  type="password"
-                  placeholder="Enter your registration password"
-                  value={extendPassword}
-                  onChange={(e) => setExtendPassword(e.target.value)}
-                  className="w-full rounded-xl border border-stone-300 px-3.5 py-2.5 text-sm font-semibold text-stone-900 focus:border-orange-500 focus:outline-none"
-                  required
-                />
-              </div>
-
-              {extendStatus.message && (
-                <div
-                  className={`p-3 rounded-xl text-xs font-bold ${
-                    extendStatus.type === "success"
-                      ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
-                      : "bg-rose-50 text-rose-800 border border-rose-200"
-                  }`}
-                >
-                  {extendStatus.message}
+                <div className="flex items-center gap-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsExtendModalOpen(false)}
+                    className="w-1/3 rounded-2xl border border-stone-300 px-4 py-3 text-xs font-bold text-stone-700 hover:bg-stone-100 transition cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isExtending}
+                    className="w-2/3 rounded-2xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 px-4 py-3 text-xs font-bold text-white shadow-md transition disabled:opacity-50 cursor-pointer"
+                  >
+                    {isExtending ? "Extending Route..." : "Extend Route"}
+                  </button>
                 </div>
-              )}
-
-              <div className="flex items-center gap-2 pt-2">
-                <button
-                  type="button"
-                  onClick={() => setIsExtendModalOpen(false)}
-                  className="w-1/3 rounded-xl border border-stone-300 px-4 py-2.5 text-xs font-bold text-stone-700 hover:bg-stone-100 transition cursor-pointer"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={isExtending}
-                  className="w-2/3 rounded-xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 px-4 py-2.5 text-xs font-bold text-white shadow-md transition disabled:opacity-50 cursor-pointer"
-                >
-                  {isExtending ? "Extending Route..." : "Add to Route & Update Pass"}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Login Modal */}
       <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />

@@ -1,5 +1,418 @@
 [
   {
+    "vehicleNumber": "uk5522",
+    "vehicleType": "private",
+    "travelFrom": "Delhi",
+    "travelTo": "Dehradun",
+    "tourFrom": "2026-09-06",
+    "tourTo": "2026-09-10",
+    "driverType": "owner",
+    "ownerName": "hello",
+    "ownerAge": "18",
+    "ownerPhone": "7896578456",
+    "ownerWhatsapp": "",
+    "ownerAadhar": "765456789087",
+    "ownerGender": "Male",
+    "ownerBloodGroup": "A+",
+    "driverName": "",
+    "vehicleOwnerName": "",
+    "vehicleOwnerContact": "",
+    "driverAge": "",
+    "driverPhone": "",
+    "driverWhatsapp": "",
+    "driverAadhar": "",
+    "driverGender": "",
+    "driverBloodGroup": "",
+    "otherName": "",
+    "otherAge": "",
+    "otherPhone": "",
+    "otherGender": "",
+    "otherBloodGroup": "",
+    "emergencyContactNo": "7867512309",
+    "passengerCount": 1,
+    "passengerDetails": [
+      {
+        "name": "hyy",
+        "age": "0",
+        "gender": "Male"
+      }
+    ],
+    "email": "hello@gmail.com",
+    "message": "",
+    "registrationPassword": "gunjannn123",
+    "id": "YS-2026-6CCFDE10",
+    "password": {
+      "salt": "b2f74cddaa85e7d59f6c9dca2af4a8b1",
+      "hash": "a43bcd1e061f52b504184d6a29f0fb4f0c58eff093a88bb294c7187d02fc102ccca8bcb2ddfa33776ceba2e9d952aefd8d9238fac38e6d23345f3c27e3dceb6a"
+    },
+    "createdAt": "2026-09-05T04:59:31.107Z",
+    "status": "Pending",
+    "updatedAt": "2026-09-05T04:59:31.107Z"
+  },
+  {
+    "vehicleNumber": "gs1234",
+    "vehicleType": "private",
+    "travelFrom": "Haridwar",
+    "travelTo": "Delhi",
+    "tourFrom": "2026-09-07",
+    "tourTo": "2026-09-17",
+    "driverType": "owner",
+    "ownerName": "hyy",
+    "ownerAge": "21",
+    "ownerPhone": "6786345263",
+    "ownerWhatsapp": "",
+    "ownerAadhar": "635426378976",
+    "ownerGender": "Male",
+    "ownerBloodGroup": "A+",
+    "driverName": "",
+    "vehicleOwnerName": "",
+    "vehicleOwnerContact": "",
+    "driverAge": "",
+    "driverPhone": "",
+    "driverWhatsapp": "",
+    "driverAadhar": "",
+    "driverGender": "",
+    "driverBloodGroup": "",
+    "otherName": "",
+    "otherAge": "",
+    "otherPhone": "",
+    "otherGender": "",
+    "otherBloodGroup": "",
+    "emergencyContactNo": "76567897654",
+    "passengerCount": 1,
+    "passengerDetails": [
+      {
+        "name": "hegdwd",
+        "age": "0",
+        "gender": "Male"
+      }
+    ],
+    "email": "shg@gmail.com",
+    "message": "",
+    "registrationPassword": "g1234567890",
+    "id": "YS-2026-744AA1A8",
+    "password": {
+      "salt": "9afa5567311c86de016d4c9ddbd3dd08",
+      "hash": "a98c476757d0de60c8014d3c521a602f9d06c566859bb9d74c0a30ff70cdebaed11065cb572774155d40aedb6995accad9708300c2042e2d7af4997ed8e89d59"
+    },
+    "createdAt": "2026-09-05T04:06:27.977Z",
+    "status": "Approved",
+    "updatedAt": "2026-09-05T04:52:00.787Z"
+  },
+  {
+    "vehicleNumber": "abcd1234",
+    "vehicleType": "private",
+    "travelFrom": "Dehradun",
+    "travelTo": "Rishikesh",
+    "tourFrom": "2026-09-06",
+    "tourTo": "2026-09-09",
+    "driverType": "owner",
+    "ownerName": "abccc",
+    "ownerAge": "19",
+    "ownerPhone": "7867893453",
+    "ownerWhatsapp": "",
+    "ownerAadhar": "897345612985",
+    "ownerGender": "Female",
+    "ownerBloodGroup": "A-",
+    "driverName": "",
+    "vehicleOwnerName": "",
+    "vehicleOwnerContact": "",
+    "driverAge": "",
+    "driverPhone": "",
+    "driverWhatsapp": "",
+    "driverAadhar": "",
+    "driverGender": "",
+    "driverBloodGroup": "",
+    "otherName": "",
+    "otherAge": "",
+    "otherPhone": "",
+    "otherGender": "",
+    "otherBloodGroup": "",
+    "emergencyContactNo": "8978965678",
+    "passengerCount": 1,
+    "passengerDetails": [
+      {
+        "name": "hgdhjdgc",
+        "age": "3",
+        "gender": "Male"
+      }
+    ],
+    "email": "hyy@gmail.com",
+    "message": "",
+    "registrationPassword": "qwert321",
+    "id": "YS-2026-B03CBEC6",
+    "password": {
+      "salt": "3218e1860b85c59cfb66dcef43aafdeb",
+      "hash": "e7538a42e024e4d540eb6a62ff9147ac3f28f2d7b1c4fbf02a9217b1b18b43a24d8d8ae1fd6df5d870b18e1b6f0eb413df79dd92e3c067fcafcdba8d92c2cdeb"
+    },
+    "createdAt": "2026-09-05T03:11:01.131Z",
+    "status": "Pending",
+    "updatedAt": "2026-09-05T03:11:01.131Z"
+  },
+  {
+    "vehicleNumber": "abc1234",
+    "vehicleType": "private",
+    "travelFrom": "Dehradun",
+    "travelTo": "Delhi",
+    "tourFrom": "2026-09-06",
+    "tourTo": "2026-09-09",
+    "driverType": "owner",
+    "ownerName": "yui",
+    "ownerAge": "19",
+    "ownerPhone": "8907656789",
+    "ownerWhatsapp": "",
+    "ownerAadhar": "098765432167",
+    "ownerGender": "Male",
+    "ownerBloodGroup": "A+",
+    "driverName": "",
+    "vehicleOwnerName": "",
+    "vehicleOwnerContact": "",
+    "driverAge": "",
+    "driverPhone": "",
+    "driverWhatsapp": "",
+    "driverAadhar": "",
+    "driverGender": "",
+    "driverBloodGroup": "",
+    "otherName": "",
+    "otherAge": "",
+    "otherPhone": "",
+    "otherGender": "",
+    "otherBloodGroup": "",
+    "emergencyContactNo": "7890876234",
+    "passengerCount": 1,
+    "passengerDetails": [
+      {
+        "name": "yhui",
+        "age": "1",
+        "gender": "Male"
+      }
+    ],
+    "email": "huhhg@gmail.com",
+    "message": "",
+    "registrationPassword": "qwert1234",
+    "id": "YS-2026-AFE64B3D",
+    "password": {
+      "salt": "cdece42b00c0838911e1a84276a129c4",
+      "hash": "5bd4161e98cfd21c294496ce63c929776f71a2c928c76222810019de2bb3cfd610830f915047df36f6a3b50f88b2009cbb1ff5da8cf88e4f6347502fc6f52fa2"
+    },
+    "createdAt": "2026-09-05T03:02:43.820Z",
+    "status": "Pending",
+    "updatedAt": "2026-09-05T03:02:43.820Z"
+  },
+  {
+    "vehicleNumber": "up123",
+    "vehicleType": "private",
+    "travelFrom": "Delhi",
+    "travelTo": "Rishikesh",
+    "tourFrom": "2026-09-05",
+    "tourTo": "2026-09-08",
+    "driverType": "driver",
+    "ownerName": "",
+    "ownerAge": "",
+    "ownerPhone": "",
+    "ownerWhatsapp": "",
+    "ownerAadhar": "",
+    "ownerGender": "",
+    "ownerBloodGroup": "",
+    "driverName": "hyy",
+    "vehicleOwnerName": "hy",
+    "vehicleOwnerContact": "6789657896",
+    "driverAge": "21",
+    "driverPhone": "7898765678",
+    "driverWhatsapp": "",
+    "driverAadhar": "767893456123",
+    "driverGender": "Male",
+    "driverBloodGroup": "A-",
+    "otherName": "",
+    "otherAge": "",
+    "otherPhone": "",
+    "otherGender": "",
+    "otherBloodGroup": "",
+    "emergencyContactNo": "7654567890",
+    "passengerCount": 1,
+    "passengerDetails": [
+      {
+        "name": "hyyy",
+        "age": "0",
+        "gender": "Male"
+      }
+    ],
+    "email": "hyy@gmail.com",
+    "message": "",
+    "registrationPassword": "asdfghj",
+    "id": "YS-2026-54BA3405",
+    "password": {
+      "salt": "7d1707b80d2841100ee05846c86cb226",
+      "hash": "5cd2cc8820633076811a10d23cbf1b5e31ccf81ea7fd3394494d8337c00dfd1a7191e9b0448f5ea1f512f65483431eacc1ed97eaae1cdd3fb6632d22fb3f9161"
+    },
+    "createdAt": "2026-09-04T12:53:57.359Z",
+    "status": "Pending",
+    "updatedAt": "2026-09-04T12:53:57.359Z"
+  },
+  {
+    "vehicleNumber": "up9988",
+    "vehicleType": "private",
+    "travelFrom": "Haridwar",
+    "travelTo": "Mussoorie",
+    "tourFrom": "2026-09-12",
+    "tourTo": "2026-09-21",
+    "driverType": "owner",
+    "ownerName": "yty",
+    "ownerAge": "20",
+    "ownerPhone": "7898765678",
+    "ownerWhatsapp": "",
+    "ownerAadhar": "787678098612",
+    "ownerGender": "Male",
+    "ownerBloodGroup": "A-",
+    "driverName": "",
+    "vehicleOwnerName": "",
+    "vehicleOwnerContact": "",
+    "driverAge": "",
+    "driverPhone": "",
+    "driverWhatsapp": "",
+    "driverAadhar": "",
+    "driverGender": "",
+    "driverBloodGroup": "",
+    "otherName": "",
+    "otherAge": "",
+    "otherPhone": "",
+    "otherGender": "",
+    "otherBloodGroup": "",
+    "emergencyContactNo": "7898765678",
+    "passengerCount": 1,
+    "passengerDetails": [
+      {
+        "name": "hyhy",
+        "age": "1",
+        "gender": "Female"
+      }
+    ],
+    "email": "hy@gmaqil.com",
+    "message": "",
+    "registrationPassword": "hello098",
+    "id": "YS-2026-4864F873",
+    "password": {
+      "salt": "75e53a7737476007a365464b9e2dd2d8",
+      "hash": "09d5adf778f71029b4a4331cce33bdf2ae834efd371bc1a71d36f9c313a10a7fc78ed698936872b4420dc218213ed4069835a3d6e04e37daf9d71004229abf42"
+    },
+    "createdAt": "2026-09-04T11:24:52.458Z",
+    "status": "Pending",
+    "updatedAt": "2026-09-04T12:47:39.312Z",
+    "routeStops": [
+      "Haridwar",
+      "Dehradun",
+      "Mussoorie"
+    ],
+    "routeHistory": [
+      {
+        "from": "Haridwar → Dehradun",
+        "addedDestination": "Mussoorie",
+        "newRoute": "Haridwar → Dehradun → Mussoorie",
+        "extendedAt": "2026-09-04T12:47:39.311Z"
+      }
+    ]
+  },
+  {
+    "vehicleNumber": "up9999",
+    "vehicleType": "private",
+    "travelFrom": "Delhi",
+    "travelTo": "Mussoorie",
+    "tourFrom": "2026-09-05",
+    "tourTo": "2026-09-08",
+    "driverType": "owner",
+    "ownerName": "helo",
+    "ownerAge": "21",
+    "ownerPhone": "8979065247",
+    "ownerWhatsapp": "",
+    "ownerAadhar": "678908764567",
+    "ownerGender": "Male",
+    "ownerBloodGroup": "A-",
+    "driverName": "",
+    "vehicleOwnerName": "",
+    "vehicleOwnerContact": "",
+    "driverAge": "",
+    "driverPhone": "",
+    "driverWhatsapp": "",
+    "driverAadhar": "",
+    "driverGender": "",
+    "driverBloodGroup": "",
+    "otherName": "",
+    "otherAge": "",
+    "otherPhone": "",
+    "otherGender": "",
+    "otherBloodGroup": "",
+    "emergencyContactNo": "7867896512",
+    "passengerCount": 1,
+    "passengerDetails": [
+      {
+        "name": "hyyy",
+        "age": "1",
+        "gender": "Other"
+      }
+    ],
+    "email": "hy@gmail.com",
+    "message": "",
+    "registrationPassword": "asdfgh",
+    "id": "YS-2026-C6D66F9F",
+    "password": {
+      "salt": "f4b28c099f9dc30fd433206b72dc5316",
+      "hash": "2e00edbc0fa4d2a3d3cbfe66be78ca3ded7fe453c48ee6ffea0eac067873de54534c58fe93c50a85bf99067e5cf16d15d94af1fc3f853af97a6d652e52c601cf"
+    },
+    "createdAt": "2026-09-04T11:00:16.954Z",
+    "status": "Pending",
+    "updatedAt": "2026-09-04T11:00:16.954Z"
+  },
+  {
+    "vehicleNumber": "up0044",
+    "vehicleType": "private",
+    "travelFrom": "Haldwani",
+    "travelTo": "Dehradun",
+    "tourFrom": "2026-09-05",
+    "tourTo": "2026-09-11",
+    "driverType": "owner",
+    "ownerName": "test",
+    "ownerAge": "23",
+    "ownerPhone": "8979065247",
+    "ownerWhatsapp": "",
+    "ownerAadhar": "567865435678",
+    "ownerGender": "Female",
+    "ownerBloodGroup": "A-",
+    "driverName": "",
+    "vehicleOwnerName": "",
+    "vehicleOwnerContact": "",
+    "driverAge": "",
+    "driverPhone": "",
+    "driverWhatsapp": "",
+    "driverAadhar": "",
+    "driverGender": "",
+    "driverBloodGroup": "",
+    "otherName": "",
+    "otherAge": "",
+    "otherPhone": "",
+    "otherGender": "",
+    "otherBloodGroup": "",
+    "emergencyContactNo": "5678567876",
+    "passengerCount": 1,
+    "passengerDetails": [
+      {
+        "name": "hyy",
+        "age": "3",
+        "gender": "Female"
+      }
+    ],
+    "email": "gs@gmail.com",
+    "message": "",
+    "registrationPassword": "hello123",
+    "id": "YS-2026-30A6E900",
+    "password": {
+      "salt": "6fec28b680d2edd5d820aaa61f2d3e49",
+      "hash": "de6e0ea4600627dca28bc796f8aab7a8b3ba31ce797eeab17074e84d63d51fe5f309e42d635128f75f489e29309a22b5d69503140bc1e506f2f32afaba1d24d0"
+    },
+    "createdAt": "2026-09-03T14:41:53.173Z",
+    "status": "Pending",
+    "updatedAt": "2026-09-03T14:41:53.173Z"
+  },
+  {
     "vehicleNumber": "uk5555",
     "vehicleType": "private",
     "travelFrom": "Dehradun",
@@ -208,7 +621,7 @@
     "vehicleNumber": "uk2233",
     "vehicleType": "private",
     "travelFrom": "Delhi",
-    "travelTo": "Dehradun",
+    "travelTo": "Haridwar",
     "tourFrom": "2026-08-16",
     "tourTo": "2026-08-19",
     "driverType": "owner",
@@ -252,7 +665,48 @@
     },
     "createdAt": "2026-08-15T09:14:24.776Z",
     "status": "Pending",
-    "updatedAt": "2026-08-15T09:14:24.777Z"
+    "updatedAt": "2026-09-04T11:35:18.074Z",
+    "routeStops": [
+      "Delhi",
+      "Dehradun",
+      "Rudrapur",
+      "Bareilly",
+      "Rishikesh",
+      "Mussoorie",
+      "Haridwar"
+    ],
+    "routeHistory": [
+      {
+        "from": "Delhi → Dehradun",
+        "addedDestination": "Rudrapur",
+        "newRoute": "Delhi → Dehradun → Rudrapur",
+        "extendedAt": "2026-09-03T15:25:25.504Z"
+      },
+      {
+        "from": "Delhi → Dehradun → Rudrapur",
+        "addedDestination": "Bareilly",
+        "newRoute": "Delhi → Dehradun → Rudrapur → Bareilly",
+        "extendedAt": "2026-09-03T15:25:25.556Z"
+      },
+      {
+        "from": "Delhi → Dehradun → Rudrapur → Bareilly",
+        "addedDestination": "Rishikesh",
+        "newRoute": "Delhi → Dehradun → Rudrapur → Bareilly → Rishikesh",
+        "extendedAt": "2026-09-04T11:17:15.018Z"
+      },
+      {
+        "from": "Delhi → Dehradun → Rudrapur → Bareilly → Rishikesh",
+        "addedDestination": "Mussoorie",
+        "newRoute": "Delhi → Dehradun → Rudrapur → Bareilly → Rishikesh → Mussoorie",
+        "extendedAt": "2026-09-04T11:35:17.295Z"
+      },
+      {
+        "from": "Delhi → Dehradun → Rudrapur → Bareilly → Rishikesh → Mussoorie",
+        "addedDestination": "Haridwar",
+        "newRoute": "Delhi → Dehradun → Rudrapur → Bareilly → Rishikesh → Mussoorie → Haridwar",
+        "extendedAt": "2026-09-04T11:35:18.073Z"
+      }
+    ]
   },
   {
     "vehicleNumber": "yui7777",
@@ -558,7 +1012,7 @@
     "vehicleNumber": "uk9088",
     "vehicleType": "private",
     "travelFrom": "Dehradun",
-    "travelTo": "Haridwar",
+    "travelTo": "Rishikesh",
     "tourFrom": "2026-08-16",
     "tourTo": "2026-08-17",
     "driverType": "owner",
@@ -602,7 +1056,27 @@
     },
     "createdAt": "2026-08-15T06:39:14.779Z",
     "status": "Pending",
-    "updatedAt": "2026-08-15T06:39:14.779Z"
+    "updatedAt": "2026-09-05T04:47:05.759Z",
+    "routeStops": [
+      "Dehradun",
+      "Haridwar",
+      "Kausani",
+      "Rishikesh"
+    ],
+    "routeHistory": [
+      {
+        "from": "Dehradun → Haridwar",
+        "addedDestination": "Kausani",
+        "newRoute": "Dehradun → Haridwar → Kausani",
+        "extendedAt": "2026-09-05T04:16:04.888Z"
+      },
+      {
+        "from": "Dehradun → Haridwar → Kausani",
+        "addedDestination": "Rishikesh",
+        "newRoute": "Dehradun → Haridwar → Kausani → Rishikesh",
+        "extendedAt": "2026-09-05T04:47:05.757Z"
+      }
+    ]
   },
   {
     "vehicleNumber": "yp8978",

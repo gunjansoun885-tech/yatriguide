@@ -14,16 +14,7 @@ import {
   ArrowUpRight,
   X,
   Star,
-  CheckCircle2,
-  Clock,
-  Ticket,
-  ShieldCheck,
-  Calendar,
-  User,
-  Phone,
-  Mail,
   ExternalLink,
-  Sparkles
 } from "lucide-react";
 import { ADVENTURES_DATA } from "@/lib/adventure-data";
 
@@ -86,41 +77,12 @@ const ADVENTURES = [
 
 export default function Adventure() {
   const [activeAdventure, setActiveAdventure] = useState(null);
-  const [bookingPackage, setBookingPackage] = useState(null);
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", date: "", travelers: 2 });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [successBooking, setSuccessBooking] = useState(null);
 
   const handleCardClick = (id) => {
     const advData = ADVENTURES_DATA[id];
     if (advData) {
       setActiveAdventure(advData);
-      setBookingPackage(null);
-      setSuccessBooking(null);
     }
-  };
-
-  const handleBookNow = (pkg) => {
-    setBookingPackage(pkg);
-    setSuccessBooking(null);
-    setFormData({ name: "", email: "", phone: "", date: "", travelers: 2 });
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      const bookingId = "YATRI-ADV-" + Math.floor(100000 + Math.random() * 900000);
-      setSuccessBooking({
-        id: bookingId,
-        packageName: bookingPackage.title,
-        price: bookingPackage.price,
-        travelers: formData.travelers,
-        date: formData.date || "As Selected",
-        name: formData.name
-      });
-    }, 1200);
   };
 
   return (
@@ -212,7 +174,7 @@ export default function Adventure() {
                 {/* Explore link */}
                 <div className="flex items-center justify-between pt-4 border-t border-stone-100">
                   <span className="text-xs font-sans font-bold text-orange-600 group-hover:text-orange-700 flex items-center gap-1">
-                    Explore Packages
+                    Explore Details
                   </span>
                   <div className="p-1.5 rounded-lg bg-orange-100 text-orange-600 group-hover:bg-orange-500 group-hover:text-white transition-colors">
                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -224,7 +186,7 @@ export default function Adventure() {
         </div>
       </div>
 
-      {/* Activity Packages Modal */}
+      {/* Activity Details Modal */}
       <AnimatePresence>
         {activeAdventure && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
@@ -233,7 +195,7 @@ export default function Adventure() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => { setActiveAdventure(null); setBookingPackage(null); setSuccessBooking(null); }}
+              onClick={() => setActiveAdventure(null)}
               className="fixed inset-0 bg-stone-950/80 backdrop-blur-md"
             />
 
@@ -269,7 +231,7 @@ export default function Adventure() {
                   </div>
 
                   <h2 className="text-2xl sm:text-4xl font-serif font-black text-white mb-1">
-                    {activeAdventure.title} Packages
+                    {activeAdventure.title}
                   </h2>
                   <p className="text-xs sm:text-sm text-stone-300 font-sans font-light">
                     "{activeAdventure.subtitle}"
@@ -277,7 +239,7 @@ export default function Adventure() {
                 </div>
 
                 <button
-                  onClick={() => { setActiveAdventure(null); setBookingPackage(null); setSuccessBooking(null); }}
+                  onClick={() => setActiveAdventure(null)}
                   className="relative z-10 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition backdrop-blur-md"
                 >
                   <X className="w-5 h-5" />
@@ -294,239 +256,15 @@ export default function Adventure() {
                   </p>
                 </div>
 
-                {/* Packages List */}
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg sm:text-xl font-serif font-black text-stone-900 flex items-center gap-2">
-                      <Sparkles className="w-5 h-5 text-orange-600" />
-                      Select Expeditions & Book
-                    </h3>
-                    <Link
-                      href={`/adventure/${activeAdventure.id}`}
-                      className="text-xs font-bold text-orange-600 hover:underline flex items-center gap-1"
-                    >
-                      <span>Full Activity Page</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-
-                  {activeAdventure.packages?.map((pkg) => (
-                    <div
-                      key={pkg.id}
-                      className="bg-white rounded-2xl p-5 sm:p-6 border border-stone-200 shadow-sm hover:shadow-md transition-all flex flex-col md:flex-row gap-6"
-                    >
-                      {/* Thumbnail */}
-                      <div className="relative w-full md:w-48 aspect-[4/3] md:aspect-auto shrink-0 bg-stone-900 rounded-xl overflow-hidden">
-                        <Image
-                          src={pkg.image || activeAdventure.heroImage}
-                          alt={pkg.title}
-                          fill
-                          className="object-cover"
-                          unoptimized
-                        />
-                      </div>
-
-                      {/* Content */}
-                      <div className="flex-1 flex flex-col justify-between">
-                        <div>
-                          <div className="flex items-center justify-between gap-2 mb-2">
-                            <span className="flex items-center gap-1 text-[11px] font-extrabold text-stone-600 bg-stone-100 px-2.5 py-0.5 rounded-md">
-                              <Clock className="w-3.5 h-3.5 text-orange-500" />
-                              {pkg.duration}
-                            </span>
-                            <span className="text-xs font-bold text-amber-600 flex items-center gap-1">
-                              <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                              {pkg.rating} ({pkg.reviews})
-                            </span>
-                          </div>
-
-                          <h4 className="text-lg font-serif font-black text-stone-900 mb-2">
-                            {pkg.title}
-                          </h4>
-
-                          <p className="text-xs text-stone-600 leading-relaxed mb-4">
-                            {pkg.description}
-                          </p>
-
-                          {/* Key Inclusions */}
-                          <div className="mb-4 pt-3 border-t border-stone-100 grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-                            {pkg.inclusions?.slice(0, 4).map((inc, i) => (
-                              <div key={i} className="flex items-center gap-2 text-[11px] text-stone-700">
-                                <CheckCircle2 className="w-3 h-3 text-emerald-500 shrink-0" />
-                                <span>{inc}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Price & Book Button */}
-                        <div className="pt-3 border-t border-stone-100 flex items-center justify-between">
-                          <div>
-                            <span className="text-xs text-stone-400 line-through mr-1 font-medium">{pkg.priceOriginal}</span>
-                            <span className="text-xl font-black text-stone-900">{pkg.price}</span>
-                            <span className="text-[10px] text-stone-500 font-medium"> / person</span>
-                          </div>
-
-                          <button
-                            onClick={() => handleBookNow(pkg)}
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 via-orange-600 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-orange-500/20 transition active:scale-95"
-                          >
-                            <Ticket className="w-4 h-4" />
-                            <span>Book Now</span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                <div className="flex justify-center">
+                  <Link
+                    href={`/adventure/${activeAdventure.id}`}
+                    className="text-xs font-bold text-orange-600 hover:underline flex items-center gap-1"
+                  >
+                    <span>Full Activity Page</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </Link>
                 </div>
-
-                {/* Instant Booking Form Popup inside Modal */}
-                {bookingPackage && (
-                  <div className="bg-orange-50 border-2 border-orange-300 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl scroll-mt-6">
-                    {!successBooking ? (
-                      <form onSubmit={handleFormSubmit} className="space-y-4">
-                        <div className="flex items-center justify-between pb-3 border-b border-orange-200">
-                          <div>
-                            <span className="text-[10px] font-extrabold uppercase tracking-widest text-orange-600 block">Instant Reservation</span>
-                            <h4 className="text-xl font-serif font-black text-stone-900">
-                              Book {bookingPackage.title}
-                            </h4>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => setBookingPackage(null)}
-                            className="p-1.5 rounded-full bg-orange-200 text-orange-800 hover:bg-orange-300 transition"
-                          >
-                            <X className="w-4 h-4" />
-                          </button>
-                        </div>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          <div>
-                            <label className="text-xs font-bold text-stone-700 mb-1 block">Full Name *</label>
-                            <div className="flex items-center gap-2 bg-white border border-stone-300 rounded-xl px-3 py-2 text-xs">
-                              <User className="w-4 h-4 text-stone-400" />
-                              <input
-                                type="text"
-                                required
-                                placeholder="Your Name"
-                                value={formData.name}
-                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                className="w-full bg-transparent outline-none font-semibold text-stone-900"
-                              />
-                            </div>
-                          </div>
-
-                          <div>
-                            <label className="text-xs font-bold text-stone-700 mb-1 block">Phone Number *</label>
-                            <div className="flex items-center gap-2 bg-white border border-stone-300 rounded-xl px-3 py-2 text-xs">
-                              <Phone className="w-4 h-4 text-stone-400" />
-                              <input
-                                type="tel"
-                                required
-                                placeholder="+91 9876543210"
-                                value={formData.phone}
-                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                className="w-full bg-transparent outline-none font-semibold text-stone-900"
-                              />
-                            </div>
-                          </div>
-
-                          <div>
-                            <label className="text-xs font-bold text-stone-700 mb-1 block">Email Address</label>
-                            <div className="flex items-center gap-2 bg-white border border-stone-300 rounded-xl px-3 py-2 text-xs">
-                              <Mail className="w-4 h-4 text-stone-400" />
-                              <input
-                                type="email"
-                                placeholder="you@example.com"
-                                value={formData.email}
-                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                className="w-full bg-transparent outline-none font-semibold text-stone-900"
-                              />
-                            </div>
-                          </div>
-
-                          <div>
-                            <label className="text-xs font-bold text-stone-700 mb-1 block">Preferred Travel Date</label>
-                            <div className="flex items-center gap-2 bg-white border border-stone-300 rounded-xl px-3 py-2 text-xs">
-                              <Calendar className="w-4 h-4 text-stone-400" />
-                              <input
-                                type="date"
-                                value={formData.date}
-                                onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                                className="w-full bg-transparent outline-none font-semibold text-stone-900"
-                              />
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="pt-3 flex items-center justify-between">
-                          <div>
-                            <span className="text-xs text-stone-500 block font-medium">Total Payable:</span>
-                            <span className="text-2xl font-black text-stone-900">{bookingPackage.price}</span>
-                          </div>
-
-                          <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 via-orange-600 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold text-xs uppercase tracking-wider shadow-xl shadow-orange-500/30 transition active:scale-95 disabled:opacity-50"
-                          >
-                            {isSubmitting ? (
-                              <span>Processing...</span>
-                            ) : (
-                              <>
-                                <Ticket className="w-4 h-4" />
-                                <span>Confirm & Reserve Now</span>
-                              </>
-                            )}
-                          </button>
-                        </div>
-                      </form>
-                    ) : (
-                      <div className="text-center py-6 space-y-4">
-                        <div className="w-16 h-16 bg-emerald-500 text-white rounded-full flex items-center justify-center mx-auto shadow-lg shadow-emerald-500/30">
-                          <CheckCircle2 className="w-8 h-8" />
-                        </div>
-                        <div>
-                          <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-600 block">Booking Confirmed!</span>
-                          <h4 className="text-2xl font-serif font-black text-stone-900">
-                            {successBooking.packageName}
-                          </h4>
-                          <p className="text-xs text-stone-600 font-medium mt-1">
-                            Booking Reference ID: <strong className="text-stone-900">{successBooking.id}</strong>
-                          </p>
-                        </div>
-
-                        <div className="bg-white p-4 rounded-2xl border border-emerald-200 max-w-md mx-auto text-left space-y-2 text-xs">
-                          <div className="flex justify-between">
-                            <span className="text-stone-500">Lead Passenger:</span>
-                            <strong className="text-stone-900">{successBooking.name}</strong>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-stone-500">Travel Date:</span>
-                            <strong className="text-stone-900">{successBooking.date}</strong>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-stone-500">Package Rate:</span>
-                            <strong className="text-emerald-700">{successBooking.price}</strong>
-                          </div>
-                          <div className="pt-2 border-t border-stone-100 flex items-center gap-1.5 text-[11px] text-emerald-700 font-bold">
-                            <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                            <span>Digital Yatri Travel Pass Verified</span>
-                          </div>
-                        </div>
-
-                        <button
-                          type="button"
-                          onClick={() => setBookingPackage(null)}
-                          className="px-6 py-2.5 rounded-xl bg-stone-900 text-white font-bold text-xs uppercase tracking-wider hover:bg-stone-800 transition"
-                        >
-                          Close Reservation Window
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                )}
 
               </div>
             </motion.div>

@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "uk5522",
+  "vehicleType": "private",
+  "travelFrom": "Delhi",
+  "travelTo": "Dehradun",
+  "tourFrom": "2026-09-06",
+  "tourTo": "2026-09-10",
+  "driverType": "owner",
+  "ownerName": "hello",
+  "ownerAge": "18",
+  "ownerPhone": "7896578456",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "765456789087",
+  "ownerGender": "Male",
+  "ownerBloodGroup": "A+",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "7867512309",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "hyy",
+      "age": "0",
+      "gender": "Male"
+    }
+  ],
+  "email": "hello@gmail.com",
+  "message": "",
+  "registrationPassword": "gunjannn123",
+  "id": "YS-2026-6CCFDE10",
+  "password": {
+    "salt": "b2f74cddaa85e7d59f6c9dca2af4a8b1",
+    "hash": "a43bcd1e061f52b504184d6a29f0fb4f0c58eff093a88bb294c7187d02fc102ccca8bcb2ddfa33776ceba2e9d952aefd8d9238fac38e6d23345f3c27e3dceb6a"
+  },
+  "createdAt": "2026-09-05T04:59:31.107Z",
+  "status": "Pending",
+  "updatedAt": "2026-09-05T04:59:31.107Z"
+}

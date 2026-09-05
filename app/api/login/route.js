@@ -36,11 +36,20 @@ function getNetworkBaseUrl(request) {
 function verifyPassword(password, storedPassword) {
   if (!storedPassword || !password) return false;
   if (typeof storedPassword === "string") {
-    return password === storedPassword;
+    return password === storedPassword.trim();
   }
   if (storedPassword.hash && storedPassword.salt) {
-    const computedHash = crypto.scryptSync(password, storedPassword.salt, 64).toString("hex");
-    return crypto.timingSafeEqual(Buffer.from(computedHash), Buffer.from(storedPassword.hash));
+    try {
+      const computedHash = crypto.scryptSync(password, storedPassword.salt, 64).toString("hex");
+      const expectedHash = String(storedPassword.hash);
+      const computedBuffer = Buffer.from(computedHash, "utf8");
+      const expectedBuffer = Buffer.from(expectedHash, "utf8");
+
+      if (computedBuffer.length !== expectedBuffer.length) return false;
+      return crypto.timingSafeEqual(computedBuffer, expectedBuffer);
+    } catch {
+      return false;
+    }
   }
   return false;
 }
@@ -137,9 +146,10 @@ export async function POST(request) {
 
     // Check password against matching registrations
     const matchedReg = matchingRegistrations.find((r) => {
-      if (r.registrationPassword && r.registrationPassword === password) return true;
-      if (r.password && verifyPassword(password, r.password)) return true;
-      return false;
+      return (
+        verifyPassword(password, r.registrationPassword) ||
+        verifyPassword(password, r.password)
+      );
     });
 
     if (!matchedReg) {
@@ -154,8 +164,8 @@ export async function POST(request) {
     const baseUrl = getNetworkBaseUrl(request);
     const passToken = encodePassData(matchedReg);
     const passUrl = passToken
-      ? `${baseUrl}/pass?id=${encodeURIComponent(matchedReg.id)}&d=${encodeURIComponent(passToken)}`
-      : `${baseUrl}/pass?id=${encodeURIComponent(matchedReg.id)}`;
+      ? `${baseUrl}/pass?id=${encodeURIComponent(matchedReg.id)}&auth=1&d=${encodeURIComponent(passToken)}`
+      : `${baseUrl}/pass?id=${encodeURIComponent(matchedReg.id)}&auth=1`;
 
     if (matchedReg.email && matchedReg.email.includes("@")) {
       sendLoginSuccessEmail(matchedReg.email, password, matchedReg).catch(() => {});

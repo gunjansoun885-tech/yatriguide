@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "gs1234",
+  "vehicleType": "private",
+  "travelFrom": "Haridwar",
+  "travelTo": "Delhi",
+  "tourFrom": "2026-09-07",
+  "tourTo": "2026-09-17",
+  "driverType": "owner",
+  "ownerName": "hyy",
+  "ownerAge": "21",
+  "ownerPhone": "6786345263",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "635426378976",
+  "ownerGender": "Male",
+  "ownerBloodGroup": "A+",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "76567897654",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "hegdwd",
+      "age": "0",
+      "gender": "Male"
+    }
+  ],
+  "email": "shg@gmail.com",
+  "message": "",
+  "registrationPassword": "g1234567890",
+  "id": "YS-2026-744AA1A8",
+  "password": {
+    "salt": "9afa5567311c86de016d4c9ddbd3dd08",
+    "hash": "a98c476757d0de60c8014d3c521a602f9d06c566859bb9d74c0a30ff70cdebaed11065cb572774155d40aedb6995accad9708300c2042e2d7af4997ed8e89d59"
+  },
+  "createdAt": "2026-09-05T04:06:27.977Z",
+  "status": "Approved",
+  "updatedAt": "2026-09-05T04:52:00.787Z"
+}

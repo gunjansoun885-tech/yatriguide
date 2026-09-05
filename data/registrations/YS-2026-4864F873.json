@@ -1,0 +1,63 @@
+{
+  "vehicleNumber": "up9988",
+  "vehicleType": "private",
+  "travelFrom": "Haridwar",
+  "travelTo": "Mussoorie",
+  "tourFrom": "2026-09-12",
+  "tourTo": "2026-09-21",
+  "driverType": "owner",
+  "ownerName": "yty",
+  "ownerAge": "20",
+  "ownerPhone": "7898765678",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "787678098612",
+  "ownerGender": "Male",
+  "ownerBloodGroup": "A-",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "7898765678",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "hyhy",
+      "age": "1",
+      "gender": "Female"
+    }
+  ],
+  "email": "hy@gmaqil.com",
+  "message": "",
+  "registrationPassword": "hello098",
+  "id": "YS-2026-4864F873",
+  "password": {
+    "salt": "75e53a7737476007a365464b9e2dd2d8",
+    "hash": "09d5adf778f71029b4a4331cce33bdf2ae834efd371bc1a71d36f9c313a10a7fc78ed698936872b4420dc218213ed4069835a3d6e04e37daf9d71004229abf42"
+  },
+  "createdAt": "2026-09-04T11:24:52.458Z",
+  "status": "Pending",
+  "updatedAt": "2026-09-04T12:47:39.312Z",
+  "routeStops": [
+    "Haridwar",
+    "Dehradun",
+    "Mussoorie"
+  ],
+  "routeHistory": [
+    {
+      "from": "Haridwar → Dehradun",
+      "addedDestination": "Mussoorie",
+      "newRoute": "Haridwar → Dehradun → Mussoorie",
+      "extendedAt": "2026-09-04T12:47:39.311Z"
+    }
+  ]
+}

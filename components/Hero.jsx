@@ -8,10 +8,13 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const HERO_IMAGES = [
   { desktop: "/oo1.png", mobile: "/mobile/oo1.png" },
   { desktop: "/g1.png", mobile: "/mobile/g1.png" },
+  { desktop: "/sp1.png", mobile: "/mobile/sp1.png" },
   { desktop: "/ch.png", mobile: "/mobile/ch.png" },
   { desktop: "/nw.png", mobile: "/mobile/nw.png" },
+  { desktop: "/sp22.png", mobile: "/mobile/sp22.png" },
   { desktop: "/opp.png", mobile: "/mobile/opp.png" },
   { desktop: "/jj1.png", mobile: "/mobile/jj1.png" },
+  { desktop: "/sp3.png", mobile: "/mobile/sp3.png" },
   { desktop: "/nn1.png", mobile: "/mobile/nn1.png" },
   { desktop: "/s1.png", mobile: "/mobile/s1.png" },
   { desktop: "/kk2.png", mobile: "/mobile/kk2.png" },

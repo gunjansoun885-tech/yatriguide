@@ -17,8 +17,8 @@ const outfit = Outfit({
 
 export const metadata = {
   title: "Yatriguide | Discover the Majestic Beauty of Uttarakhand",
-  description: "Explore the ultimate tourism guide of Uttarakhand. Discover majestic mountains, sacred temples, Char Dham Yatra, thrilling adventure sports, premium travel packages, and high-altitude trekking in the Land of Gods.",
-  keywords: "Uttarakhand Tourism, Kedarnath, Mussoorie, Rishikesh, Nainital, Auli, Jim Corbett, Travel Packages, Chardham Yatra, Trekking",
+  description: "Explore the ultimate tourism guide of Uttarakhand. Discover majestic mountains, sacred temples, thrilling adventure sports, and high-altitude trekking in the Land of Gods.",
+  keywords: "Uttarakhand Tourism, Kedarnath, Mussoorie, Rishikesh, Nainital, Auli, Jim Corbett, Chardham Yatra, Trekking",
   authors: [{ name: "Yatriguide Tourism" }],
   openGraph: {
     title: "Yatriguide - Uttarakhand Tourism",

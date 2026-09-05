@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "uk0411",
+  "vehicleType": "private",
+  "travelFrom": "Delhi",
+  "travelTo": "Rishikesh",
+  "tourFrom": "2026-09-05",
+  "tourTo": "2026-09-09",
+  "driverType": "owner",
+  "ownerName": "helloo",
+  "ownerAge": "25",
+  "ownerPhone": "8979065247",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "789024587234",
+  "ownerGender": "Female",
+  "ownerBloodGroup": "A-",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "8967564323",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "hyyy",
+      "age": "4",
+      "gender": "Male"
+    }
+  ],
+  "email": "hello@gmail.com",
+  "message": "",
+  "registrationPassword": "gunjanbisht",
+  "id": "YS-2026-E14E9547",
+  "password": {
+    "salt": "ebc8fe1d235dd6df52a3344bc36547ba",
+    "hash": "e97abe6131ba34a85cf9d123975a67f57c32b83e155be4bcf1b54c9803b5404d0d09804564836a26230d3f7c9636b2125a7b38537785173dea25eef1dbf00609"
+  },
+  "createdAt": "2026-09-03T14:07:50.674Z",
+  "status": "Pending",
+  "updatedAt": "2026-09-03T14:07:50.674Z"
+}

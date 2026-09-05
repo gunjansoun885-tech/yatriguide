@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "abc1234",
+  "vehicleType": "private",
+  "travelFrom": "Dehradun",
+  "travelTo": "Delhi",
+  "tourFrom": "2026-09-06",
+  "tourTo": "2026-09-09",
+  "driverType": "owner",
+  "ownerName": "yui",
+  "ownerAge": "19",
+  "ownerPhone": "8907656789",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "098765432167",
+  "ownerGender": "Male",
+  "ownerBloodGroup": "A+",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "7890876234",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "yhui",
+      "age": "1",
+      "gender": "Male"
+    }
+  ],
+  "email": "huhhg@gmail.com",
+  "message": "",
+  "registrationPassword": "qwert1234",
+  "id": "YS-2026-AFE64B3D",
+  "password": {
+    "salt": "cdece42b00c0838911e1a84276a129c4",
+    "hash": "5bd4161e98cfd21c294496ce63c929776f71a2c928c76222810019de2bb3cfd610830f915047df36f6a3b50f88b2009cbb1ff5da8cf88e4f6347502fc6f52fa2"
+  },
+  "createdAt": "2026-09-05T03:02:43.820Z",
+  "status": "Pending",
+  "updatedAt": "2026-09-05T03:02:43.820Z"
+}
