@@ -71,15 +71,18 @@ export async function POST(request) {
       validityMessage = "Pass application is PENDING approval.";
     }
 
-    // Check if pass tour end date is in the past
-    if (isApproved && registration.tourTo) {
-      const tourEndDate = new Date(registration.tourTo);
-      if (!isNaN(tourEndDate.getTime())) {
-        tourEndDate.setHours(23, 59, 59, 999);
-        if (new Date() > tourEndDate) {
-          isValidPass = false;
-          validityMessage = `Pass expired on ${registration.tourTo}.`;
-        }
+    // The pass is valid only during the inclusive trip date window.
+    if (isApproved && (registration.tourFrom || registration.tourTo)) {
+      const today = new Date();
+      const tourStartDate = registration.tourFrom ? new Date(`${registration.tourFrom}T00:00:00`) : null;
+      const tourEndDate = registration.tourTo ? new Date(`${registration.tourTo}T23:59:59.999`) : null;
+
+      if (tourStartDate && !isNaN(tourStartDate.getTime()) && today < tourStartDate) {
+        isValidPass = false;
+        validityMessage = `Pass is valid from ${registration.tourFrom}.`;
+      } else if (tourEndDate && !isNaN(tourEndDate.getTime()) && today > tourEndDate) {
+        isValidPass = false;
+        validityMessage = `Pass expired on ${registration.tourTo}.`;
       }
     }
 

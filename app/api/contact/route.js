@@ -1,37 +1,11 @@
 import { randomBytes, scryptSync } from "crypto";
 import { mkdir, readFile, readdir, rename, writeFile } from "fs/promises";
 import path from "path";
-import os from "os";
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-function getNetworkBaseUrl(request) {
-  if (process.env.NEXT_PUBLIC_APP_URL) {
-    return process.env.NEXT_PUBLIC_APP_URL.replace(/\/$/, "");
-  }
-
-  const hostHeader = request?.headers?.get("host") || "";
-  const proto = request?.headers?.get("x-forwarded-proto") || (hostHeader.includes("localhost") ? "http" : "https");
-
-  if (hostHeader.startsWith("localhost") || hostHeader.startsWith("127.0.0.1")) {
-    const port = hostHeader.split(":")[1] || "3000";
-    try {
-      const interfaces = os.networkInterfaces();
-      for (const name of Object.keys(interfaces)) {
-        for (const iface of interfaces[name] || []) {
-          if (iface.family === "IPv4" && !iface.internal && iface.address) {
-            return `http://${iface.address}:${port}`;
-          }
-        }
-      }
-    } catch {}
-  }
-
-  return `${proto}://${hostHeader || "localhost:3000"}`;
-}
 
 const dataDirectory = path.join(process.cwd(), "data");
 const registrationsDirectory = path.join(dataDirectory, "registrations");
@@ -57,7 +31,6 @@ function hashPassword(password) {
 }
 
 import { getAllRegistrations, saveRegistration } from "@/lib/db";
-import { encodePassData } from "@/lib/pass-utils";
 
 async function listRegistrations() {
   await mkdir(registrationsDirectory, { recursive: true });
@@ -292,6 +265,63 @@ function getSmtpConfig() {
   return { host, user, pass, sender, port, secure };
 }
 
+async function sendAdminRegistrationNotification(registration) {
+  const { host, user, pass, sender, port, secure } = getSmtpConfig();
+  if (!user || !pass) {
+    console.log("[SMTP Notice] Admin registration notification skipped because SMTP credentials are not configured.");
+    return false;
+  }
+
+  const transporter = nodemailer.createTransport({
+    host,
+    port,
+    secure,
+    auth: { user, pass },
+    requireTLS: true,
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 10000,
+    tls: { rejectUnauthorized: false },
+  });
+
+  const userName = registration.ownerName || registration.driverName || registration.otherName || registration.vehicleOwnerName || "-";
+  const passengerCount = registration.passengerCount || registration.passengerDetails?.length || 0;
+  const subject = "New YatriGuide Registration Received";
+  const text = [
+    "New registration is pending admin approval.",
+    "",
+    `Registration ID: ${registration.id}`,
+    `User name: ${userName}`,
+    `Vehicle number: ${registration.vehicleNumber || "-"}`,
+    `User email: ${registration.email || "-"}`,
+    `Tour dates: ${registration.tourFrom || "-"} to ${registration.tourTo || "-"}`,
+    `Passenger count: ${passengerCount}`,
+  ].join("\n");
+  const html = `
+    <div style="font-family: Arial, sans-serif; color: #1f2937; line-height: 1.6;">
+      <h2 style="color: #ea580c;">New YatriGuide Registration Received</h2>
+      <p><strong>New registration is pending admin approval.</strong></p>
+      <table style="border-collapse: collapse;">
+        <tr><td style="padding: 4px 16px 4px 0;"><strong>Registration ID</strong></td><td>${escapeHtml(registration.id)}</td></tr>
+        <tr><td style="padding: 4px 16px 4px 0;"><strong>User name</strong></td><td>${escapeHtml(userName)}</td></tr>
+        <tr><td style="padding: 4px 16px 4px 0;"><strong>Vehicle number</strong></td><td>${escapeHtml(registration.vehicleNumber || "-")}</td></tr>
+        <tr><td style="padding: 4px 16px 4px 0;"><strong>User email</strong></td><td>${escapeHtml(registration.email || "-")}</td></tr>
+        <tr><td style="padding: 4px 16px 4px 0;"><strong>Tour dates</strong></td><td>${escapeHtml(`${registration.tourFrom || "-"} to ${registration.tourTo || "-"}`)}</td></tr>
+        <tr><td style="padding: 4px 16px 4px 0;"><strong>Passenger count</strong></td><td>${escapeHtml(passengerCount)}</td></tr>
+      </table>
+    </div>
+  `;
+
+  await transporter.sendMail({
+    from: sender,
+    to: "guideyatri@gmail.com",
+    subject,
+    text,
+    html,
+  });
+  return true;
+}
+
 async function sendConfirmationEmail(registration, passUrl) {
   const { host, user, pass, sender, port, secure } = getSmtpConfig();
   if (!registration.email) return false;
@@ -393,15 +423,15 @@ export async function POST(request) {
 
     await saveRegistration(registration);
 
-    const baseUrl = getNetworkBaseUrl(request);
-    const passToken = encodePassData(registration);
-    const passUrl = passToken
-      ? `${baseUrl}/pass?id=${encodeURIComponent(registration.id)}&d=${encodeURIComponent(passToken)}`
-      : `${baseUrl}/pass?id=${encodeURIComponent(registration.id)}`;
+    try {
+      await sendAdminRegistrationNotification(registration);
+    } catch (emailError) {
+      console.error("Registration saved, but admin notification email failed", emailError);
+    }
 
     let emailSent = false;
     try {
-      emailSent = await sendConfirmationEmail(registration, passUrl);
+      emailSent = await sendConfirmationEmail(registration, null);
     } catch (emailError) {
       console.error("Registration saved, but confirmation email failed", emailError);
     }
@@ -411,7 +441,8 @@ export async function POST(request) {
         ? `Registration saved! A confirmation message has been sent to ${registration.email}.`
         : "Registration saved successfully.",
       registrationId: registration.id,
-      passUrl,
+      status: "Pending",
+      passUrl: null,
       emailSent,
     });
   } catch (error) {

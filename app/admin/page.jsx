@@ -214,6 +214,15 @@ function StatusBadge({ status }) {
   );
 }
 
+function formatAdminTime(date) {
+  const hours = date.getHours();
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+  const meridiem = hours >= 12 ? "PM" : "AM";
+  const displayHour = hours % 12 || 12;
+  return `${displayHour}:${minutes}:${seconds} ${meridiem}`;
+}
+
 export default function AdminDashboardPage() {
   const router = useRouter();
 
@@ -229,7 +238,7 @@ export default function AdminDashboardPage() {
   // UI State
   const [activeView, setActiveView] = useState("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [currentTime, setCurrentTime] = useState(null);
 
   // Modal State
   const [viewDetailsModal, setViewDetailsModal] = useState(false);
@@ -362,6 +371,7 @@ export default function AdminDashboardPage() {
   };
 
   const openQrPreview = async (reg) => {
+    if (reg.status !== "Approved") return;
     setSelectedRegistration(reg);
     const passUrl = `${window.location.origin}/pass?id=${reg.id}`;
     const qr = await toDataURL(passUrl, {
@@ -451,6 +461,7 @@ export default function AdminDashboardPage() {
   };
 
   const handlePrintPass = async (reg) => {
+    if (reg.status !== "Approved") return;
     const passUrl = `${window.location.origin}/pass?id=${reg.id}`;
     const qrDataUrl = await toDataURL(passUrl, { errorCorrectionLevel: "H", margin: 1, width: 180 });
     const passengerRowsHtml = reg.passengerDetails?.length
@@ -764,7 +775,7 @@ export default function AdminDashboardPage() {
                 border: "1px solid #bae6fd",
               }}
             >
-              {currentTime.toLocaleTimeString("en-IN", { hour12: true })}
+              {currentTime ? formatAdminTime(currentTime) : "--:--:-- --"}
             </div>
 
             <button

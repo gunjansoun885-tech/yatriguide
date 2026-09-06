@@ -1,17 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import {
   Trash2,
-  Download,
-  ShieldCheck,
-  ExternalLink,
-  Copy,
-  Check,
 } from "lucide-react";
-import { toDataURL } from "qrcode";
 
 const initialForm = {
   vehicleNumber: "",
@@ -72,20 +64,9 @@ function Field({ label, children }) {
 
 export default function ContactForm() {
   const [form, setForm] = useState(initialForm);
-  const [qrCode, setQrCode] = useState("");
   const [registrationId, setRegistrationId] = useState("");
-  const [passUrl, setPassUrl] = useState("");
-  const [copied, setCopied] = useState(false);
   const [statusMessage, setStatusMessage] = useState({ type: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleCopyPassLink = () => {
-    if (!passUrl) return;
-    navigator.clipboard.writeText(passUrl).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    });
-  };
 
   const handleChange = ({ target: { name, value } }) => {
     setForm((previous) => ({ ...previous, [name]: value }));
@@ -167,25 +148,10 @@ export default function ContactForm() {
 
       if (!response.ok) throw new Error(data.error || "Unable to submit registration right now.");
 
-      const origin = typeof window !== "undefined" ? window.location.origin : "";
-      const finalPassUrl = data.passUrl || `${origin}/pass?id=${encodeURIComponent(data.registrationId)}`;
-
-      const generatedQrUrl = await toDataURL(finalPassUrl, {
-        errorCorrectionLevel: "H",
-        margin: 2,
-        width: 320,
-        color: {
-          dark: "#000000",
-          light: "#ffffff",
-        },
-      });
-
-      setQrCode(generatedQrUrl);
       setRegistrationId(data.registrationId);
-      setPassUrl(finalPassUrl);
       setStatusMessage({
         type: "success",
-        message: data.message || "Vehicle registration submitted successfully.",
+        message: "Registration submitted and is pending admin approval. Your QR Travel Pass will be available after approval.",
       });
       setForm(initialForm);
     } catch (error) {
@@ -347,78 +313,15 @@ export default function ContactForm() {
         </div>
       </form>
 
-      {qrCode && (
-        <div className="mt-8 overflow-hidden rounded-3xl border border-orange-200 bg-white shadow-2xl shadow-orange-950/10">
-          {/* Header */}
-          <div className="bg-linear-to-r from-orange-600 via-amber-600 to-orange-500 p-6 text-center text-white">
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3.5 py-1 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
-              <ShieldCheck className="h-4 w-4 text-emerald-300" />
-              Verified Travel Registration Pass
-            </div>
-            <h3 className="mt-3 text-2xl font-black tracking-tight">Your Digital Pass is Ready</h3>
-            <p className="mt-1 text-xs font-mono font-bold text-orange-100">
-              Registration ID: <span className="underline text-white">{registrationId}</span>
-            </p>
-          </div>
-
-          <div className="p-6 space-y-6">
-            {/* Quick Action Alert */}
-            <div className="rounded-2xl border border-emerald-200 bg-emerald-50/80 p-4 text-center">
-              <p className="text-sm font-bold text-emerald-900">
-                ✅ Scan with ANY Phone Camera, Google Lens, or Scanner App
-              </p>
-              <p className="mt-1 text-xs text-emerald-700">
-                Scanning this QR code instantly opens your complete official Uttarakhand Travel Pass with all details, direct emergency calling, and live GPS sharing.
-              </p>
-            </div>
-
-            {/* QR Code Image Box */}
-            <div className="flex flex-col items-center justify-center">
-              <div className="rounded-2xl border-2 border-orange-300 bg-white p-4 shadow-lg">
-                <Image
-                  src={qrCode}
-                  alt="Vehicle registration QR code"
-                  width={260}
-                  height={260}
-                  unoptimized
-                  className="mx-auto rounded-xl"
-                />
-              </div>
-              <span className="mt-2 text-[11px] font-bold text-stone-500 uppercase tracking-wider">
-                Universal High-Resolution QR Code (Level H)
-              </span>
-            </div>
-
-            {/* Quick Action Buttons */}
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-              <Link
-                href={`/pass?id=${encodeURIComponent(registrationId)}`}
-                target="_blank"
-                className="flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-4 py-3 text-sm font-bold text-white shadow-md transition hover:bg-orange-700 active:scale-95"
-              >
-                <ExternalLink className="h-4 w-4" />
-                View Pass Online
-              </Link>
-
-              <button
-                type="button"
-                onClick={handleCopyPassLink}
-                className="flex items-center justify-center gap-2 rounded-xl border border-stone-300 bg-white px-4 py-3 text-sm font-bold text-stone-700 shadow-xs transition hover:bg-stone-50 active:scale-95 cursor-pointer"
-              >
-                {copied ? <Check className="h-4 w-4 text-emerald-600" /> : <Copy className="h-4 w-4" />}
-                {copied ? "Link Copied!" : "Copy Pass Link"}
-              </button>
-
-              <a
-                href={qrCode}
-                download={`Yatriguide-Pass-${registrationId}.png`}
-                className="flex items-center justify-center gap-2 rounded-xl bg-stone-900 px-4 py-3 text-sm font-bold text-white shadow-md transition hover:bg-black active:scale-95 cursor-pointer"
-              >
-                <Download className="h-4 w-4" />
-                Download QR
-              </a>
-            </div>
-          </div>
+      {registrationId && statusMessage.type === "success" && (
+        <div className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-6 text-center shadow-sm">
+          <h3 className="text-xl font-black text-amber-950">Registration submitted</h3>
+          <p className="mt-2 text-sm text-amber-800">
+            Your registration is pending admin approval. QR and Digital Pass options will appear here only after approval.
+          </p>
+          <p className="mt-3 text-xs font-mono font-bold text-amber-900">
+            Registration ID: <span className="underline">{registrationId}</span>
+          </p>
         </div>
       )}
     </div>

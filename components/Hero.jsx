@@ -10,7 +10,7 @@ const HERO_IMAGES = [
   { desktop: "/g1.png", mobile: "/mobile/g1.png" },
   { desktop: "/sp1.png", mobile: "/sp1.png", containOnMobile: true },
   { desktop: "/ch.png", mobile: "/mobile/ch.png" },
-  { desktop: "/nw.png", mobile: "/mobile/nw.png" },
+  { desktop: "/nw.png", mobile: "/mobile/nw.png", containOnMobile: true },
   { desktop: "/sp22.png", mobile: "/mobile/sp22.png" },
   { desktop: "/opp.png", mobile: "/mobile/opp.png" },
   { desktop: "/jj1.png", mobile: "/mobile/jj1.png" },
@@ -22,6 +22,7 @@ const HERO_IMAGES = [
 
 export default function Hero() {
   const [currentBg, setCurrentBg] = useState(0);
+  const isNwSlide = currentBg === 4;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -42,7 +43,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative h-[70vh] sm:h-[80vh] md:h-[85vh] lg:h-[90vh] xl:h-screen w-full overflow-hidden bg-stone-950 flex items-center justify-center"
+      className={`relative ${isNwSlide ? "h-[160vw]" : "h-[70vh]"} sm:h-[80vh] md:h-[85vh] lg:h-[90vh] xl:h-screen w-full overflow-hidden bg-stone-950 flex items-center justify-center`}
     >
       {/* Full-bleed Hero Image covering 100% screen */}
       <div className="absolute inset-0 z-0 overflow-hidden flex items-center justify-center">

@@ -62,18 +62,20 @@ export default async function TravelPassPage({ searchParams }) {
   }
 
   let qrCodeUrl = "";
-  try {
-    const origin = process.env.NEXT_PUBLIC_APP_URL || "";
-    const passUrl = origin
-      ? `${origin}/pass?id=${encodeURIComponent(registration.id)}`
-      : `/pass?id=${encodeURIComponent(registration.id)}`;
-    qrCodeUrl = await toDataURL(passUrl, {
-      errorCorrectionLevel: "H",
-      margin: 2,
-      width: 320,
-      color: { dark: "#000000", light: "#ffffff" },
-    });
-  } catch {}
+  if (registration.status === "Approved") {
+    try {
+      const origin = process.env.NEXT_PUBLIC_APP_URL || "";
+      const passUrl = origin
+        ? `${origin}/pass?id=${encodeURIComponent(registration.id)}`
+        : `/pass?id=${encodeURIComponent(registration.id)}`;
+      qrCodeUrl = await toDataURL(passUrl, {
+        errorCorrectionLevel: "H",
+        margin: 2,
+        width: 320,
+        color: { dark: "#000000", light: "#ffffff" },
+      });
+    } catch {}
+  }
 
   const { registrationPassword, password, ...safeDetails } = registration;
 

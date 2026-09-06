@@ -23,7 +23,7 @@ function getSmtpConfig() {
   return { host, user, pass, sender, port, secure };
 }
 
-async function sendStatusNotificationEmail(targetEmail, registration, status) {
+async function sendStatusNotificationEmail(targetEmail, registration, status, passUrl) {
   const { host, user, pass, sender, port, secure } = getSmtpConfig();
   if (!targetEmail || !user || !pass || user.includes("your-email")) {
     console.log(`[SMTP Notice] Email notification skipped for ${targetEmail} because SMTP_USER/SMTP_PASS are placeholders.`);
@@ -74,7 +74,8 @@ async function sendStatusNotificationEmail(targetEmail, registration, status) {
           ${
             isApproved
               ? `<div style="margin-top: 20px; text-align: center;">
-                  <p style="font-size: 13px; color: #666;">Your Yatriguide Digital Pass is ready for presentation during travel.</p>
+                  <p style="font-size: 13px; color: #666;">Your registration has been approved. Here is your QR Travel Pass.</p>
+                  <a href="${passUrl}" style="display: inline-block; margin-top: 8px; padding: 12px 22px; border-radius: 8px; background: #ea580c; color: #ffffff; font-weight: bold; text-decoration: none;">View QR Travel Pass</a>
                 </div>`
               : ""
           }
@@ -89,7 +90,9 @@ async function sendStatusNotificationEmail(targetEmail, registration, status) {
     from: sender,
     to: targetEmail,
     subject,
-    text: `Your Yatriguide registration status for ${registration.vehicleNumber} is now: ${status}. ID: ${registration.id}`,
+    text: isApproved
+      ? `Your registration has been approved. Here is your QR Travel Pass: ${passUrl}`
+      : `Your Yatriguide registration status for ${registration.vehicleNumber} is now: ${status}. ID: ${registration.id}`,
     html,
   });
 
@@ -196,7 +199,9 @@ export async function PUT(request) {
     // Send email notification if status was changed
     if (status && updated.email) {
       try {
-        await sendStatusNotificationEmail(updated.email, updated, status);
+        const baseUrl = process.env.NEXT_PUBLIC_APP_URL?.trim()?.replace(/\/$/, "") || new URL(request.url).origin;
+        const passUrl = `${baseUrl}/pass?id=${encodeURIComponent(updated.id)}`;
+        await sendStatusNotificationEmail(updated.email, updated, status, passUrl);
       } catch (err) {
         console.warn("Status notification email failed:", err.message);
       }
