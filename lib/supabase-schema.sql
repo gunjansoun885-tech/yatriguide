@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS public.registrations (
   travel_from_other TEXT,
   travel_to TEXT,
   travel_to_other TEXT,
+  route_stops JSONB DEFAULT '[]'::jsonb,
+  route_history JSONB DEFAULT '[]'::jsonb,
   tour_from TEXT,
   tour_to TEXT,
   driver_type TEXT,
@@ -50,6 +52,10 @@ CREATE TABLE IF NOT EXISTS public.registrations (
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+-- Add route history columns to an existing registrations table safely.
+ALTER TABLE public.registrations ADD COLUMN IF NOT EXISTS route_stops JSONB DEFAULT '[]'::jsonb;
+ALTER TABLE public.registrations ADD COLUMN IF NOT EXISTS route_history JSONB DEFAULT '[]'::jsonb;
 
 -- Enable Row Level Security (RLS)
 ALTER TABLE public.registrations ENABLE ROW LEVEL SECURITY;
