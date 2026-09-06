@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "uk2222",
+  "vehicleType": "private",
+  "travelFrom": "Delhi",
+  "travelTo": "Haridwar",
+  "tourFrom": "2026-09-07",
+  "tourTo": "2026-09-10",
+  "driverType": "owner",
+  "ownerName": "heye",
+  "ownerAge": "18",
+  "ownerPhone": "8978973645",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "748475837458",
+  "ownerGender": "Male",
+  "ownerBloodGroup": "A+",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "8474839484",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "hdghgh",
+      "age": "0",
+      "gender": "Male"
+    }
+  ],
+  "email": "hdg@gmail.com",
+  "message": "",
+  "registrationPassword": "gauravsoun123",
+  "id": "YS-2026-CC13A057",
+  "password": {
+    "salt": "5e2f8f277bd7ac4b4f8109ada23c2b17",
+    "hash": "4bb60fc3ed6e46dba1ad59b2ea173e3cb0c9d677167fa89fede91b5e2fff9723eb92c4d002a753c61e46feffe3e8696c589496f38cfb43a475ae33de910b8491"
+  },
+  "createdAt": "2026-09-05T15:00:37.070Z",
+  "status": "Pending",
+  "updatedAt": "2026-09-05T15:00:37.070Z"
+}

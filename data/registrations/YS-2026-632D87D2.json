@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "up999",
+  "vehicleType": "private",
+  "travelFrom": "Haridwar",
+  "travelTo": "Mussoorie",
+  "tourFrom": "2026-09-09",
+  "tourTo": "2026-09-18",
+  "driverType": "owner",
+  "ownerName": "reha",
+  "ownerAge": "21",
+  "ownerPhone": "89789654567",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "767656557767",
+  "ownerGender": "Other",
+  "ownerBloodGroup": "A+",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "676545678890",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "hjgjkgf",
+      "age": "1",
+      "gender": "Male"
+    }
+  ],
+  "email": "gunjansoun885@gmail.com",
+  "message": "",
+  "registrationPassword": "hyhyhy",
+  "id": "YS-2026-632D87D2",
+  "password": {
+    "salt": "ba0f6371ba58c14086f47024bd047ef3",
+    "hash": "b9e8755e657faf1e0fc5258523c223810890e6f84466b65d3ccd5449b92cf960b6bcc5c116f31a7284bef385ed53a9a6d315277e735e53800fde5a2001b0648f"
+  },
+  "createdAt": "2026-09-06T10:59:42.631Z",
+  "status": "Approved",
+  "updatedAt": "2026-09-06T11:00:44.419Z"
+}

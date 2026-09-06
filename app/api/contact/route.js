@@ -366,7 +366,7 @@ export async function GET(request) {
   }
 
   try {
-    const registrations = await listRegistrations();
+   const registrations = await getAllRegistrations();
     return NextResponse.json({ registrations });
   } catch (error) {
     console.error("Registration listing failed", error);

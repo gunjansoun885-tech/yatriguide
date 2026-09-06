@@ -1,0 +1,50 @@
+{
+  "vehicleNumber": "gs33",
+  "vehicleType": "private",
+  "travelFrom": "Haldwani",
+  "travelTo": "Nainital",
+  "tourFrom": "2026-09-06",
+  "tourTo": "2026-09-07",
+  "driverType": "owner",
+  "ownerName": "hy",
+  "ownerAge": "19",
+  "ownerPhone": "83764567289",
+  "ownerWhatsapp": "",
+  "ownerAadhar": "827364562789",
+  "ownerGender": "Male",
+  "ownerBloodGroup": "A+",
+  "driverName": "",
+  "vehicleOwnerName": "",
+  "vehicleOwnerContact": "",
+  "driverAge": "",
+  "driverPhone": "",
+  "driverWhatsapp": "",
+  "driverAadhar": "",
+  "driverGender": "",
+  "driverBloodGroup": "",
+  "otherName": "",
+  "otherAge": "",
+  "otherPhone": "",
+  "otherGender": "",
+  "otherBloodGroup": "",
+  "emergencyContactNo": "7265245678",
+  "passengerCount": 1,
+  "passengerDetails": [
+    {
+      "name": "hsd",
+      "age": "0",
+      "gender": "Female"
+    }
+  ],
+  "email": "hd@gmail.com",
+  "message": "",
+  "registrationPassword": "0987654321",
+  "id": "YS-2026-4F8CDA0B",
+  "password": {
+    "salt": "521f828d616e5d361aa7effa1354be22",
+    "hash": "6d77fe24302ff3476ec11dee386be6b01fdcbed63155f196bc33a4a295d7aeb9ea6d6ad0cec591a1c6da66dc54c946f8ea38a36bd54de68617193c5ee9d95b35"
+  },
+  "createdAt": "2026-09-05T15:08:56.873Z",
+  "status": "Approved",
+  "updatedAt": "2026-09-05T15:13:40.701Z"
+}
