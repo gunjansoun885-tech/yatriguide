@@ -1,15 +1,9 @@
 import { randomBytes, scryptSync } from "crypto";
-import { mkdir, readFile, readdir, rename, writeFile } from "fs/promises";
-import path from "path";
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-const dataDirectory = path.join(process.cwd(), "data");
-const registrationsDirectory = path.join(dataDirectory, "registrations");
-const registrationsFile = path.join(dataDirectory, "registrations.json");
 
 function escapeHtml(value) {
   return String(value)
@@ -31,29 +25,6 @@ function hashPassword(password) {
 }
 
 import { getAllRegistrations, saveRegistration } from "@/lib/db";
-
-async function listRegistrations() {
-  await mkdir(registrationsDirectory, { recursive: true });
-
-  const files = await readdir(registrationsDirectory, { withFileTypes: true });
-  const registrationFiles = files
-    .filter((entry) => entry.isFile() && entry.name.endsWith(".json"))
-    .map((entry) => entry.name);
-
-  const registrations = await Promise.all(
-    registrationFiles.map(async (fileName) => {
-      const filePath = path.join(registrationsDirectory, fileName);
-      const content = await readFile(filePath, "utf8");
-      try {
-        return JSON.parse(content);
-      } catch {
-        return null;
-      }
-    }),
-  );
-
-  return registrations.filter(Boolean).sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
-}
 
 function buildPayload(registration) {
   const passengerDetails = registration.passengerDetails?.length
@@ -415,6 +386,8 @@ export async function POST(request) {
       ...details,
       registrationPassword,
       id: createRegistrationId(),
+      travelFromOther: travelFromOther?.trim() || "",
+      travelToOther: travelToOther?.trim() || "",
       travelFrom: details.travelFrom === "Other" ? travelFromOther?.trim() : details.travelFrom,
       travelTo: details.travelTo === "Other" ? travelToOther?.trim() : details.travelTo,
       password,
