@@ -113,6 +113,7 @@ export default function PassClientView({
   registration: initialRegistration,
   qrCodeUrl: initialQrUrl,
   error,
+  errorTitle = "Pass Not Found",
   isInitialAuth = false,
 }) {
   const [registration, setRegistration] = useState(initialRegistration);
@@ -313,7 +314,7 @@ export default function PassClientView({
     return (
       <div className="rounded-3xl border border-rose-200 bg-white p-8 text-center shadow-lg">
         <AlertCircle className="mx-auto h-12 w-12 text-rose-500 mb-3" />
-        <h2 className="text-xl font-bold text-stone-900">Pass Not Found</h2>
+        <h2 className="text-xl font-bold text-stone-900">{errorTitle}</h2>
         <p className="mt-2 text-sm text-stone-600">{error || "Registration pass not found or ID is invalid."}</p>
         <Link
           href="/contact"

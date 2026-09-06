@@ -200,7 +200,7 @@ export async function PUT(request) {
     if (status && updated.email) {
       try {
         const baseUrl = process.env.NEXT_PUBLIC_APP_URL?.trim()?.replace(/\/$/, "") || new URL(request.url).origin;
-        const passUrl = `${baseUrl}/pass?id=${encodeURIComponent(updated.id)}`;
+        const passUrl = `${baseUrl}/qr-result?id=${encodeURIComponent(String(updated.id).trim().toUpperCase())}`;
         await sendStatusNotificationEmail(updated.email, updated, status, passUrl);
       } catch (err) {
         console.warn("Status notification email failed:", err.message);

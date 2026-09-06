@@ -373,7 +373,7 @@ export default function AdminDashboardPage() {
   const openQrPreview = async (reg) => {
     if (reg.status !== "Approved") return;
     setSelectedRegistration(reg);
-    const passUrl = `${window.location.origin}/pass?id=${reg.id}`;
+    const passUrl = `${window.location.origin}/qr-result?id=${encodeURIComponent(String(reg.id).trim().toUpperCase())}`;
     const qr = await toDataURL(passUrl, {
       errorCorrectionLevel: "H",
       margin: 2,
@@ -462,7 +462,7 @@ export default function AdminDashboardPage() {
 
   const handlePrintPass = async (reg) => {
     if (reg.status !== "Approved") return;
-    const passUrl = `${window.location.origin}/pass?id=${reg.id}`;
+    const passUrl = `${window.location.origin}/qr-result?id=${encodeURIComponent(String(reg.id).trim().toUpperCase())}`;
     const qrDataUrl = await toDataURL(passUrl, { errorCorrectionLevel: "H", margin: 1, width: 180 });
     const passengerRowsHtml = reg.passengerDetails?.length
       ? reg.passengerDetails.map((p, i) => `<tr><td style="padding:6px 10px;border-bottom:1px solid #e2e8f0;text-align:center">${i+1}</td><td style="padding:6px 10px;border-bottom:1px solid #e2e8f0;font-weight:600">${p.name||"-"}</td><td style="padding:6px 10px;border-bottom:1px solid #e2e8f0;text-align:center">${p.age||"-"} yrs</td><td style="padding:6px 10px;border-bottom:1px solid #e2e8f0;text-align:center">${p.gender||"-"}</td></tr>`).join("")

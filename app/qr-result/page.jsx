@@ -1,5 +1,4 @@
 import { getRegistrationById } from "@/lib/db";
-import { decodePassData } from "@/lib/pass-utils";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PassClientView from "@/components/PassClientView";
@@ -11,13 +10,12 @@ export const revalidate = 0;
 export default async function QrResultPage({ searchParams }) {
   const resolvedSearchParams = await searchParams;
   const passId = resolvedSearchParams?.id || resolvedSearchParams?.registrationId;
-  const passToken = resolvedSearchParams?.d || resolvedSearchParams?.token || resolvedSearchParams?.p;
   const isAuth =
     resolvedSearchParams?.auth === "1" ||
     resolvedSearchParams?.unmask === "1" ||
     resolvedSearchParams?.login === "1";
 
-  if (!passId && !passToken) {
+  if (!passId) {
     return (
       <>
         <div className="print:hidden">
@@ -35,11 +33,8 @@ export default async function QrResultPage({ searchParams }) {
     );
   }
 
-  let registration = passId ? await getRegistrationById(passId) : null;
-
-  if (!registration && passToken) {
-    registration = decodePassData(passToken);
-  }
+  const cleanPassId = String(passId).trim().toUpperCase();
+  const registration = await getRegistrationById(cleanPassId);
 
   if (!registration) {
     return (
@@ -49,7 +44,7 @@ export default async function QrResultPage({ searchParams }) {
         </div>
         <main className="min-h-screen bg-stone-100 py-10 px-4 sm:px-6 lg:px-8 text-stone-800 print:bg-white print:p-0">
           <div className="mx-auto max-w-2xl pt-12 print:pt-0">
-            <PassClientView error={`Registration pass not found for ID: ${passId || "Unknown"}`} />
+            <PassClientView error={`No Supabase registration found for ID: ${cleanPassId || "Unknown"}`} errorTitle="Invalid Travel Pass" />
           </div>
         </main>
         <div className="print:hidden">
@@ -59,13 +54,26 @@ export default async function QrResultPage({ searchParams }) {
     );
   }
 
+  if (String(registration.status || "").trim().toLowerCase() !== "approved") {
+    return (
+      <>
+        <div className="print:hidden"><Navbar /></div>
+        <main className="min-h-screen bg-stone-100 py-10 px-4 sm:px-6 lg:px-8 text-stone-800 print:bg-white print:p-0">
+          <div className="mx-auto max-w-2xl pt-12 print:pt-0">
+            <PassClientView registration={registration} error="Travel Pass Pending Approval" errorTitle="Travel Pass Pending Approval" />
+          </div>
+        </main>
+        <div className="print:hidden"><Footer /></div>
+      </>
+    );
+  }
+
   let qrCodeUrl = "";
-  if (registration.status === "Approved") {
+  if (String(registration.status || "").trim().toLowerCase() === "approved") {
     try {
       const origin = process.env.NEXT_PUBLIC_APP_URL || "";
-      const passUrl = origin
-        ? `${origin}/pass?id=${encodeURIComponent(registration.id)}`
-        : `/pass?id=${encodeURIComponent(registration.id)}`;
+      const baseUrl = origin || "https://www.yatriguide.in";
+      const passUrl = `${baseUrl}/qr-result?id=${encodeURIComponent(String(registration.id).trim().toUpperCase())}`;
       qrCodeUrl = await toDataURL(passUrl, {
         errorCorrectionLevel: "H",
         margin: 2,
