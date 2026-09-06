@@ -214,7 +214,13 @@ export async function PUT(request) {
     });
   } catch (error) {
     console.error("PUT registration error:", error);
-    return NextResponse.json({ error: "Failed to update registration." }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: "Failed to update registration.",
+        details: process.env.NODE_ENV === "production" ? error.message : undefined,
+      },
+      { status: 500 },
+    );
   }
 }
 

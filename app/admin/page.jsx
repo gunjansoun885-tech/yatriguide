@@ -307,7 +307,7 @@ export default function AdminDashboardPage() {
         body: JSON.stringify({ id, status }),
       });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Status update failed.");
+      if (!response.ok) throw new Error(data.details || data.error || "Status update failed.");
 
       const msg = `Pass ${id} → ${status}`;
       setActionMessage({ type: "success", text: `Registration ${id} updated to '${status}'. Notification sent.` });
@@ -339,7 +339,7 @@ export default function AdminDashboardPage() {
         body: JSON.stringify(editForm),
       });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Save failed.");
+      if (!response.ok) throw new Error(data.details || data.error || "Save failed.");
       setEditModal(false);
       setActionMessage({ type: "success", text: `Registration ${editForm.id} updated successfully.` });
       fetchRegistrations();

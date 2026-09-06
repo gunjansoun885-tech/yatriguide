@@ -146,7 +146,9 @@ export default function ContactForm() {
       });
       const data = await response.json().catch(() => ({}));
 
-      if (!response.ok) throw new Error(data.error || "Unable to submit registration right now.");
+      if (!response.ok) {
+        throw new Error(data.details || data.error || "Unable to submit registration right now.");
+      }
 
       setRegistrationId(data.registrationId);
       setStatusMessage({

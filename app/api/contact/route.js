@@ -420,6 +420,13 @@ export async function POST(request) {
     });
   } catch (error) {
     console.error("Registration save failed", error);
-    return NextResponse.json({ error: "Unable to save registration right now." }, { status: 500 });
+    const isDatabaseConfigurationError = error.message?.includes("Supabase database configuration is required");
+    return NextResponse.json(
+      {
+        error: "Unable to save registration right now.",
+        details: process.env.NODE_ENV === "production" ? error.message : undefined,
+      },
+      { status: isDatabaseConfigurationError ? 503 : 500 },
+    );
   }
 }
